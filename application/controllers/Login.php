@@ -4,7 +4,10 @@ defined('BASEPATH') OR exit('No Direct script access');
 class Login extends CI_Controller {
 
 	public function index() {
-		$this->load->view('settings/bootstrap');
+		$data = array(
+			'title' => "Yuk Bali - Login"
+		);
+		$this->load->view('settings/bootstrap',$data);
 		$this->load->view('header');
 		$this->load->view('menu');
 		$this->load->view('login');

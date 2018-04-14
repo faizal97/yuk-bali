@@ -50,8 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
+$route['welcome'] = 'home';
 $route['daftar'] = 'register';
+$route['profil'] = "dashbord/profile";
+$route['profil/(:any)'] = "dashbord/profile/$1";
 $route['masuk'] = 'login';
+$route['keluar'] = 'logout';
 $route['daftar_akun'] = 'register/action';
 $route['masuk_akun'] = 'login/action';
 $route['home'] = 'dashbord';

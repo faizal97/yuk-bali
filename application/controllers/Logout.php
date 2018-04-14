@@ -7,6 +7,6 @@ class Logout extends CI_Controller {
 	{
 		$this->load->library('session');
 		$this->session->sess_destroy();
-		redirect(base_url()."home");
+		redirect("welcome");
 	}
 }

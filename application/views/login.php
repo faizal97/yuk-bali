@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/login.css">
 <div id="content">
 <form action="masuk_akun.html" method="POST" accept-charset="utf-8">
 		<h1>Masuk Akun Belajar</h1>

@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="css/home.css">
-<div id="content" style="border:1px solid black;margin-left:5px;margin-right:5px;background-color:#001111;">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/home.css">
+<div id="content" style="">
     <table cellpadding="50px" width="100%">
         <tbody>
             <tr>

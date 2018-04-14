@@ -5,7 +5,10 @@
 
 		public function index()
 		{
-			$this->load->view('settings/bootstrap');
+			$data = array(
+				'title' => "Yuk Bali - Register"
+			);
+			$this->load->view('settings/bootstrap',$data);
 			$this->load->view('header');
 			$this->load->view('menu');
 			$this->load->view('register');

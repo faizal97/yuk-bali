@@ -5,7 +5,10 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('settings/bootstrap');
+		$data = array(
+			'title' => "Yuk Bali - Home"
+		);
+		$this->load->view('settings/bootstrap',$data);
 		$this->load->view('header');
 		$this->load->view('menu');
 		$this->load->view('home');

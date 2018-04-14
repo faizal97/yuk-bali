@@ -11,13 +11,17 @@ class Dashbord extends CI_Controller {
 		$data = array(
 			'username' => $this->session->userdata['username'],
 			'nama_depan' => ucwords($this->session->userdata['nama_depan']),
-			'nama_belakang' => $this->session->userdata['nama_belakang']
+			'nama_belakang' => $this->session->userdata['nama_belakang'],
+			'title' => "Dashbord"
 		);
-			$this->load->view('dashbord',$data);
+			$this->load->view('header');
+			$this->load->view('settings/bootstrap',$data);
+			$this->load->view('menu_dashbord');
+			$this->load->view('dashbord',$data);	
 		}
 		else {
 		echo "<script>alert('Harap Login Terlebih Dahulu');</script>";
-		redirect(base_url()."login","refresh");
+		redirect("masuk","refresh");
 		}
 	}
 
@@ -34,6 +38,12 @@ class Dashbord extends CI_Controller {
 		if($query->num_rows()<=0){
 			show_error("User Tidak Ditemukan.<br>Hubungi Admin Untuk Meminta Bantuan.<br><a href=".base_url()."dashbord>Kembali</a>",404,"[ERROR] User $username Tidak Ditemukan");
 		}
+		$data = array(
+			'title' => $row->nama_depan." ".$row->nama_belakang
+		);
+		$this->load->view('header');
+		$this->load->view('settings/bootstrap',$data);
+		$this->load->view('menu_dashbord');
 		$this->load->view('profile',$row);
 	}
 

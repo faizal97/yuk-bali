@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/register.css">
 <div id="content">
-<form action="daftar_akun.html" class="" method="POST" accept-charset="utf-8">
+<form action="<?php echo base_url() ?>daftar_akun.html" class="" method="POST" accept-charset="utf-8">
 		<h1>DAFTAR AKUN BELAJAR</h1>
 		<div class="form-group">
 			<input type="text"  class="textbox form-control-sm" name="nama_depan" value="" placeholder="Masukan Nama Depan. . ." required="required"><br><br>
