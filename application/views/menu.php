@@ -2,7 +2,7 @@
 |
 <a href="<?php 	echo base_url() ?>welcome.html">BERANDA</a>
 |
-<a href="<?php 	echo base_url() ?>kursus">KURSUS</a>
+<a href="<?php 	echo base_url() ?>#">KURSUS</a>
 |	
 <a href="<?php echo base_url() ?>daftar.html">DAFTAR</a>
 |
