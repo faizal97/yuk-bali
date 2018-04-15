@@ -17,32 +17,61 @@
 
 		function action() {
 		$username = strtolower($this->input->post('username'));
-		$nama_depan = strtolower($this->input->post('nama_depan'));
-		$nama_belakang = strtolower($this->input->post('nama_belakang'));
+		$nama_depan = $this->input->post('nama_depan');
+		$nama_belakang = $this->input->post('nama_belakang');
 		$salt = bin2hex(openssl_random_pseudo_bytes(64,$cstrong));
 		$password = $salt.$this->input->post('password');
+		$password2 = $this->input->post('password_ulang');
 		$password = hash('sha512',$password);
+		$tipe = $this->input->post('tipe');
 
+		if($password2 != $this->input->post('password')){
+			echo "<script>alert('Password tidak cocok');</script>";
+			redirect(base_url()."daftar.html",'refresh');			
+		}
+
+		switch ($tipe) {
+			case 'learner':
+				$kode = "1";
+				break;
+			
+			case 'instructor':
+				$kode = "2";
+				break;
+			default:
+				$kode = "1";
+				break;
+		}
+		$query = $this->db->query("SELECT * FROM tb_user WHERE username='$username'");
+		$num = $query->num_rows();
+		if($num>0){
+			echo "<script>alert('Username telah ada');</script>";
+			redirect(base_url()."daftar.html",'refresh');
+		}
+		$query = $this->db->query("SELECT * FROM tb_user WHERE status='$tipe'");
+		$num = $query->num_rows() + 1;
+		$id = "10".$kode.Date("y").$num;
 
 
 		$data = array(
-			'id_user' => '',
+			'id_user' => $id,
 			'username' => $username,
 			'nama_depan' => $nama_depan,
 			'nama_belakang' => $nama_belakang,
 			'password' => $password,
-			'password_salt' => $salt
+			'password_salt' => $salt,
+			'status' => $tipe
 		);
 
 		$result = $this->db->insert('tb_user',$data);
 
 		if($result){
-			echo "<script>alert('Data Berhasil Tersimpan');</script>";
-			redirect(base_url()."login",'refresh');
+			// echo "<script>alert('Data Berhasil Tersimpan');</script>";
+			redirect(base_url()."masuk.html");
 		}
 		else {
 			echo "<script>alert('Data Gagal Tersimpan');</script>";
-			redirect(base_url()."register",'refresh');
+			redirect(base_url()."daftar.html",'refresh');
 		}
 		}
 	}

@@ -31,13 +31,14 @@ class Login extends CI_Controller {
 				'nama_depan' => $row->nama_depan,
 				'nama_belakang' => $row->nama_belakang,
 				'password' => $password,
+				'status' => $row->status,
 				'logged_in' => TRUE
 			);
 			if($username == $row->username){
 				if($password == $row->password){
-					echo "<script>alert('BERHASIL LOGIN');</script>";
+					// echo "<script>alert('BERHASIL LOGIN');</script>";
 					$this->session->set_userdata($data);
-					redirect(base_url()."home.html","refresh");
+					redirect(base_url()."home.html");
 				}
 			}
 				echo "<script>alert('GAGAL LOGIN');</script>";

@@ -4,7 +4,7 @@
 |
 <a href="<?php echo base_url() ?>profil.html" title="">PROFIL</a>
 |
-<a href="<?php echo base_url() ?>dashbord/mycourse" title="">KURSUS</a>
+<a href="<?php echo base_url() ?>kursusku.html" title="">KURSUS</a>
 |
 <a href="<?php echo base_url() ?>keluar.html" title="">KELUAR</a>
 |

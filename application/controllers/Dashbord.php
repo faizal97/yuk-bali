@@ -12,12 +12,13 @@ class Dashbord extends CI_Controller {
 			'username' => $this->session->userdata['username'],
 			'nama_depan' => ucwords($this->session->userdata['nama_depan']),
 			'nama_belakang' => $this->session->userdata['nama_belakang'],
-			'title' => "Dashbord"
+			'title' => "Yuk Bali - Home"
 		);
 			$this->load->view('header');
 			$this->load->view('settings/bootstrap',$data);
 			$this->load->view('menu_dashbord');
-			$this->load->view('dashbord',$data);	
+			$this->load->view('dashbord',$data);
+			$this->load->view('footer');	
 		}
 		else {
 		echo "<script>alert('Harap Login Terlebih Dahulu');</script>";
@@ -45,6 +46,7 @@ class Dashbord extends CI_Controller {
 		$this->load->view('settings/bootstrap',$data);
 		$this->load->view('menu_dashbord');
 		$this->load->view('profile',$row);
+		$this->load->view('footer');
 	}
 
 	public function mycourse($tipe='',$aksi='')
@@ -55,13 +57,26 @@ class Dashbord extends CI_Controller {
 		$query = $this->db->query("SELECT * FROM tb_kursus WHERE id_user='$id_user'");
 		$data = array(
 			'username' => $this->session->userdata['username'],
-			'query' => $query
+			'query' => $query,
+			'title' => ucwords($this->session->userdata['username'])."'s Course"
 		);
+		$this->load->view('settings/bootstrap', $data);
+		$this->load->view('header');
+		$this->load->view('menu_dashbord');
 		$this->load->view('mycourse',$data);
+		$this->load->view('footer');
+		
 	}
 	else if($tipe=='add'){
 		if(empty($aksi)){
+			$data = array(
+				'title' => 'Tambah Kursus'
+			);
+			$this->load->view('settings/bootstrap', $data);
+			$this->load->view('header');
+			$this->load->view('menu_dashbord');
 			$this->load->view('mycourse_add');
+			$this->load->view('footer');
 		}
 		else if($aksi=='action'){
 			$nama_kursus = $this->input->post('nama_kursus');

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><?php echo $username ?>'s Course</title>
-	<link rel="stylesheet" href="">
-</head>
 <body>
-	<table cellspacing="10" cellpadding="10" align="center">
-		<caption>KURSUS SAYA</caption>
+	<table align="center" class="table">
 		<thead>
 				<th>No</th>
 				<th>Nama Kursus</th>
@@ -30,13 +21,13 @@
 				<td><a href="" title="">Kelola</a></td>
 			</tr>
 	<?php
+	}	if(count($query->result()<=0)){
+		echo "<td colspan=4 align=center style='font-size:20pt;'>Data Kursus Kosong !</td>";
 	}
 	?>
 	<tr>
-		<td><a href="<?php echo base_url() ?>dashbord/mycourse/add" title="">Tambah</a></td>
+		<td><a href="<?php echo base_url() ?>tambah_kursus.html" title="">Tambah</a></td>
 	</tr>
 		</tbody>
 	</table>
-	<a href="<?php echo base_url() ?>dashbord" title="">Kembali</a>
 </body>
-</html>
