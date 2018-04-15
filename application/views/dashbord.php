@@ -1,7 +1,7 @@
 <body>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/home.css">
 <div id="content">
-<h1 style="color:#280897">Selamat Datang, <?php echo $nama_depan ?></h1>
+<h1 style="color:black">Selamat Datang, <?php echo $nama_depan ?></h1>
 <table cellpadding="50px" width="100%">
         <tbody>
             <tr>

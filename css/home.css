@@ -1,13 +1,13 @@
 .judul {
-	color:#060696;
+	color:black;
 }
 .isi {
-	color:white;
+	color:black;
 	font-size: 11pt;
 }
 #content {
 	border:1px solid black;
 	margin-left:5px;
 	margin-right:5px;
-	background-color:#001111;
+	background-color:#ffffff;
 }
