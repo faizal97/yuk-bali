@@ -56,6 +56,7 @@ $route['profil'] = "dashbord/profile";
 $route['profil/(:any)'] = "dashbord/profile/$1";
 $route['kursusku'] = "dashbord/mycourse";
 $route['tambah_kursus'] = "dashbord/mycourse/add";
+$route['tambah_kursus_aksi'] = "dashbord/mycourse/add/action";
 $route['masuk'] = 'login';
 $route['keluar'] = 'logout';
 $route['daftar_akun'] = 'register/action';

@@ -5,6 +5,12 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->library('session');
+		if(isset($this->session->id_user)){
+			
+			redirect('home','refresh');
+			
+		}
 		$data = array(
 			'title' => "Yuk Bali - Home"
 		);
