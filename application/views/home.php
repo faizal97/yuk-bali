@@ -1,17 +1,20 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/home.css">
-<div id="content" style="">
-    <table cellpadding="50px" width="100%">
-        <tbody>
-            <tr>
-                <td style="width:300px;height:300px;"><h4 class="judul">Belajar JAVA Pemula</h4><img src="img/thumb1.jpg"  width="300px" height="200px"><br><span class="isi">Belajar Pemograman java untuk pemula</span><br><button style="width:300px" class="btn btn-warning">DAFTAR</button></td>
-                <td style="width:300px;height:300px"><h4 class="judul">Belajar C++ Pemula</h4><img src="img/thumb2.jpg"  width="300px" height="200px"><br><span class="isi">Belajar Pemograman c++ untuk pemula</span><br><button style="width:300px" class="btn btn-warning">DAFTAR</button></td>
-                <td style="width:300px;height:300px"><h4 class="judul">Belajar Python Pemula</h4><img src="img/thumb3.png"  width="300px" height="200px"><br><span class="isi">Belajar Pemograman python untuk pemula</span><br><button style="width:300px" class="btn btn-warning">DAFTAR</button></td>
-            </tr>
-            <tr>
-                <td style="width:300px;height:300px"><h4 class="judul">Cara Memanajemen Akun Youtube yang baik</h4><img src="img/thumb4.jpg"  width="300px" height="200px"><br><span class="isi">Belajar Pemograman java untuk pemula</span><br><button style="width:300px" class="btn btn-warning">DAFTAR</button></td>
-                <td style="width:300px;height:300px"><h4 class="judul">Belajar Pemograman Visual Studio untuk pemula</h4><img src="img/thumb5.jpg"  width="300px" height="200px"><br><span class="isi">Belajar Pemograman Visual Studio untuk pemula</span><br><button style="width:300px" class="btn btn-warning">DAFTAR</button></t>
-                <td style="width:300px;height:300px"><h4 class="judul">Cara Berkonsentrasi Saat Menghadapi Ujian</h4><img src="img/background.jpg"  width="300px" height="200px"><br><span class="isi">Cara Berkonsentrasi Saat Menghadapi Ujian</span><br><button style="width:300px" class="btn btn-warning">DAFTAR</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div id="content">
+        <div id="home" style="background-image:url('<?php echo base_url('img/background/index.jpg') ?>')">
+                <div class="" id="hcari">
+                    <form  id="frmCari" class="input-group mb-3" action="">
+                        <input type="search" placeholder="Apa Yang Ingin Dipelajari ?" class="form-control form-control-lg" name="tcari" id="tcari" autofocus>
+                        <div class="input-group-append">
+                            <button type="submit" id="cari" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span></button>
+                        </div>                    
+                    </form>
+                </div>
+
+        <div class="jumbotron" id="yuk-bali" style="background-image:url('<?php echo base_url('img/background/yuk-bali.png') ?>');">
+            <h1>YUK BALI</h1>
+            <p>Yuk Bali merupakan singkatan dari <strong>Yuk Belajar Apapun Lewat Internet</strong> atau dalam bahasa inggris
+            <strong><i>Let's Learn Everything On Net(L-LEON)</i></strong>. Yang berarti <strong>Yuk Bali</strong> merupakan sebuah situs untuk pembelajaran online(e-learning)
+            dengan metode <strong><i>Learner-Led Learning</i></strong>. Yaitu, metode dimana Pelajar dapat melakukan pembelajaran kapapun dan dimanapun dia mau</p>
+        </div>
+    </div>
+    <script src="<?php echo base_url('js/home.js') ?>"></script>

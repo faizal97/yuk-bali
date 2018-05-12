@@ -3,22 +3,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('session');
+		$this->load->model('template');
+		
+
+	}
+
 	public function index()
 	{
-		$this->load->library('session');
-		if(isset($this->session->id_user)){
-			
-			redirect('home','refresh');
-			
-		}
+		$course = $this->db->query("SELECT * FROM tb_kursus INNER JOIN tb_pengajar ON tb_pengajar.id_pengajar=tb_kursus.id_pengajar INNER JOIN tb_pelajar ON tb_pelajar.id_pelajar = tb_pengajar.id_pelajar ORDER BY RAND() LIMIT 0,5");
 		$data = array(
-			'title' => "Yuk Bali - Home"
+			'course' => $course
 		);
-		$this->load->view('settings/bootstrap',$data);
-		$this->load->view('header');
-		$this->load->view('menu');
-		$this->load->view('home');
-		$this->load->view('footer');
+		$this->template->header('Yuk Bali - Home',1);
+		$this->load->view('home',$data);
+		$this->template->footer();
 	}
 
 }

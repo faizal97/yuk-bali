@@ -3,48 +3,32 @@ defined('BASEPATH') OR exit('No Direct script access');
 
 class Login extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('session');
+		$this->load->model('pelajar');
+		$this->load->model('template');
+		
+
+		if(isset($this->session->id_user)){
+			
+			redirect('home','refresh');
+			
+		}
+	}
+	
 	public function index() {
 		$data = array(
-			'title' => "Yuk Bali - Login"
+			'title' => "Yuk Bali - Login",
+			'gambar' => 'img/background/login.jpg'
 		);
 		$this->load->view('settings/bootstrap',$data);
-		$this->load->view('header');
-		$this->load->view('menu');
-		$this->load->view('login');
-		$this->load->view('footer');		
+		$this->load->view('login');		
 	}
 
 	public function action()
 	{
-		$this->load->library('session');
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-
-		$query = $this->db->query("SELECT * FROM tb_user WHERE username='".$username."'");
-		$row = $query->row();
-
-		if(isset($row)){
-			$password = hash('sha512',$row->password_salt.$password);
-			$data = array(
-				'id_user' => $row->id_user,
-				'username' => $username,
-				'nama_depan' => $row->nama_depan,
-				'nama_belakang' => $row->nama_belakang,
-				'password' => $password,
-				'status' => $row->status,
-				'logged_in' => TRUE
-			);
-			if($username == $row->username){
-				if($password == $row->password){
-					// echo "<script>alert('BERHASIL LOGIN');</script>";
-					$this->session->set_userdata($data);
-					redirect(base_url()."home.html");
-				}
-			}
-				echo "<script>alert('GAGAL LOGIN');</script>";
-				redirect(base_url()."masuk.html","refresh");			
-		}
-		echo "<script>alert('GAGAL LOGIN');</script>";
-		redirect(base_url()."masuk.html","refresh");
+		$this->pelajar->login();
 	}
 }

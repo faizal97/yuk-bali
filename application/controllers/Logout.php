@@ -3,10 +3,15 @@ defined('BASEPATH') OR exit('No Direct script access');
 
 class Logout extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('session');
+		$this->load->model('pelajar');
+	}
 	public function index()
 	{
-		$this->load->library('session');
-		$this->session->sess_destroy();
-		redirect("welcome");
+		$this->pelajar->logout('welcome');
+		
 	}
 }

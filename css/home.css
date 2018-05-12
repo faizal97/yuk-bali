@@ -1,13 +1,44 @@
-.judul {
-	color:black;
+#home {
+	width:100%;
+	height:700px;
+	background-size:100% 700px;
+	opacity:0;
 }
-.isi {
-	color:black;
-	font-size: 11pt;
+#frmCari {
+	opacity:1;
+	position:absolute;
+	left:-1000px;
 }
-#content {
-	border:1px solid black;
-	margin-left:5px;
-	margin-right:5px;
-	background-color:#ffffff;
+#cari {
+	opacity:0;
+}
+#yuk-bali {
+	font-size:18pt;
+	margin:0px;
+	border: 1px solid black;
+	background-repeat:repeat-y;
+	background-size:1920px 1080px;
+	border-radius:0px;
+	color:#888888;
+	height:300px;
+	opacity:0;
+	overflow:hidden;
+	position:absolute;
+	top:700px;
+}
+#hcari {
+	top:45%;
+	left:5%;
+	width:40%;
+	position:absolute;
+	font-weight:bold;
+	font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	padding:20px;
+	color:whitesmoke;
+}
+
+#footer {
+	position:absolute;
+	top:1000px;
+	width:100%;
 }
