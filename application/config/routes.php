@@ -49,20 +49,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+// Controller Halaman Awal
 $route['default_controller'] = 'home';
+// Halaman Awal
 $route['welcome'] = 'home';
+
+// Halaman Pelajar Setelah Login
+$route['home'] = 'dashbord';
+
+// Register Pelajar
 $route['daftar'] = 'register';
+$route['daftar_akun'] = 'register/action';
+
+// Login & Logout Pelajar
+$route['masuk'] = 'login';
+$route['masuk_akun'] = 'login/action';
+$route['keluar'] = 'logout';
+
+// Profil Pelajar
 $route['profil'] = "dashbord/profile";
 $route['profil/(:any)'] = "dashbord/profile/$1";
+
+// Kursus ku(My Courses)
 $route['kursusku'] = "dashbord/mycourse";
 $route['tambah_kursus'] = "dashbord/mycourse/add";
 $route['tambah_kursus_aksi'] = "dashbord/mycourse/add/action";
 $route['kelola_kursus/(:any)'] = "dashbord/manage_course/$1";
 $route['kelola_kursus/hapus/(:any)'] ="dashbord/delete_course/$1";
-$route['masuk'] = 'login';
-$route['keluar'] = 'logout';
-$route['daftar_akun'] = 'register/action';
-$route['masuk_akun'] = 'login/action';
-$route['home'] = 'dashbord';
+
+// Halaman 404
 $route['404_override'] = '';
+
+
 $route['translate_uri_dashes'] = FALSE;

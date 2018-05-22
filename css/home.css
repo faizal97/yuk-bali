@@ -9,6 +9,9 @@
 	position:absolute;
 	left:-1000px;
 }
+#judul h1 {
+	font-size:64pt;
+}
 #cari {
 	opacity:0;
 }

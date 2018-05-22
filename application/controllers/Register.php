@@ -10,9 +10,7 @@
 			$this->load->model('pelajar');
 			
 			if(isset($this->session->id_user)){
-				
-				redirect('home','refresh');
-				
+				redirect('home','refresh');	
 			}
 		}
 		
