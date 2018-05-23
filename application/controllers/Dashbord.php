@@ -8,12 +8,10 @@ class Dashbord extends CI_Controller {
 			parent::__construct();
 			$this->load->library('session');
 			$this->load->model('pengajar');
-			
-			if(!$this->session->userdata){
-				
-				redirect('welcome','refresh');
-				
-			}
+			$this->load->model('pelajar');
+			$this->load->model('functions');
+
+			$this->pelajar->getSession('visitor');
 	}
 	public function index()
 	{
@@ -65,9 +63,8 @@ class Dashbord extends CI_Controller {
 	{
 		$this->load->library('session');
 		if(empty($tipe)){	
-		$id_user = $this->session->id_user;
-		$query = $this->db->query("SELECT tb_kursus.*,tb_kategori.* FROM tb_kursus INNER JOIN tb_kategori ON tb_kategori.id_kategori=tb_kursus.id_kategori WHERE id_user='$id_user'");
-		$akses = $this->session->userdata['status'];
+		$id_pelajar = $this->session->id_pelajar;
+		$query = $this->db->query("SELECT tb_kursus.*,tb_kategori.* FROM tb_kursus INNER JOIN tb_kategori ON tb_kategori.id_kategori=tb_kursus.id_kategori WHERE id_pengajar='$id_pelajar'");
 		$data = array(
 			'username' => $this->session->userdata['username'],
 			'query' => $query,
@@ -83,7 +80,6 @@ class Dashbord extends CI_Controller {
 	else if($tipe=='add'){
 		if(empty($aksi)){
 			$kategori = $this->db->query("SELECT * FROM tb_kategori");
-			$akses = $this->session->userdata['status'];
 			$data = array(
 				'title' => 'Tambah Kursus',
 				'kategori' => $kategori
@@ -126,7 +122,7 @@ class Dashbord extends CI_Controller {
 				'id_kursus' => $id,
 				'nama_kursus' => $nama_kursus,
 				'id_kategori' => $kategori,
-				'id_user' => $this->session->id_user,
+				'id_pengajar' => $this->session->id_pelajar,
 				'gambar_kursus' => $gambar
 			);
 

@@ -8,7 +8,23 @@ class Pelajar extends CI_Model {
 	{
 		parent::__construct();
 		$this->load->model('functions');
+		$this->load->library('session');
 		
+		
+	}
+
+	public function getSession($tipe)
+	{
+		if($tipe=='visitor'){	
+			if(!isset($this->session->id_pelajar) && empty($this->session->id_pelajar)){
+				redirect(base_url('welcome.html'),'refresh');
+			}
+		}
+		else {
+			if(isset($this->session->id_pelajar) && !empty($this->session->id_pelajar)){
+				redirect(base_url('home.html'),'refresh');
+			}
+		}
 	}
 	// Begin : Method Login Pelajar
     public function login($berhasil='home.html',$gagal='masuk.html')
