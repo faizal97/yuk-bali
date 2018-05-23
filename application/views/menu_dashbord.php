@@ -1,4 +1,3 @@
-<div class="container-fluid">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <a href="#" class="navbar-brand">
         <img src="<?php echo base_url() ?>img/logo.png" width="100px" alt="brand" />
@@ -6,9 +5,6 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
         <li class='nav-item'><a class='nav-link' href='<?php echo base_url() ?>home.html'><span class='oi oi-home'></span>&nbsp;&nbsp;Beranda</a></li>
-        <?php if($_SESSION['status']=='instructor'){ ?>
-        <li class='nav-item'><a class='nav-link' href='<?php echo base_url() ?>kursusku.html'><span class='oi oi-file'></span>&nbsp;&nbsp;Kursus</a></li>
-        <?php };?>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
@@ -21,6 +17,11 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url() ?>profil.html"><span class="oi oi-person"></span>&nbsp;&nbsp;Profil</a>
                 <a class="dropdown-item" href="#"><span class="oi oi-wrench"></span>&nbsp;&nbsp;Edit Profil</a>
+                <?php if($_SESSION['instructor']==true){ ?>
+                    <a class="dropdown-item bg-success" href="<?php echo base_url('kursusku.html') ?>"><span class="oi oi-book"></span>&nbsp;&nbsp;Kursusku</a>
+                <?php }else{ ?>
+                    <a class="dropdown-item bg-warning" href="<?php echo base_url('aktivasi_pengajar.html') ?>"><span class="oi oi-briefcase"></span>&nbsp;&nbsp;Jadi Pengajar</a>
+                <?php } ?>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url() ?>keluar.html"><span class="oi oi-account-logout"></span>&nbsp;&nbsp;Keluar</a>
             </div>
@@ -28,4 +29,3 @@
         </ul>
     </div>
 </nav>
-</div>

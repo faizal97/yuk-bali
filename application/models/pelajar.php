@@ -116,7 +116,13 @@ class Pelajar extends CI_Model {
 		}
 
 		$row = $query->row();
-
+		$query2 = $this->db->query("SELECT * FROM tb_pengajar WHERE id_pelajar='$row->id_pelajar'");
+		if ($query2->num_rows() > 0) {
+			$instruct = true;
+		}
+		else {
+			$instruct = false;
+		}
 		if(isset($row)){
 			$password = hash($hash,$row->password_salt.$password);
 			$data = array(
@@ -126,7 +132,8 @@ class Pelajar extends CI_Model {
 				'nama_depan' => $row->nama_depan,
 				'nama_belakang' => $row->nama_belakang,
 				'password' => $password,
-				'status' => 'Learner',
+				'learner' => true,
+				'instructor' => $instruct,
 				'gambar_profil' => $row->foto_profil,
 				'logged_in' => TRUE
 			);

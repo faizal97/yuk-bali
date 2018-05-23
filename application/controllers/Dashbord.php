@@ -7,6 +7,8 @@ class Dashbord extends CI_Controller {
 	{
 			parent::__construct();
 			$this->load->library('session');
+			$this->load->model('pengajar');
+			
 			if(!$this->session->userdata){
 				
 				redirect('welcome','refresh');
@@ -17,7 +19,6 @@ class Dashbord extends CI_Controller {
 	{
 		$this->load->library('session');
 		if(isset($this->session->userdata['username'])){
-			$akses = $this->session->userdata['status'];
 			$data = array(
 				'username' => $this->session->userdata['username'],
 				'nama_depan' => ucwords($this->session->userdata['nama_depan']),
@@ -177,5 +178,10 @@ class Dashbord extends CI_Controller {
 		$query = $this->db->query("DELETE FROM tb_kursus WHERE nama_kursus='$judul' AND id_user='$user'");
 		unlink($row->gambar_kursus);
 		redirect(base_url().'kursusku.html','refresh');
+	}
+
+	public function menjadi_pengajar()
+	{
+		$this->pengajar->become_instructor();
 	}
 }
