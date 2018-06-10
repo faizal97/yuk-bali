@@ -6,9 +6,14 @@ class Test extends CI_Controller {
 
     public function index()
     {
+		$data = [
+			'title' => 'Eksperimen'
+		];
+		$this->load->view('settings/bootstrap',$data);
+		
         $this->load->view('test/dl');
         
-    }
+	}
 
 }
 

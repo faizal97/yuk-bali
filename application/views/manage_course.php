@@ -23,4 +23,6 @@
     <textarea name="deskripsi_kursus" id="deskripsi_kursus" class="form-control" style="width:500px"><?php echo $data->deskripsi ?></textarea>
     
     <a href="<?php echo base_url() ?>kelola_kursus/hapus/<?php echo str_replace(" ","_",$title) ?>.html"><button class="btn btn-danger">HAPUS KURSUS</button></a>
+    <a href="<?php echo base_url('kursusku.html') ?>"><button class="btn btn-success">Kembali</button></a>
+    <a href="<?php echo base_url('kelola_kursus/kelola_materi/'.str_replace(" ","_",$title))?>"><button class="btn btn-primary">Kelola Materi</button></a>
 </div>

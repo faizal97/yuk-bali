@@ -11,11 +11,7 @@ class Login extends CI_Controller {
 		$this->load->model('template');
 		
 
-		if(isset($this->session->id_user)){
-			
-			redirect('home','refresh');
-			
-		}
+		$this->pelajar->getSession('login');
 	}
 	
 	public function index() {

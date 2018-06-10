@@ -31,6 +31,24 @@ class functions extends CI_Model {
         }
     }
 
+    public function random_badge()
+    {
+        return ["badge-primary","badge-secondary","badge-success"," badge-danger"," badge-warning","badge-info","badge-dark"];
+    }
+
+    public function getRandom_Badge($badge)
+    {
+        return $badge[rand(0,sizeof($badge)-1)];
+	}
+	
+	public function pindah_halaman($link,$pesan='')
+	{
+		if (!empty($pesan)) {
+			echo "<script>alert('".$pesan."');</script>";
+		}
+		redirect(base_url($link),'refresh');
+	}
+
 }
 
 /* End of file functions.php */

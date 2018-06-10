@@ -9,9 +9,7 @@
 			$this->load->library('session');
 			$this->load->model('pelajar');
 			
-			if(isset($this->session->id_user)){
-				redirect('home','refresh');	
-			}
+			$this->pelajar->getSession('login');
 		}
 		
 		public function index()

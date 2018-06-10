@@ -21,7 +21,7 @@ if (empty($title) || !isset($title)) {
     <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
     <style>
     body {
-        font-family: 'Roboto', sans-serif;
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         background-image:url('<?php echo $gambar ?>');
         background-size:1920px 1080px;
     }

@@ -2,6 +2,8 @@
 #menu_wrapper {
     width:100%;
     position:absolute;
+	/* background-color:white;
+	border-bottom:3px solid red; */
     top:-100px;
 }
 .nav-item {

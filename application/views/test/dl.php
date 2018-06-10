@@ -1,19 +1,14 @@
 <?php
+require('Unirest.php');
+$response = Unirest\Request::get("https://quotes.p.mashape.com/?category=learning",
+  array(
+    "X-Mashape-Key" => "ijSVUPAaQ1mshaBtiOdZ34YwDfDwp1F88RLjsnpERnLBU8YlAN",
+    "Accept" => "application/json"
+  )
+);
 
-    $to = 'faizalardianputra@yahoo.co.id';
+$json = json_encode($response);
+$myarray = json_decode($json);
 
-    $subject = 'Testing Mail PHP';
-
-    $message = '
-    
-    Testing Mail PHP From Localhost
-    from Yuk Bali
-
-    -Faizal
-    ';
-
-    $headers = 'From:noreply@yukbali.com'.'\r\n';
-
-    $sukses = mail($to,$subject,$message,$headers);
-var_dump($sukses);
+var_dump($myarray);
 ?>

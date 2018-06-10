@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
     <a href="#" class="navbar-brand">
         <img src="<?php echo base_url() ?>img/logo.png" width="100px" alt="brand" />
     </a>

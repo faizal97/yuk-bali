@@ -17,6 +17,7 @@ class Pelajar extends CI_Model {
 	{
 		if($tipe=='visitor'){	
 			if(!isset($this->session->id_pelajar) && empty($this->session->id_pelajar)){
+				exit();
 				redirect(base_url('welcome.html'),'refresh');
 			}
 		}
