@@ -11,13 +11,13 @@
         </div>
         <div class="card-body">
         <a data-toggle="modal" href='#tambah-kursus' class="card-title btn btn-primary">Tambah Kursus</a>
-        <a href="#" class="card-title btn btn-danger">Hapus Semua</a>
+        <a href="<?php echo base_url('kursusku/hapus_semua.html') ?>" class="card-title btn btn-danger">Hapus Semua</a>
             <div class="row">
                 <?php $no=0;foreach ($query->result() as $row) {$no++; ?>
                 <div class="col-sm-3">
                     <div class="card">
 							<div id="tombol-sembunyi<?php echo $no ?>" onmouseover="tampil_tombol('<?php echo $no ?>')" style="position:absolute;border:1px solid black;width:100%;height:250px;background-color:rgb(0,0,0,0.8);opacity:0;" onmouseout="hilang_tombol('<?php echo $no ?>')">
-                            	<a href="#" onmouseover="tampil_tombol('<?php echo $no ?>')" class="btn btn-primary" style="width:50%;margin-bottom:5px;margin-left:25%;margin-top:25%">Kelola</a>
+                            	<a href="<?php echo base_url('kursusku/kelola/'.str_replace(" ","-",$row->nama_kursus).'.html') ?>" onmouseover="tampil_tombol('<?php echo $no ?>')" class="btn btn-primary" style="width:50%;margin-bottom:5px;margin-left:25%;margin-top:25%">Kelola</a>
                             	<a href="<?php echo base_url('kursusku/hapus/'.str_replace(" ","-",$row->nama_kursus).'.html') ?>" onmouseover="tampil_tombol('<?php echo $no ?>')" class="btn btn-danger" style="width:50%;margin-left:25%;margin-top:5%">Hapus</a>
 							</div>
                         <img class="card-img-top" src="<?php echo base_url($row->gambar_kursus) ?>" width="300px" height="250px" alt="Card Image">

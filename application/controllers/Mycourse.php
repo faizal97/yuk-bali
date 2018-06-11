@@ -104,9 +104,9 @@ class Mycourse extends CI_Controller {
         
         public function tampil_data_kursus($judul)
         {
-            $judul = str_replace("_"," ",$judul);
+            $judul = str_replace("-"," ",$judul);
             $user = $this->session->id_pelajar;
-            $query = $this->db->query("SELECT * FROM tb_kursus WHERE nama_kursus='$judul' AND id_pengajar='$user'");
+            $query = $this->db->query("SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori WHERE tb_kursus.nama_kursus='$judul' AND tb_kursus.id_pengajar='$user'");
             $row = $query->row();
             $kategori = $this->db->query('SELECT * FROM tb_kategori');
             $data = array(
@@ -132,16 +132,37 @@ class Mycourse extends CI_Controller {
             $judul = str_replace("-"," ",$judul);
             $query = $this->db->query("SELECT * FROM tb_kursus WHERE nama_kursus='$judul' AND id_pengajar='$user'");
             $row = $query->row();
-            $query = $this->db->query("DELETE FROM tb_kursus WHERE nama_kursus='$judul' AND id_pengajar='$user'");
+            $hapus = $this->db->query("DELETE FROM tb_kursus WHERE nama_kursus='$judul' AND id_pengajar='$user'");
 			unlink($row->gambar_kursus);
-			if ($query) {
+			if ($hapus) {
 				$this->functions->pindah_halaman('kursusku.html','Kursus Berhasil Dihapus.');
 			}
 			else 
 			{
 				$this->functions->pindah_halaman('kursusku.html','Kursus Gagal Dihapus.');
 			}
-        }
+		}
+		
+		public function hapus_semua()
+		{
+			$user = $this->session->id_pelajar;
+			$query = $this->db->query("SELECT * FROM tb_kursus WHERE id_pengajar='$user'");
+			$pics = [];
+			foreach ($query->result() as $row) {
+				array_push($pics,$row->gambar_kursus);
+			}
+			$hapus = $this->db->query("DELETE FROM tb_kursus WHERE id_pengajar='$user'");
+			foreach ($pics as $value) {
+				unlink($value);
+			}
+			if ($hapus) {
+				$this->functions->pindah_halaman('kursusku.html','Semua Kursus Berhasil Dihapus.');
+			}
+			else 
+			{
+				$this->functions->pindah_halaman('kursusku.html','Semua Kursus Gagal Dihapus.');
+			}
+		}
     }
 
 /* End of file Mycourse.php */

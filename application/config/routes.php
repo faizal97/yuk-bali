@@ -74,9 +74,10 @@ $route['profil/(:any)'] = "dashbord/profile/$1";
 $route['aktivasi_pengajar'] = "dashbord/menjadi_pengajar";
 $route['kursusku'] = "mycourse";
 $route['kursusku/tambah_kursus'] = "mycourse/proses_tambah_kursus";
-$route['kelola_kursus/(:any)'] = "dashbord/";
-$route['kelola_kursus/edit/(:any)'] = "mycourse/manage_course/$1";
+$route['kursusku/kelola/(:any)'] = "mycourse/tampil_data_kursus/$1";
+$route['kursusku/kelola/edit/(:any)'] = "mycourse/manage_course/$1";
 $route['kursusku/hapus/(:any)'] ="mycourse/hapus_kursus/$1";
+$route['kursusku/hapus_semua'] = "mycourse/hapus_semua";
 
 // Halaman 404
 $route['404_override'] = '';
