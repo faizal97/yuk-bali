@@ -9,7 +9,6 @@
 	}
 	?>
 	</select><br>
-	<input type="text" class="form-control" name="tags" id="tags" placeholder="Bahasa Pemograman: cth. php,mysql,java"><br>
 	<label for="gambar">Gambar Kursus</label>
 	<input type="file" name="gambar" id="gambar" class="form-control" accept=".jpg, .jpeg, .png" required><br><br>
 	<script>

@@ -16,9 +16,8 @@ class Dashbord extends CI_Controller {
 	public function index()
 	{
 		$this->load->library('session');
-		if(isset($this->session->userdata['username'])){
+		if(isset($this->session->id_pelajar)){
 			$data = array(
-				'username' => $this->session->userdata['username'],
 				'nama_depan' => ucwords($this->session->userdata['nama_depan']),
 				'nama_belakang' => $this->session->userdata['nama_belakang'],
 				'title' => "Yuk Bali - Home"

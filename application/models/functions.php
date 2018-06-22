@@ -4,6 +4,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class functions extends CI_Model {
 
+	public function makeID($query,$depan,$banyak_nol=5)
+	{
+		$no = 1;
+		$query_field = $query->field_data();
+		$primary = $query_field[0]->name;
+		foreach ($query->result() as $value) {
+			$id_temp = $depan.$this->functions->buatnol($no,$banyak_nol);
+			if ($value->$primary == $id_temp) {
+				if ($no == $this->functions->buatnol($query->num_rows(),$banyak_nol)) {
+					$no++;
+					$num = $no;
+					continue;
+				}
+				$no++;
+				continue;
+			}
+			else {
+				$num = $no;
+				break;
+			}
+		}
+		if (!isset($num) || empty($num)) {
+			$num=1;
+		}
+		return $depan.$this->functions->buatnol($num,$banyak_nol);
+	}
+	
     public function buatnol($num,$banyak_nol)
 	{
         $sisa = $banyak_nol - strlen($num);

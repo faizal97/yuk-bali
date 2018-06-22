@@ -13,7 +13,7 @@
                     <?php echo $_SESSION['nama_depan'] ?>
                 </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div href="#" class="dropdown-header">Masuk sebagai <strong><?php echo $_SESSION['username'] ?></strong></div>
+                <div href="#" class="dropdown-header">Masuk sebagai <strong><?php echo $_SESSION['nama_depan']." ".$_SESSION['nama_belakang'] ?></strong></div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url() ?>profil.html"><span class="oi oi-person"></span>&nbsp;&nbsp;Profil</a>
                 <a class="dropdown-item" href="#"><span class="oi oi-wrench"></span>&nbsp;&nbsp;Edit Profil</a>

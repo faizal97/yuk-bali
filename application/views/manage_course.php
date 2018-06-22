@@ -57,8 +57,8 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#pelajar">
-									Pelajar
+								<a class="nav-link" data-toggle="tab" href="#soal">
+									Soal
 								</a>
 							</li>
 							<li class="nav-item">
@@ -77,14 +77,20 @@
 					<!-- START MENU BAGIAN KANAN -->
 					<div class="col-sm-10">
 						<div class="tab-content">
-							<div class="tab-pane container active" id="utama">
+							<div class="tab-pane container fade" id="utama">
 								<?php $this->load->view('kelola_kursus/utama');?>
 							</div>
 							<div class="tab-pane container fade" id="materi">
 								<?php $this->load->view('kelola_kursus/materi');?>
 							</div>
-							<div class="tab-pane container fade" id="pelajar">
-								<?php $this->load->view('kelola_kursus/pelajar');?>
+							<div class="tab-pane container fade" id="soal">
+								<?php $this->load->view('kelola_kursus/soal');?>
+							</div>
+							<div class="tab-pane container fade" id="laporan">
+								<?php $this->load->view('kelola_kursus/laporan');?>
+							</div>
+							<div class="tab-pane container fade" id="pengaturan">
+								<?php $this->load->view('kelola_kursus/pengaturan');?>
 							</div>
 						</div>
 					</div>
@@ -113,4 +119,10 @@
 function perbesar_gambar() {
 	$('#modal_images').modal('show');
 }
+let urlParams = new URLSearchParams(window.location.search);
+let tab = urlParams.get('tab');
+if(tab==null){
+	tab='utama';
+}
+$('a[href="#' + tab + '"]').tab('show');
 </script>

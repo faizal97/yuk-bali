@@ -16,7 +16,7 @@
 		{
 			$data = array(
 				'title' => "Yuk Bali - Register",
-				'gambar' => 'img/background/daftar.jpg'
+				'gambar' => 'img/background/blur.png'
 			);
 			$this->load->view('settings/bootstrap',$data);
 			$this->load->view('register');

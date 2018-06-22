@@ -1,11 +1,11 @@
 <?php
-	$query_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut");
+	$query_materi = $this->db->query("SELECT * FROM tb_soal JOIN tb_materi ON tb_materi.id_materi = tb_soal.id_materi WHERE tb_materi.id_kursus='$id_kursus' ORDER BY tb_materi.urut");
 ?>
 <div class="container-fluid">
-	<h1>MATERI</h1>
-	<a data-toggle="modal" href='#tambah-materi'>
+	<h1>Soal</h1>
+	<a data-toggle="modal" href='#tambah-soal'>
 		<button class="btn btn-primary">
-			Tambah Materi
+			Tambah Soal
 		</button>
 	</a>	
 	<a href="">
@@ -17,7 +17,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<td>No</td>
+				<td>No Materi</td>
 				<td>Nama Materi</td>
 				<td colspan="2">Aksi</td>
 			</tr>
@@ -35,16 +35,16 @@
 	</table>
 </div>
 <!-- Modal tambah kursus -->
-<form action="<?php echo base_url('kursusku/kelola/'.str_replace(" ","-",$title).'/tambah_materi.html') ?>" method="POST" enctype="multipart/form-data">
- <div class="modal fade" id="tambah-materi">
+<form action="<?php echo base_url('kursusku/kelola/'.str_replace(" ","-",$title).'/tambah_soal.html') ?>" method="POST" enctype="multipart/form-data">
+ <div class="modal fade" id="tambah-soal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5>Tambah Materi</h5>
+                <h5>Tambah Soal</h5>
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            <?php $this->load->view('kelola_kursus/tambah_materi');
+            <?php $this->load->view('kelola_kursus/tambah_soal');
              ?>
             </div>
 			<div class="modal-footer">

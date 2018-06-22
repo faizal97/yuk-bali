@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/home.css">
     <div id="content">
-        <div id="home" style="background-image:url('<?php echo base_url('img/background/index.jpg') ?>')">
+        <div id="home" style="background-image:url('<?php echo base_url('img/background/index.png') ?>')">
                 <div class="" id="hcari">
                     <form  id="frmCari" class="input-group mb-3" action="">
                         <input type="search" placeholder="Apa Yang Ingin Dipelajari ?" class="form-control form-control-lg" name="tcari" id="tcari" autofocus>

@@ -18,14 +18,13 @@ class Mycourse extends CI_Controller {
     public function index()
     {
         $this->load->library('session');	
-        $id_pelajar = $this->session->id_pelajar;
+        $id_pengajar = $this->session->id_pengajar;
         $kategori = $this->db->query("SELECT * FROM tb_kategori ORDER BY nama_kategori");
-		$query = $this->db->query("SELECT tb_kursus.*,tb_kategori.* FROM tb_kursus INNER JOIN tb_kategori ON tb_kategori.id_kategori=tb_kursus.id_kategori WHERE id_pengajar='$id_pelajar'");
+		$query = $this->db->query("SELECT tb_kursus.*,tb_kategori.* FROM tb_kursus INNER JOIN tb_kategori ON tb_kategori.id_kategori=tb_kursus.id_kategori WHERE id_pengajar='$id_pengajar'");
         
         $data = array(
-			'username' => $this->session->userdata['username'],
 			'query' => $query,
-            'title' => ucwords($this->session->userdata['username'])."'s Course",
+            'title' => ucwords($this->session->nama_depan)."'s Course",
             'badge' => $this->functions->random_badge(),
             'kategori' => $kategori
 		);
@@ -54,13 +53,9 @@ class Mycourse extends CI_Controller {
     {
         	$nama_kursus = $this->input->post('nama_kursus');
 			$kategori = $this->input->post('kategori');
-			$tags = $this->input->post('tags');
 
 			$query = $this->db->query("SELECT * FROM tb_kursus");
-			$num = $query->num_rows() + 1;
-			$query = $this->db->query("SELECT * FROM tb_kategori WHERE id_kategori='$kategori'");
-			$row = $query->row();
-			$id = "11".$row->id_kategori.$num;
+			$id = $this->functions->MakeID($query,"KRS",3);
 
 			$config['upload_path'] = "img/course/";
 			$config['allowed_types'] = 'jpg|png|jpeg';
@@ -83,9 +78,8 @@ class Mycourse extends CI_Controller {
 			$data = array(
 				'id_kursus' => $id,
 				'nama_kursus' => $nama_kursus,
-				'tags' => $tags,
 				'id_kategori' => $kategori,
-				'id_pengajar' => $this->session->id_pelajar,
+				'id_pengajar' => $this->session->id_pengajar,
 				'gambar_kursus' => $gambar
 			);
 
@@ -105,14 +99,15 @@ class Mycourse extends CI_Controller {
         public function tampil_data_kursus($judul)
         {
             $judul = str_replace("-"," ",$judul);
-            $user = $this->session->id_pelajar;
+            $user = $this->session->id_pengajar;
             $query = $this->db->query("SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori WHERE tb_kursus.nama_kursus='$judul' AND tb_kursus.id_pengajar='$user'");
             $row = $query->row();
             $kategori = $this->db->query('SELECT * FROM tb_kategori');
             $data = array(
                 'title' => $judul,
                 'data' => $row,
-                'kategori' => $kategori
+				'kategori' => $kategori,
+				'id_kursus' => $row->id_kursus
             );
             $this->load->view('settings/bootstrap', $data);
             $this->load->view('header');

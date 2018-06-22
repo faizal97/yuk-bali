@@ -17,7 +17,6 @@ class Pelajar extends CI_Model {
 	{
 		if($tipe=='visitor'){	
 			if(!isset($this->session->id_pelajar) && empty($this->session->id_pelajar)){
-				exit();
 				redirect(base_url('welcome.html'),'refresh');
 			}
 		}
@@ -38,14 +37,7 @@ class Pelajar extends CI_Model {
 			$euser = $this->db->escape_str(($this->input->post('euser')));
 			$password = $this->db->escape_str(($this->input->post('password')));
 		}
-
-		if (strpos($euser,"@") && strpos($euser,".")) {
-			$tipe = 'email';
-		}
-		else {
-			$tipe = 'username';
-		}
-		$this->setSession($euser,$password,$tipe);
+		$this->setSession($euser,$password);
 
 		echo "<script>alert('GAGAL LOGIN');</script>";
 		redirect(base_url($gagal),"refresh");
@@ -61,7 +53,6 @@ class Pelajar extends CI_Model {
 		// Set Data
 		$nama_lengkap = $this->db->escape_str($this->input->post('nama_lengkap'));
 		$nama_lengkap = explode(" ",$nama_lengkap);
-		$username = $this->db->escape_str(strtolower($this->input->post('username')));
 		$nama_depan = $nama_lengkap[0];
 		$nama_belakang="";
 		for ($i=1; $i < count($nama_lengkap); $i++) { 
@@ -84,25 +75,18 @@ class Pelajar extends CI_Model {
 
 		// Cek Jika Ada Email Yang Sama
 		if ($this->functions->cekSamaData($tabel,'email',$email)) {
-			echo "<script>alert('Username telah ada');</script>";
-			redirect(base_url()."daftar.html",'refresh');
-		}
-
-		// Cek Jika Ada Username Yang Sama
-		if ($this->functions->cekSamaData($tabel,'username',$username)) {
-			echo "<script>alert('Username telah ada');</script>";
+			echo "<script>alert('Email telah ada');</script>";
 			redirect(base_url()."daftar.html",'refresh');
 		}
 
 
-		$query = $this->db->query("SELECT * FROM $tabel WHERE id_pelajar LIKE '".Date("y").Date("m")."%' ");
+		$query = $this->db->query("SELECT * FROM $tabel");
 
-		$id=$this->makeID($query);
+		$id=$this->makeID($query,'PLJ',3);
 
 		$data = array(
 			'id_pelajar' => $id,
 			'email' => $email,
-			'username' => $username,
 			'nama_depan' => $nama_depan,
 			'nama_belakang' => $nama_belakang,
 			'password' => $hashed_password,
@@ -112,7 +96,7 @@ class Pelajar extends CI_Model {
 		$result = $this->db->insert($tabel,$data);
 
 		if($result){
-			$this->setSession($username,$password);
+			$this->setSession($email,$password);
 		}
 		else {
 			echo "<script>alert('Data Gagal Tersimpan');</script>";
@@ -122,29 +106,32 @@ class Pelajar extends CI_Model {
 	// END :  Method Register Pelajar
 
 	// Begin : Method Set Session Pelajar
-	public function setSession($euser='',$password='',$tipe='username',$berhasil='home.html',$gagal='masuk.html',$tabel='tb_pelajar')
+	public function setSession($euser='',$password='',$berhasil='home.html',$gagal='masuk.html',$tabel='tb_pelajar')
 	{
 		$hash = 'sha512';
-		if ($tipe=='email') {
-			$query = $this->db->query("SELECT * FROM $tabel WHERE email='".$euser."'");
+		$query = $this->db->query("SELECT * FROM $tabel WHERE email='".$euser."'");
+		$ketemu = $query->num_rows();
+		if($ketemu<1){
+			echo "<script>alert('GAGAL LOGIN');</script>";
+			redirect(base_url($gagal),"refresh");
 		}
-		else {
-			$query = $this->db->query("SELECT * FROM $tabel WHERE username='".$euser."'");
-		}
-
 		$row = $query->row();
-		$query2 = $this->db->query("SELECT * FROM tb_pengajar WHERE id_pelajar='$row->id_pelajar'");
+		$id_pelajar = $row->id_pelajar;
+		$query2 = $this->db->query("SELECT * FROM tb_pengajar WHERE id_pelajar='".$id_pelajar."'");
+		$query_guru = $query2->row();
 		if ($query2->num_rows() > 0) {
 			$instruct = true;
+			$id_pengajar = $query_guru->id_pengajar;
 		}
 		else {
 			$instruct = false;
+			$id_pengajar = null;
 		}
 		if(isset($row)){
 			$password = hash($hash,$row->password_salt.$password);
 			$data = array(
 				'id_pelajar' => $row->id_pelajar,
-				'username' => $row->username,
+				'id_pengajar' => $id_pengajar,
 				'email' => $row->email,
 				'nama_depan' => $row->nama_depan,
 				'nama_belakang' => $row->nama_belakang,
@@ -155,7 +142,6 @@ class Pelajar extends CI_Model {
 				'logged_in' => TRUE
 			);
 
-		if ($tipe=='email') {
 			if($euser == $row->email){
 				if($password == $row->password){
 					$this->session->set_userdata($data);
@@ -163,34 +149,17 @@ class Pelajar extends CI_Model {
 				}
 			}
 			}
-			else {
-				if($euser == $row->username){
-					if($password == $row->password){
-						$this->session->set_userdata($data);
-						redirect(base_url($berhasil));
-					}
-				}
-			}
-
-			// Mencocokan dengan database
-			if($username == $row->username){
-				if($password == $row->password){
-					$this->session->set_userdata($data);
-					redirect(base_url($berhasil));
-				}
-			}
 			echo "<script>alert('GAGAL LOGIN');</script>";
 				redirect(base_url($gagal),"refresh");			
-		}
-	}
+		}	
 	// End : Method Set Session Pelajar
 
 	// Begin : Method Make ID Pelajar
-	public function makeID($query,$banyak_nol=5)
+	public function makeID($query,$depan,$banyak_nol=5)
 	{
 		$no = 1;
 		foreach ($query->result() as $value) {
-			$id_temp = Date("y").Date("m").$this->functions->buatnol($no,$banyak_nol);
+			$id_temp = $depan.$this->functions->buatnol($no,$banyak_nol);
 			if ($value->id_pelajar == $id_temp) {
 				if ($no == $this->functions->buatnol($query->num_rows(),$banyak_nol)) {
 					$no++;
@@ -208,7 +177,7 @@ class Pelajar extends CI_Model {
 		if (!isset($num) || empty($num)) {
 			$num=1;
 		}
-		return Date("y").Date("m").$this->functions->buatnol($num,$banyak_nol);
+		return $depan.$this->functions->buatnol($num,$banyak_nol);
 	}
 	// End : Method Make ID Pelajar
 

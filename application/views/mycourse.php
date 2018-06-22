@@ -23,10 +23,6 @@
                         <img class="card-img-top" src="<?php echo base_url($row->gambar_kursus) ?>" width="300px" height="250px" alt="Card Image">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row->nama_kursus ?></h5>
-                            <p class="card-text"><?php $tags=explode(",",$row->tags);foreach ($tags as $value) { ?>
-                                <span class="badge <?php echo $this->functions->getRandom_Badge($badge) ?>" style="font-size:10pt;font-family:Arial"><?php echo $value ?></span>
-                            <?php } ?></p>
-
                         </div>
                     </div>
                 </div>

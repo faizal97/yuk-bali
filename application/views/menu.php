@@ -17,20 +17,20 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link text-dark"  href="#"><span class="oi oi-grid-three-up"></span>&nbsp;&nbsp;Kategori</a></li>
+            <li class="nav-item"><a class="nav-link text-light"  href="#"><span class="oi oi-grid-three-up"></span>&nbsp;&nbsp;Kategori</a></li>
             <li class="nav-item">
                 <form  id="mnFrmCari" class="input-group mb-3" action="">
                     <input type="search" placeholder="Cari Kursus" class="form-control form-control-sm" name="tcari" id="tmenucari">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span></button>
+                            <button type="submit" class="btn btn-light"><span class="oi oi-magnifying-glass"></span></button>
                         </div>                    
                 </form>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link text-dark" href="#"><span class="oi oi-briefcase"></span>&nbsp;&nbsp;Menjadi Pengajar</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li class="nav-item"><a class="nav-link text-dark" href="<?php echo base_url('masuk.html') ?>"><span class="oi oi-account-login"></span>&nbsp;&nbsp;Masuk</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="<?php echo base_url('daftar.html') ?>"><span class="oi oi-person"></span>&nbsp;&nbsp;Daftar</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#"><span class="oi oi-briefcase"></span>&nbsp;&nbsp;Menjadi Pengajar</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li class="nav-item"><a class="nav-link text-light" href="<?php echo base_url('masuk.html') ?>"><span class="oi oi-account-login"></span>&nbsp;&nbsp;Masuk</a></li>
+            <li class="nav-item"><a class="nav-link text-light" href="<?php echo base_url('daftar.html') ?>"><span class="oi oi-person"></span>&nbsp;&nbsp;Daftar</a></li>
         </ul>
     </div>
 </nav>

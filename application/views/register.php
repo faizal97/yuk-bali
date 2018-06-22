@@ -13,7 +13,6 @@
 			<div class="form-group">
 				<input type="text" autofocus style="" class="textbox form-control" name="nama_lengkap" id="nama-lengkap" value="" placeholder="Nama Lengkap" required="required">
 				<br><input type="email" class="textbox form-control" name="email" value="" id="email" placeholder="E-Mail" required="required">
-				<br><input type="text" class="textbox form-control" name="username" value="" id="username" placeholder="Username" required="required">
 				<br><input type="password" id="pass" class="textbox form-control" name="password" id="password" value="" placeholder="Password" required="required">
 				<br><input type="password" id="pass-again" class="textbox form-control" id="password-lagi" name="password_ulang" value="" placeholder="Ulang Password" required="required"><span id="pass-valid"></span>
 				<div class="form-check" style="margin-left:10px;margin-top:10px;">

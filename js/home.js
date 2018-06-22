@@ -16,7 +16,7 @@ $(document).ready(()=>{
         top:'0px'
     },1000,()=>{
         $('#frmCari').animate({
-            left:'0px'
+            left:'360px'
         },2000,()=>{
             $('#cari').animate({
                 opacity:1

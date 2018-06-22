@@ -17,7 +17,7 @@ class Login extends CI_Controller {
 	public function index() {
 		$data = array(
 			'title' => "Yuk Bali - Login",
-			'gambar' => 'img/background/login.jpg'
+			'gambar' => 'img/background/blur.png'
 		);
 		$this->load->view('settings/bootstrap',$data);
 		$this->load->view('login');		

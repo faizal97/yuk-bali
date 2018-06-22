@@ -8,6 +8,7 @@
 	opacity:1;
 	position:absolute;
 	left:-1000px;
+	top:100px;
 }
 #judul h1 {
 	font-size:64pt;

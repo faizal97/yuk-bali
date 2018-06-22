@@ -13,10 +13,14 @@ class Pengajar extends CI_Model {
 
    public function become_instructor()
    {
+	   $query = $this->db->query("SELECT * FROM tb_pengajar");
+	   $id_pengajar = $this->functions->makeID($query,'PGJ',3);
        $data = array(
-           'id_pengajar' => $this->session->id_pelajar,
+           'id_pengajar' => $id_pengajar,
            'id_pelajar' => $this->session->id_pelajar
-       );  
+	   );
+	   $this->session->id_pengajar = $id_pengajar;
+	   $this->session->instructor = TRUE;
        $this->db->insert('tb_pengajar',$data);
        redirect(base_url('kursusku.html'),'refresh');
    }
