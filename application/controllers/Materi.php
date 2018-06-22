@@ -38,6 +38,60 @@ class Materi extends CI_Controller {
 
 	}
 
+	public function view_kelola_materi($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$nama_materi2 = str_replace("-"," ",$nama_materi);
+		$user = $this->session->id_pengajar;
+		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
+		$query = $query->row();
+		$data = [
+			'data_materi' => $query,
+			'judul_materi' => $nama_materi2,
+			'judul_kursus' => $nama_kursus2,
+			'pengajar' => $this->session->nama_depan." ".$this->session->nama_belakang 
+		];
+
+		$this->template->header($nama_kursus2." - ".$nama_materi2,2);
+		$this->load->view('kelola_kursus/tampil_materi',$data);
+		$this->template->footer();		
+	}
+
+	public function proses_edit_url_video($nama_kursus,$nama_materi)
+	{
+		$url_video = $this->input->post('url_video');
+		if(empty($url_video) || $url_video == null){
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','URL Tidak Boleh Kosong !');
+		}
+		if(strpos($url_video,"youtube.com/watch?v=")!=false)
+		{
+			$url_valid = true;
+		}
+		else 
+		{
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','Format URL Tidak Valid !');
+		}
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$nama_materi2 = str_replace("-"," ",$nama_materi);
+		$user = $this->session->id_pengajar;
+		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
+		$query = $query->row();
+		$id_materi = $query->id_materi;
+		$data = [
+			'url_video' => $url_video
+		];
+
+		$this->db->where('id_materi',$id_materi);
+		$result = $this->db->update('tb_materi',$data);
+
+		if ($result) {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','URL Video Berhasil Disimpan');
+		}
+		else {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','URL Video Gagal Disimpan');
+		}
+	}
+
 }
 
 /* End of file Materi.php */

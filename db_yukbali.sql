@@ -1,5 +1,5 @@
 /*
-SQLyog Community v13.0.0 (32 bit)
+SQLyog Community v13.0.1 (64 bit)
 MySQL - 10.1.31-MariaDB : Database - db_yukbali
 *********************************************************************
 */
@@ -39,76 +39,94 @@ CREATE TABLE `tb_detail_kursus` (
   `id_pelajar` int(11) DEFAULT NULL,
   `tgl_daftar` date DEFAULT NULL,
   KEY `id_kursus` (`id_kursus`),
-  KEY `tb_detail_kursus_ibfk_2` (`id_pelajar`),
-  CONSTRAINT `tb_detail_kursus_ibfk_1` FOREIGN KEY (`id_kursus`) REFERENCES `tb_kursus` (`id_kursus`),
-  CONSTRAINT `tb_detail_kursus_ibfk_2` FOREIGN KEY (`id_pelajar`) REFERENCES `tb_pelajar` (`id_pelajar`)
+  KEY `tb_detail_kursus_ibfk_2` (`id_pelajar`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_detail_kursus` */
+
+/*Table structure for table `tb_detail_soal` */
+
+DROP TABLE IF EXISTS `tb_detail_soal`;
+
+CREATE TABLE `tb_detail_soal` (
+  `id_soal` varchar(6) DEFAULT NULL,
+  `nama_soal` text,
+  `pilihan1` text,
+  `pilihan2` text,
+  `pilihan3` text,
+  `pilihan4` text,
+  `jawaban` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tb_detail_soal` */
 
 /*Table structure for table `tb_kategori` */
 
 DROP TABLE IF EXISTS `tb_kategori`;
 
 CREATE TABLE `tb_kategori` (
-  `id_kategori` int(11) NOT NULL AUTO_INCREMENT,
+  `id_kategori` varchar(6) NOT NULL,
   `nama_kategori` varchar(30) NOT NULL,
   PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_kategori` */
 
 insert  into `tb_kategori`(`id_kategori`,`nama_kategori`) values 
-(1,'Pemograman'),
-(2,'Komputer'),
-(3,'Ga Jelas');
+('KTG001','Pemograman'),
+('KTG002','Komputer'),
+('KTG003','Ga Jelas');
 
 /*Table structure for table `tb_kursus` */
 
 DROP TABLE IF EXISTS `tb_kursus`;
 
 CREATE TABLE `tb_kursus` (
-  `id_kursus` int(11) NOT NULL COMMENT 'id kursus',
+  `id_kursus` varchar(6) NOT NULL COMMENT 'id kursus',
   `nama_kursus` varchar(100) NOT NULL COMMENT 'judul kursus',
-  `id_pengajar` int(15) NOT NULL COMMENT 'user yang membuat kursus',
+  `id_pengajar` varchar(6) NOT NULL COMMENT 'user yang membuat kursus',
   `tgl_buat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'tanggal dibuatnya kursus',
   `gambar_kursus` varchar(32) DEFAULT NULL COMMENT 'gambar thumbnail kursus',
-  `id_kategori` int(11) DEFAULT NULL COMMENT 'kategori dari kursus',
+  `id_kategori` varchar(6) DEFAULT NULL COMMENT 'kategori dari kursus',
   `deskripsi` text COMMENT 'deskripsi kursus',
   PRIMARY KEY (`id_kursus`),
   KEY `id_user` (`id_pengajar`),
-  KEY `id_kategori` (`id_kategori`),
-  CONSTRAINT `tb_kursus_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `tb_kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tb_kursus_ibfk_2` FOREIGN KEY (`id_pengajar`) REFERENCES `tb_pengajar` (`id_pengajar`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `id_kategori` (`id_kategori`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_kursus` */
+
+insert  into `tb_kursus`(`id_kursus`,`nama_kursus`,`id_pengajar`,`tgl_buat`,`gambar_kursus`,`id_kategori`,`deskripsi`) values 
+('KRS001','Belajar PHP','PGJ001','2018-06-20 16:15:30','img/course/KRS001.jpeg','KTG001',NULL);
 
 /*Table structure for table `tb_materi` */
 
 DROP TABLE IF EXISTS `tb_materi`;
 
 CREATE TABLE `tb_materi` (
-  `id_materi` int(11) NOT NULL,
+  `id_materi` varchar(6) NOT NULL,
   `nama_materi` varchar(30) DEFAULT NULL,
-  `id_kursus` int(11) DEFAULT NULL,
+  `id_kursus` varchar(6) DEFAULT NULL,
   `isi_materi` text,
   `url_video` varchar(50) DEFAULT NULL,
-  `tgl_dibuat` date DEFAULT NULL,
+  `tgl_dibuat` datetime DEFAULT CURRENT_TIMESTAMP,
+  `urut` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_materi`),
-  KEY `id_kursus` (`id_kursus`),
-  CONSTRAINT `tb_materi_ibfk_1` FOREIGN KEY (`id_kursus`) REFERENCES `tb_kursus` (`id_kursus`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `id_kursus` (`id_kursus`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_materi` */
+
+insert  into `tb_materi`(`id_materi`,`nama_materi`,`id_kursus`,`isi_materi`,`url_video`,`tgl_dibuat`,`urut`) values 
+('MTR001','Bab 1','KRS001',NULL,'https://www.youtube.com/watch?v=diGjw5tghYU','2018-06-20 16:53:20',1),
+('MTR002','Bab 2','KRS001',NULL,NULL,'2018-06-20 21:49:48',2);
 
 /*Table structure for table `tb_pelajar` */
 
 DROP TABLE IF EXISTS `tb_pelajar`;
 
 CREATE TABLE `tb_pelajar` (
-  `id_pelajar` int(15) NOT NULL AUTO_INCREMENT COMMENT 'id pengguna',
-  `username` varchar(32) NOT NULL COMMENT 'username pengguna',
+  `id_pelajar` varchar(6) NOT NULL COMMENT 'id pengguna',
   `nama_depan` varchar(32) NOT NULL COMMENT 'nama depan pengguna',
   `nama_belakang` varchar(64) DEFAULT NULL COMMENT 'nama belakang pengguna',
   `password` varchar(128) NOT NULL COMMENT 'password pengguna',
@@ -119,44 +137,48 @@ CREATE TABLE `tb_pelajar` (
   `tgl_lahir` date DEFAULT NULL,
   `alamat` text,
   PRIMARY KEY (`id_pelajar`)
-) ENGINE=InnoDB AUTO_INCREMENT=1805000003 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pelajar` */
 
-insert  into `tb_pelajar`(`id_pelajar`,`username`,`nama_depan`,`nama_belakang`,`password`,`password_salt`,`foto_profil`,`email`,`jenis_kelamin`,`tgl_lahir`,`alamat`) values 
-(1805000001,'kepsek','Kepala','Sekolah','f1fa967a140e185d18b256b8a446ba51ad4583efa0ccb8989dacb94371fd249e0427fcc65a2f5dec75e882866827f23250f0de644baccb479fce5e41e3d9fb36','0b3e5630eaf489f5c536f6ee832ab22b7e4afa7a68f2f9694c9f6395548207dca10d848d9bf0966f16ce78652cf42af4ead720a7b9465148d2cdbc07dece1351','img/user/nopic.jpg',NULL,NULL,NULL,NULL),
-(1805000002,'faizal97','Faizal','Ardian Putra','bea575c4d2c950619c802f1eea61d937461797356ff6befb7b2390af98b171e93160931b43d8da28bd29d566d39159efce1af06bb5b14623a5548a59f47a26d0','18f8a8979846e18327dceedeb8056f3f9e578416f47036acd09eecccc9f7d213aeb33913bde935b8088a8285da8d08b5ff94d2e5e4bf4f04bcb9841a0bfc1583','img/user/nopic.jpg',NULL,NULL,NULL,NULL);
+insert  into `tb_pelajar`(`id_pelajar`,`nama_depan`,`nama_belakang`,`password`,`password_salt`,`foto_profil`,`email`,`jenis_kelamin`,`tgl_lahir`,`alamat`) values 
+('PLJ001','Kepala','Sekolah','8bfd0302da67e8f791acdfe2f4b6ae6bacf95af7647768126a2b3fdca8aecac3a1c9cd719ac8e00436bb2c4401a1374f0079ff76cfaa363be318275949d39750','ce5fbcc7d504e8a6b734a12630e5dc12ab36ebd1f3c1ad5646bd83976dc044f7ec0e80a4b0c3eada50411db2bd0a2de19bf6eba15dac8eadffe16e1f270e8be7','img/user/nopic.jpg','kepsek@yahoo.co.id',NULL,NULL,NULL),
+('PLJ002','Faizal','Ardian Putra','73fe94f7ace26f8ed8236bef45206e0913797234b85ec12b25bc382561bba33be9fb1ea3ba909b6c4b477b55c18186bf10941c3e87d68b417d0f7063e9b31c3e','602241e89dc5f6a120d60481e0126ca0d7ee41ec9e7ef9d56e8cea7c79bdb4b17c12563a12c42bea6581210f169fa0300d5f85ea0602c6d751e9cdc3f9a572fe','img/user/nopic.jpg','faizalardianputra@yahoo.co.id',NULL,NULL,NULL);
 
 /*Table structure for table `tb_pengajar` */
 
 DROP TABLE IF EXISTS `tb_pengajar`;
 
 CREATE TABLE `tb_pengajar` (
-  `id_pengajar` int(15) NOT NULL COMMENT 'id pengguna',
+  `id_pengajar` varchar(6) NOT NULL COMMENT 'id pengguna',
   `upvote` int(11) DEFAULT '0',
   `downvote` int(11) DEFAULT '0',
-  `id_pelajar` int(11) DEFAULT NULL,
+  `id_pelajar` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`id_pengajar`),
-  KEY `id_pelajar` (`id_pelajar`),
-  CONSTRAINT `tb_pengajar_ibfk_1` FOREIGN KEY (`id_pelajar`) REFERENCES `tb_pelajar` (`id_pelajar`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `id_pelajar` (`id_pelajar`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pengajar` */
+
+insert  into `tb_pengajar`(`id_pengajar`,`upvote`,`downvote`,`id_pelajar`) values 
+('PGJ001',0,0,'PLJ002');
 
 /*Table structure for table `tb_soal` */
 
 DROP TABLE IF EXISTS `tb_soal`;
 
 CREATE TABLE `tb_soal` (
-  `id_soal` int(11) NOT NULL,
-  `id_materi` int(11) DEFAULT NULL,
-  `nama_soal` text,
-  `pilihan` text,
-  `jawaban` text,
+  `id_soal` varchar(6) NOT NULL,
+  `id_materi` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`id_soal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_soal` */
+
+insert  into `tb_soal`(`id_soal`,`id_materi`) values 
+('SOL001','MTR001'),
+('SOL002','final'),
+('SOL003','MTR002');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

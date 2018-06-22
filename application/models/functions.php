@@ -76,6 +76,50 @@ class functions extends CI_Model {
 		redirect(base_url($link),'refresh');
 	}
 
+	public function jika_kosong($tes)
+	{
+		if (!empty($tes) && $tes != null) {
+			return $tes;
+		}
+		else {
+			return "-";
+		}
+	}
+
+	public function ubahURL($a)
+	{
+		return str_replace(" ","-",$a);
+	}
+
+	public function ubahKata($a)
+	{
+		return str_replace("-"," ",$a);
+	}
+
+	public function youtubeAPI($link,$id='player',$width=680,$height=480)
+	{
+		if(!empty($link) && $link != null){
+			$link_array = explode("v=",$link);
+			$video_key = $link_array[1];
+		}
+		else{
+			$video_key = "";
+		}
+
+		return "<script>
+		var player;
+		function onYouTubeIframeAPIReady() {
+		  player = new YT.Player('".$id."', {
+			height: '".$height."',
+			width: '".$width."',
+			videoId: '".$video_key."',
+			events: {
+			  'onReady': onPlayerReady
+			}
+		  });
+		}
+	  </script>";
+	}
 }
 
 /* End of file functions.php */

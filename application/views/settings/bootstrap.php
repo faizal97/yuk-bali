@@ -20,7 +20,10 @@ if (empty($title) || !isset($title)) {
     <script src="<?php echo base_url('bs4/js/bootstrap.min.js') ?>"></script>
     <link href="<?php echo base_url() ?>open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
-    <style>
+	<link rel="stylesheet" href="<?php echo base_url('summernote/dist/summernote-bs4.css') ?>">
+	<script src="<?php echo base_url('summernote/dist/summernote-bs4.js') ?>"></script>
+    <script src="<?php echo base_url() ?>js/ytapi.js"></script>
+	<style>
     body {
         font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         background-image:url('<?php echo $gambar ?>');
