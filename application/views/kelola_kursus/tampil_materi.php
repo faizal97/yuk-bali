@@ -16,13 +16,13 @@
 				</div>
 				<div class="card-body" style="font-size:14pt;">
 					<label for="judul_materi" style="line-height:0px;font-weight:bold;">Nama Materi</label><br>
-					<span id="judul_materi"><?php echo $judul_materi ?></span>
+					<span id="judul_materi"><?php echo $judul_materi ?></span>&nbsp;<button id="edit_nama_materi" class="btn btn-secondary" style="font-size:8pt;letter-spacing:1px"><span class="oi oi-pencil">&nbsp;Edit</span></button>
 					<br><br>
 					<label for="judul_kursus" style="line-height:0px;font-weight:bold;">Nama Kursus</label><br>
 					<span id="judul_kursus"><?php echo $judul_kursus ?></span>
 					<br><br>
 					<label for="urut" style="line-height:0px;font-weight:bold;">No. Materi</label><br>
-					<span id="urut"><?php echo $data_materi->urut ?></span>
+					<span id="urut"><?php echo $data_materi->urut ?></span>&nbsp;<button id="edit_urut_materi" class="btn btn-secondary" style="font-size:8pt;letter-spacing:1px" href="#"><span class="oi oi-pencil">&nbsp;Edit</span></button>
 					<br><br>
 					<label for="pengajar" style="line-height:0px;font-weight:bold;">Pengajar</label><br>
 					<span id="pengajar"><?php echo $pengajar ?></span>
@@ -97,4 +97,16 @@ $(document).ready(()=>{
 if (!navigator.onLine) {
   $('#player').html('<span class="alert alert-danger form-control"><span class="oi oi-warning"></span>&nbsp;Anda tidak terhubung pada jaringan internet. Video tidak dapat ditampilkan. <a href="">Refresh</a> halaman.</span>');
 }
+
+$('#edit_nama_materi').click(()=>{
+	let isi = $('#judul_materi').text();
+	$('#judul_materi').html("<form action='<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($judul_kursus).'/materi/'.$this->functions->ubahURL($judul_materi).'/update_nama_materi.html') ?>' method='post'><input name='nama_materi' class='form-control' type='text' value='"+isi+"'><button class='btn btn-success' type='submit'>Simpan</button></form>");
+	$('#edit_nama_materi').hide(1);
+});
+
+$('#edit_urut_materi').click(()=>{
+	let isi = $('#urut').text();
+	$('#urut').html("<form action='<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($judul_kursus).'/materi/'.$this->functions->ubahURL($judul_materi).'/update_urut_materi.html') ?>' method='post'><input class='form-control' name='urut' type='number' value='"+isi+"'><button class='btn btn-success' type='submit'>Simpan</button></form>");
+	$('#edit_urut_materi').hide(1);
+});
 </script>

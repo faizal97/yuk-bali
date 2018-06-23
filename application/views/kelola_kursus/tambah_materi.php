@@ -1,3 +1,3 @@
 <div>
-	<input type="text" class="form-control" name="nama_materi" placeholder="Nama Materi">
+	<input type="text" class="form-control" name="nama_materi" placeholder="Nama Materi" required>
 </div>

@@ -30,7 +30,7 @@ class Materi extends CI_Controller {
 		$result = $this->db->insert('tb_materi',$data);
 
 		if($result){
-			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'.html?tab=materi',"Materi Berhasil Ditambahkan !");
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$this->functions->ubahURL($nama_materi).'.html',"Materi Berhasil Ditambahkan !");
 		}
 		else {
 			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'.html?tab=materi',"Materi Gagal Ditambahkan !");
@@ -114,6 +114,83 @@ class Materi extends CI_Controller {
 		else {
 			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','Artikel Gagal Disimpan');
 		}
+	}
+
+	public function proses_edit_nama_materi($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$nama_materi2 = str_replace("-"," ",$nama_materi);
+		$user = $this->session->id_pengajar;
+		$nama_materi3 = $this->input->post('nama_materi');
+		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
+		$query = $query->row();
+		$id_materi = $query->id_materi;
+		$data = [
+			'nama_materi' => $nama_materi3
+		];
+
+		$this->db->where('id_materi',$id_materi);
+		$result = $this->db->update('tb_materi',$data);
+
+		if ($result) {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$this->functions->ubahURL($nama_materi3).'.html','Nama Materi Berhasil Disimpan');
+		}
+		else {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','Nama Materi Gagal Disimpan');
+		}
+	}
+
+	public function proses_edit_urut_materi($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$nama_materi2 = str_replace("-"," ",$nama_materi);
+		$user = $this->session->id_pengajar;
+		$urut = $this->input->post('urut');
+		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
+		$query = $query->row();
+		$id_materi = $query->id_materi;
+		$urut_lama = $query->urut;
+		$data = [
+			'urut' => $urut_lama
+		];
+		$this->db->where('urut',$urut);
+		$this->db->update('tb_materi',$data);
+
+		$data = [
+			'urut' => $urut
+		];
+
+		$this->db->where('id_materi',$id_materi);
+		$result = $this->db->update('tb_materi',$data);
+
+		if ($result) {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$this->functions->ubahURL($nama_materi).'.html','Urut Materi Berhasil Disimpan');
+		}
+		else {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','Urut Materi Gagal Disimpan');
+		}
+	}
+
+	public function proses_hapus_materi($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$nama_materi2 = str_replace("-"," ",$nama_materi);
+		$user = $this->session->id_pengajar;
+		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
+		$query = $query->row();
+		$urut = $query->urut;
+		$id_materi = $query->id_materi;
+		$id_kursus = $query->id_kursus;
+		$query = $this->db->query("UPDATE tb_materi SET urut = urut - 1 WHERE urut > '$urut'");
+		$query = $this->db->query("DELETE FROM tb_materi WHERE id_materi='$id_materi' AND id_kursus='$id_kursus'");
+		if($query){
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'.html?tab=materi','Materi Berhasil Dihapus');
+		}
+		else
+		{
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'html?tab=materi','Materi Gagal Dihapus');
+		}
+		
 	}
 
 }
