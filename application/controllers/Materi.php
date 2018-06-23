@@ -92,6 +92,30 @@ class Materi extends CI_Controller {
 		}
 	}
 
+	public function proses_edit_artikel($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$nama_materi2 = str_replace("-"," ",$nama_materi);
+		$user = $this->session->id_pengajar;
+		$isi_materi = $this->input->post('artikel');
+		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
+		$query = $query->row();
+		$id_materi = $query->id_materi;
+		$data = [
+			'isi_materi' => $isi_materi
+		];
+
+		$this->db->where('id_materi',$id_materi);
+		$result = $this->db->update('tb_materi',$data);
+
+		if ($result) {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','Artikel Berhasil Disimpan');
+		}
+		else {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$nama_materi.'.html','Artikel Gagal Disimpan');
+		}
+	}
+
 }
 
 /* End of file Materi.php */

@@ -68,8 +68,10 @@
 					</form>
 					</div>
 					<div class="tab-pane container fade" id="artikel">
-						<form action="" method="post">
-								<textarea name="artikel" id="summernote"></textarea>
+						<form action="<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($judul_kursus).'/materi/'.$this->functions->ubahURL($judul_materi).'/update_artikel.html') ?>" class="form-horizontal" method="post">
+								<textarea name="artikel" id="summernote"><br><?php echo $data_materi->isi_materi ?></textarea>
+								<br>
+								<button class="btn btn-success" type="submit">Simpan</button>
 						</form>
 					</div>
 					</div>
@@ -86,10 +88,13 @@ $(document).ready(()=>{
 	$('#summernote').summernote({
 		placeholder: 'Isi konten artikel dari materi ini. . .',
 		tabsize:2,
-		height:300,
+		height:400,
 		minHeight:100,
 		maxHeight:400,
 		focus:true
 	});
 });
+if (!navigator.onLine) {
+  $('#player').html('<span class="alert alert-danger form-control"><span class="oi oi-warning"></span>&nbsp;Anda tidak terhubung pada jaringan internet. Video tidak dapat ditampilkan. <a href="">Refresh</a> halaman.</span>');
+}
 </script>

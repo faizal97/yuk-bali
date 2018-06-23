@@ -76,6 +76,7 @@ $route['kursusku'] = "mycourse";
 $route['kursusku/tambah_kursus'] = "mycourse/proses_tambah_kursus";
 $route['kursusku/kelola/(:any)/tambah_materi'] = "materi/proses_tambah_materi/$1";
 $route['kursusku/kelola/(:any)/tambah_soal'] = "soal/proses_tambah_soal/$1";
+$route['kursusku/kelola/(:any)/materi/(:any)/update_artikel'] = "materi/proses_edit_artikel/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_url_video'] = "materi/proses_edit_url_video/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)'] = "materi/view_kelola_materi/$1/$2";
 $route['kursusku/kelola/(:any)'] = "mycourse/tampil_data_kursus/$1";

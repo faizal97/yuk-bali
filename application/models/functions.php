@@ -96,7 +96,7 @@ class functions extends CI_Model {
 		return str_replace("-"," ",$a);
 	}
 
-	public function youtubeAPI($link,$id='player',$width=680,$height=480)
+	public function youtubeAPI($link,$id='player',$width=680,$height=480,$autoplay=false)
 	{
 		if(!empty($link) && $link != null){
 			$link_array = explode("v=",$link);
@@ -105,17 +105,22 @@ class functions extends CI_Model {
 		else{
 			$video_key = "";
 		}
-
+		if ($autoplay) {
+			$auto = ",
+			events: {
+			  'onReady': onPlayerReady
+			}";
+		}
+		else {
+			$auto="";
+		}
 		return "<script>
 		var player;
 		function onYouTubeIframeAPIReady() {
 		  player = new YT.Player('".$id."', {
 			height: '".$height."',
 			width: '".$width."',
-			videoId: '".$video_key."',
-			events: {
-			  'onReady': onPlayerReady
-			}
+			videoId: '".$video_key."'".$auto."
 		  });
 		}
 	  </script>";
