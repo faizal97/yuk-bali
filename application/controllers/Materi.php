@@ -193,6 +193,23 @@ class Materi extends CI_Controller {
 		
 	}
 
+	public function proses_hapus_semua($nama_kursus)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$user = $this->session->id_pengajar;
+		$query = $this->db->query("SELECT * FROM tb_kursus WHERE nama_kursus='$nama_kursus2' AND id_pengajar='$user'");
+		$query = $query->row();
+		$id_kursus = $query->id_kursus;
+		$result = $this->db->query("DELETE FROM tb_materi WHERE id_kursus='$id_kursus'");
+		if ($result) {
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'.html?tab=materi','Materi Berhasil Dihapus');
+		}
+		else
+		{
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'html?tab=materi','Materi Gagal Dihapus');
+		}
+	}
+
 }
 
 /* End of file Materi.php */

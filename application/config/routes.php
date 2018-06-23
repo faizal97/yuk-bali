@@ -74,14 +74,24 @@ $route['profil/(:any)'] = "dashbord/profile/$1";
 $route['aktivasi_pengajar'] = "dashbord/menjadi_pengajar";
 $route['kursusku'] = "mycourse";
 $route['kursusku/tambah_kursus'] = "mycourse/proses_tambah_kursus";
+// Kursuku Materi
 $route['kursusku/kelola/(:any)/tambah_materi'] = "materi/proses_tambah_materi/$1";
 $route['kursusku/kelola/(:any)/tambah_soal'] = "soal/proses_tambah_soal/$1";
+$route['kursusku/kelola/(:any)/hapus_materi'] = "materi/proses_hapus_semua/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_artikel'] = "materi/proses_edit_artikel/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_nama_materi'] = "materi/proses_edit_nama_materi/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_urut_materi'] = "materi/proses_edit_urut_materi/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_url_video'] = "materi/proses_edit_url_video/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/hapus_materi'] = "materi/proses_hapus_materi/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)'] = "materi/view_kelola_materi/$1/$2";
+
+// Kursusku Soal
+$route['kursusku/kelola/(:any)/soal/(:any)/hapus/(:any)'] = "soal/proses_hapus_detail_soal/$1/$2/$3";
+$route['kursusku/kelola/(:any)/soal/(:any)/tambah_soal'] = "soal/proses_tambah_detail_soal/$1/$2";
+$route['kursusku/kelola/(:any)/soal/(:any)/(:any)/update_soal'] = "soal/proses_edit_detail_soal/$1/$2/$3";
+$route['kursusku/kelola/(:any)/soal/(:any)/(:any)'] = "soal/view_detail_soal/$1/$2/$3";
+$route['kursusku/kelola/(:any)/soal/(:any)'] = "soal/view_kelola_soal/$1/$2";
+
 $route['kursusku/kelola/(:any)'] = "mycourse/tampil_data_kursus/$1";
 $route['kursusku/kelola/edit/(:any)'] = "mycourse/manage_course/$1";
 $route['kursusku/hapus/(:any)'] ="mycourse/hapus_kursus/$1";

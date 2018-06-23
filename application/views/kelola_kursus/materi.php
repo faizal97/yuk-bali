@@ -8,11 +8,10 @@
 			Tambah Materi
 		</button>
 	</a>	
-	<a href="">
-		<button class="btn btn-danger">
+		<button onclick='hapus_semua()' class="btn btn-danger">
 			Hapus Semua
 		</button>
-	</a>
+
 
 	<table class="table">
 		<thead>
@@ -55,3 +54,11 @@
     </div>
  </div>
  </form>
+ <script>
+ function hapus_semua() {
+	 let a = confirm("Apakah anda yakin ingin menghapus semua materi?");
+	 if(a){
+		 window.location.assign('<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($title).'/hapus_materi.html') ?>');
+	 }
+ }
+ </script>

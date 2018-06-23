@@ -27,7 +27,7 @@
 				<tr>
 					<td><?php echo $row->urut ?></td>
 					<td><?php echo $row->nama_materi ?></td>
-					<td><a href="#" class="btn btn-success">Kelola</a></td>
+					<td><a href="<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($title).'/soal/'.$this->functions->ubahURL($row->nama_materi).'.html') ?>" class="btn btn-success">Kelola</a></td>
 					<td><a href="#" class="btn btn-danger">Hapus</a></td>
 				</tr>
 			<?php } ?>
