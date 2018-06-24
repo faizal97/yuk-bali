@@ -5,8 +5,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
         <li class='nav-item'><a class='nav-link' href='<?php echo base_url() ?>home.html'><span class='oi oi-home'></span>&nbsp;&nbsp;Beranda</a></li>
-        </ul>
+        <li class="nav-item"><a href="" class="nav-link">Kategori</a></li>
+		<li class="nav-item"><a href="" class="nav-link">Eksplor</a></li>
+		</ul>
         <ul class="navbar-nav ml-auto">
+			<li class="nav-item"><a href="" class="nav-link">Kursus Terdaftar</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                     <img class="rounded-circle" width="40px" src="<?php echo base_url().$_SESSION['gambar_profil'] ?>" alt="profil">&nbsp;&nbsp;
