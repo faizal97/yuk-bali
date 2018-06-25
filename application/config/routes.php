@@ -54,6 +54,10 @@ $route['default_controller'] = 'home';
 // Halaman Awal
 $route['welcome'] = 'home';
 
+// Detail Kursus
+$route['(:any)/(:any)'] = "course/view_detail_kursus/$1/$2";
+
+
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
 
