@@ -1,7 +1,7 @@
 <div class="container-fluid">
 <!-- breadcrumb -->
  <nav class="breadcrumb bg-white">
-     <a class="breadcrumb-item" href="<?php echo base_url('home.html') ?>">Home</a>
+     <a class="breadcrumb-item" href="<?php echo base_url('home.html') ?>">Beranda</a>
      <span class="breadcrumb-item active">Kursus Saya</span>
  </nav>
 
