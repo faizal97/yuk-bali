@@ -9,7 +9,7 @@
 		<li class="nav-item"><a href="" class="nav-link">Eksplor</a></li>
 		</ul>
         <ul class="navbar-nav ml-auto">
-			<li class="nav-item"><a href="" class="nav-link">Kursus Terdaftar</a></li>
+			<li class="nav-item"><a href="<?php echo base_url('kursus.html') ?>" class="nav-link">Kursus Saya</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                     <img class="rounded-circle" width="40px" src="<?php echo base_url().$_SESSION['gambar_profil'] ?>" alt="profil">&nbsp;&nbsp;
@@ -19,9 +19,9 @@
                 <div href="#" class="dropdown-header">Masuk sebagai <strong><?php echo $_SESSION['nama_depan']." ".$_SESSION['nama_belakang'] ?></strong></div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url() ?>profil.html"><span class="oi oi-person"></span>&nbsp;&nbsp;Profil</a>
-                <a class="dropdown-item" href="#"><span class="oi oi-wrench"></span>&nbsp;&nbsp; Ubah Profil</a>
+                <a class="dropdown-item" href="#"><span class="oi oi-wrench"></span>&nbsp;&nbsp;Ubah Profil</a>
                 <?php if($_SESSION['instructor']==true){ ?>
-                    <a class="dropdown-item bg-success" href="<?php echo base_url('kursusku.html') ?>"><span class="oi oi-book"></span>&nbsp;&nbsp;Kursusku</a>
+                    <a class="dropdown-item bg-success" href="<?php echo base_url('kursusku.html') ?>"><span class="oi oi-book"></span>&nbsp;&nbsp;Kelola Kursus</a>
                 <?php }else{ ?>
                     <a class="dropdown-item bg-warning" href="<?php echo base_url('aktivasi_pengajar.html') ?>"><span class="oi oi-briefcase"></span>&nbsp;&nbsp;Jadi Pengajar</a>
                 <?php } ?>
