@@ -156,11 +156,48 @@ class Course extends CI_Controller {
 		$id_materi = $query->id_materi;
 		$query_soal = $this->db->query("SELECT * FROM tb_detail_soal INNER JOIN tb_soal ON tb_detail_soal.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi WHERE tb_soal.id_materi='$id_materi'");
 		$jumlah_soal = $query_soal->num_rows();
+		$query_datso = $query_soal->row();
+		$id_soal = $query_datso->id_soal;
 		$isian_pelajar = [];
 		for ($i=1; $i <= $jumlah_soal; $i++) { 
 			array_push($isian_pelajar,$this->input->post('soal'.$i));
 		}
 		$kunci_jawaban = [];
-		exit();
+		foreach ($query_soal->result() as $row) {
+			array_push($kunci_jawaban,$row->jawaban.'|'.$row->id_detail_soal);
+		}
+		$benar = sizeof(array_intersect($isian_pelajar,$kunci_jawaban));
+		$salah = $jumlah_soal - $benar;
+		$nilai = round(($benar / $jumlah_soal) * 100);
+		$query = $this->db->query("SELECT * FROM tb_nilai");
+		$id_nilai = $this->functions->makeID($query,'NIL',3);
+		$data = [
+			'id_nilai' => $id_nilai,
+			'id_pelajar' => $user,
+			'id_soal' => $id_soal,
+			'benar' => $benar,
+			'salah' => $salah,
+			'nilai' => $nilai
+		];
+		$result = $this->db->insert('tb_nilai',$data);
+		if ($result) {
+			$this->functions->pindah_halaman('kursus/nilai/'.$id_nilai.'.html');
+		}
+		else {
+			$this->functions->pindah_halaman('kursus.html');
+		}
+	}
+
+	public function tampil_nilai($id_nilai)
+	{
+		$user = $this->session->id_pelajar;
+		$query = $this->db->query("SELECT * FROM tb_nilai WHERE id_nilai='$id_nilai'");
+		$query = $query->row();
+		$data = [
+			'data_nilai' => $query
+		];
+		$this->template->header('Hasil Nilai',2);
+		$this->load->view('belajar/nilai', $data);
+		$this->template->footer();
 	}
 }

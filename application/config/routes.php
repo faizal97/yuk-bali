@@ -56,6 +56,7 @@ $route['welcome'] = 'home';
 
 // Kursus Saya
 $route['kursus'] = "course";
+$route['kursus/nilai/(:any)'] = "course/tampil_nilai/$1";
 $route['kursus/(:any)'] = "course/belajar/$1";
 $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
 $route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";
