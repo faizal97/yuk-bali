@@ -58,6 +58,8 @@ $route['welcome'] = 'home';
 $route['kursus'] = "course";
 $route['kursus/(:any)'] = "course/belajar/$1";
 $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
+$route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";
+$route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
 
 // Detail Kursus
 $route['(:any)/(:any)'] = "course/view_detail_kursus/$1/$2";

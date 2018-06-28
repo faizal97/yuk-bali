@@ -21,7 +21,9 @@
 			<div class="tab-pane container active" id="video">
 				<div class="row">
 					<div class="col-sm-11">
-						<div class="mt-5 mb-5" id="player"></div>
+						<div class="mt-5 mb-5" id="player">
+						<span class="alert alert-danger form-control"><span class="oi oi-warning"></span>&nbsp;Anda tidak terhubung pada jaringan internet. Video tidak dapat ditampilkan. <a href="">Refresh</a> halaman.</span>
+						</div>
 					</div>
 					<div class="col-sm-1">
 						<span onclick="buka_tab('artikel')" style="top:50%;font-size:36pt" class="oi oi-chevron-right"></span>
@@ -44,7 +46,7 @@
 					<hr>
 				</div>
 				<div class="col-sm-2">
-					<a style="letter-spacing:1px" href="<?php echo base_url() ?>" class="btn btn-outline-success btn-lg btn-block">SELESAI</a>
+					<a style="letter-spacing:1px" href="<?php echo base_url('kursus/'.$this->functions->ubahURL($nama_kursus).'/'.$this->functions->ubahURL($nama_materi).'/soal.html') ?>" class="btn btn-outline-success btn-lg btn-block">SELESAI</a>
 				</div>
 				<div class="col-sm-5">
 					<hr>
@@ -56,5 +58,9 @@
 <script>
 function buka_tab(id) {
 	$('a[href="#' + id + '"]').tab('show');
+}
+
+if (!navigator.onLine) {
+  $('#player').html('<span class="alert alert-danger form-control"><span class="oi oi-warning"></span>&nbsp;Anda tidak terhubung pada jaringan internet. Video tidak dapat ditampilkan. <a href="">Refresh</a> halaman.</span>');
 }
 </script>

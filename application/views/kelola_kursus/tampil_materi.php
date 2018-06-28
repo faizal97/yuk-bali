@@ -53,7 +53,9 @@
 				<div class="tab-content">
 				<div class="tab-pane container active" id="video">
 					<br>
-					<div id="player"></div>
+					<div id="player">
+					<span class="alert alert-danger form-control"><span class="oi oi-warning"></span>&nbsp;Anda tidak terhubung pada jaringan internet. Video tidak dapat ditampilkan. <a href="">Refresh</a> halaman.</span>
+					</div>
 					<br>
 					<form action="<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($judul_kursus).'/materi/'.$this->functions->ubahURL($judul_materi).'/update_url_video.html') ?>" class="form-horizontal" method="post">
 					<label for="url_video">URL Video</label>

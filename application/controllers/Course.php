@@ -121,4 +121,46 @@ class Course extends CI_Controller {
 		$this->load->view('belajar/detail_belajar', $data);
 		$this->template->footer();
 	}
+
+	public function soal($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = $this->functions->ubahKata($nama_kursus);
+		$nama_materi2 = $this->functions->ubahKata($nama_materi);
+		$user = $this->session->id_pelajar;
+		$query = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_kursus INNER JOIN tb_detail_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_detail_kursus.id_pelajar='$user'");
+		$query = $query->row();
+		$id_kursus = $query->id_kursus;
+		$id_materi = $query->id_materi;
+		$query_soal = $this->db->query("SELECT * FROM tb_detail_soal INNER JOIN tb_soal ON tb_detail_soal.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi WHERE tb_soal.id_materi='$id_materi' ORDER BY RAND()");
+		$jumlah_soal = $query_soal->num_rows();
+		$data = [
+			'data_kursus' => $query,
+			'data_soal' => $query_soal,
+			'nama_kursus' => $nama_kursus2,
+			'nama_materi' => $nama_materi2,
+			'jumlah_soal' => $jumlah_soal
+		];
+		$this->template->header($nama_materi2." - Soal",2);
+		$this->load->view('belajar/soal', $data);
+		$this->template->footer();
+	}
+
+	public function cek_soal($nama_kursus,$nama_materi)
+	{
+		$nama_kursus2 = $this->functions->ubahKata($nama_kursus);
+		$nama_materi2 = $this->functions->ubahKata($nama_materi);
+		$user = $this->session->id_pelajar;
+		$query = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_kursus INNER JOIN tb_detail_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_detail_kursus.id_pelajar='$user'");
+		$query = $query->row();
+		$id_kursus = $query->id_kursus;
+		$id_materi = $query->id_materi;
+		$query_soal = $this->db->query("SELECT * FROM tb_detail_soal INNER JOIN tb_soal ON tb_detail_soal.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi WHERE tb_soal.id_materi='$id_materi'");
+		$jumlah_soal = $query_soal->num_rows();
+		$isian_pelajar = [];
+		for ($i=1; $i <= $jumlah_soal; $i++) { 
+			array_push($isian_pelajar,$this->input->post('soal'.$i));
+		}
+		$kunci_jawaban = [];
+		exit();
+	}
 }
