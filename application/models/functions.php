@@ -125,6 +125,78 @@ class functions extends CI_Model {
 		}
 	  </script>";
 	}
+
+	public function buatPagination($tabel='',$link='',$aktif,$per=5)
+	{
+		if (strpos($link,"?")!=false) {
+			$simbol = "&";
+		}
+		else {
+			$simbol ="?";
+		}
+		$per_halaman = $per;
+		$query = $this->db->query("SELECT * FROM $tabel");
+		$jumlah = $query->num_rows();
+		if($jumlah<=$per_halaman)
+		{
+			$banyak_halaman = 1;
+		}else
+		{
+			$banyak_halaman = floor($jumlah / $per_halaman);
+			if ($jumlah % $per_halaman != 0)
+			{
+				$banyak_halaman++;
+			} 
+		}
+		echo "<ul id='pagin' class='pagination'>";
+		for ($i=1;$i<=$banyak_halaman;$i++) {
+			$prev = $aktif - 1;  
+			if ($i==1) {
+				if ($aktif == 1) {
+					$a = "disabled";
+					$href = "#pagin";
+				}
+				else {
+					$a = "";
+					$href = base_url($link.$simbol.'p='.$prev);
+				}
+				echo "<li class='".$a."'><a href='".$href."'><<</a></li>";
+			}
+			if ($aktif==$i) {
+				$b = "active";
+			}
+			else {
+				$b = "";
+			}
+			echo "<li class='".$b."'><a href='".base_url($link.$simbol.'p='.$i)."'>$i</a></li>";
+			$next = $aktif + 1;
+			if ($i==$banyak_halaman) {
+				if ($aktif == $banyak_halaman) {
+					$a = "disabled";
+					$href ="#pagin";
+				}
+				else {
+					$a = "";
+					$href=base_url($link.$simbol.'p='.$next);
+				} 
+				echo "<li class='".$a."'><a href='".$href."'>>></a></li>";
+			}	
+		}
+		echo "</ul>";	
+	}
+
+	public function getPage($p,$per=5)
+	{
+		$per_halaman = $per;
+		if(empty($p)){
+			$p = 1;
+			$page=0;
+		}else{
+			$page = ($p - 1) * $per_halaman;
+		}
+		return $page;
+	}
+
 }
 
 /* End of file functions.php */

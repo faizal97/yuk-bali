@@ -62,10 +62,6 @@ $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
 $route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";
 $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
 
-// Detail Kursus
-$route['(:any)/(:any)'] = "course/view_detail_kursus/$1/$2";
-$route['(:any)/(:any)/daftar_kursus'] = "course/daftar_kursus/$1/$2";
-
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
 
@@ -108,6 +104,40 @@ $route['kursusku/kelola/(:any)'] = "mycourse/tampil_data_kursus/$1";
 $route['kursusku/kelola/edit/(:any)'] = "mycourse/manage_course/$1";
 $route['kursusku/hapus/(:any)'] ="mycourse/hapus_kursus/$1";
 $route['kursusku/hapus_semua'] = "mycourse/hapus_semua";
+
+$route['admin/masuk'] = "login_admin";
+
+// Data admin
+$route['admin/data_admin'] = "data_admin";
+$route['admin/data_admin/tambah_admin'] = "data_admin/tambah_admin";
+$route['admin/data_admin/tambah_admin/proses'] = 'data_admin/proses_tambah_admin';
+$route['admin/data_admin/ubah_admin/proses/(:any)'] = 'data_admin/proses_edit_admin/$1';
+$route['admin/data_admin/ubah_admin/(:any)'] = 'data_admin/edit_admin/$1';
+$route['admin/data_admin/hapus_admin/(:any)'] = 'data_admin/hapus_admin/$1';
+$route['admin/data_admin/hapus/semua'] = "data_admin/hapus_semua";
+$route['admin/data_admin/cari_data'] = 'data_admin/cari_data';
+
+// Data kategori
+$route['admin/data_kategori'] = "data_kategori";
+$route['admin/data_kategori/tambah_kategori'] = "data_kategori/tambah_kategori";
+$route['admin/data_kategori/tambah_kategori/proses'] = 'data_kategori/proses_tambah_kategori';
+$route['admin/data_kategori/ubah_kategori/(:any)'] = 'data_kategori/edit_kategori/$1';
+$route['admin/data_kategori/ubah_kategori/proses/(:any)'] = 'data_kategori/proses_edit_kategori/$1';
+$route['admin/data_kategori/hapus_kategori/(:any)'] = 'data_kategori/hapus_kategori/$1';
+$route['admin/data_kategori/hapus/semua'] = "data_kategori/hapus_semua";
+$route['admin/data_kategori/cari_data'] = 'data_kategori/cari_data';
+
+// Data pelajar
+$route['admin/data_pelajar'] = "data_pelajar";
+$route['admin/data_pelajar/ubah_pelajar/(:any)'] = 'data_pelajar/edit_pelajar/$1';
+$route['admin/data_pelajar/ubah_pelajar/proses/(:any)'] = 'data_pelajar/proses_edit_pelajar/$1';
+$route['admin/data_pelajar/hapus_pelajar/(:any)'] = 'data_pelajar/hapus_pelajar/$1';
+$route['admin/data_pelajar/hapus/semua'] = "data_pelajar/hapus_semua";
+$route['admin/data_pelajar/cari_data'] = 'data_pelajar/cari_data';
+
+// Detail Kursus
+$route['(:any)/(:any)'] = "course/view_detail_kursus/$1/$2";
+$route['(:any)/(:any)/daftar_kursus'] = "course/daftar_kursus/$1/$2";
 
 // Halaman 404
 $route['404_override'] = '';

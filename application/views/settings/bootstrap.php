@@ -23,6 +23,7 @@ if (empty($title) || !isset($title)) {
 	<link rel="stylesheet" href="<?php echo base_url('summernote/dist/summernote-bs4.css') ?>">
 	<script src="<?php echo base_url('summernote/dist/summernote-bs4.js') ?>"></script>
     <script src="<?php echo base_url() ?>js/ytapi.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 	<style>
     body {
         font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
