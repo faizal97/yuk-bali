@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 15px">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+    <li class="breadcrumb-item"><a  href="<?php echo base_url('admin/beranda.html') ?>" >Beranda</a></li>
     <li class="breadcrumb-item active" aria-current="page">Data pelajar</li>
   </ol>
 </nav>

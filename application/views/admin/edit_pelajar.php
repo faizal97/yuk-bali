@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 15px">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+    <li class="breadcrumb-item"><a  href="<?php echo base_url('admin/beranda.html') ?>" >Beranda</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/data_pelajar.html') ?>">Data Pelajar</a></li>
     <li class="breadcrumb-item active" aria-current="page">Ubah Data Pelajar</li>
   </ol>
@@ -18,28 +18,28 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Nama Depan</label>
     <div class="col-sm-10">
-      <input type="text"  class="form-control" id="nama_depan"  value="<?php echo $data_pelajar->nama_depan ?>" onkeyup="this.value = this.value.replace(/[^a-z, A-Z]/, '')" / required>
+      <input type="text"  class="form-control" id="nama_depan" name="nama_depan"  value="<?php echo $data_pelajar->nama_depan ?>" onkeyup="this.value = this.value.replace(/[^a-z, A-Z]/, '')" / required>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Nama Belakang</label>
     <div class="col-sm-10">
-      <input type="text"  class="form-control" id="nama_belakang" value="<?php echo $data_pelajar->nama_belakang ?>" onkeyup="this.value = this.value.replace(/[^a-z, A-Z]/, '')" / required>
+      <input type="text"  class="form-control" id="nama_belakang" name="nama_belakang"  value="<?php echo $data_pelajar->nama_belakang ?>" onkeyup="this.value = this.value.replace(/[^a-z, A-Z]/, '')" / required>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email" value="<?php echo $data_pelajar->email ?>" required>
+      <input type="email" class="form-control" id="email" name="email"  value="<?php echo $data_pelajar->email ?>" required>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
     <div class="col-sm-10">
-      <input type="date"  class="form-control" value="<?php echo $data_pelajar->tgl_lahir ?>">
+      <input type="date"  class="form-control"  name="tgl_lahir"  value="<?php echo $data_pelajar->tgl_lahir ?>">
     </div>
   </div>
 
@@ -48,11 +48,11 @@
 
 <div class="form-check form-check-inline">
 <div class="col-sm-10">
-  <input class="form-check-input" type="radio" name="jeniskel1"  value="Laki-Laki">
+ <input type="radio"  required value="Laki-Laki" <?php if ($data_pelajar->jenis_kelamin=='Laki-Laki'){echo"checked";} ?> name="jenis_kelamin">
   <label class="form-check-label">Laki-Laki</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="jeniskel2" value="Perempuan">
+  <input type="radio"  required value="Perempuan" <?php if ($data_pelajar->jenis_kelamin=='Perempuan'){echo"checked";} ?> name="jenis_kelamin">
   <label class="form-check-label" >Perempuan</label>
 </div>
 </div>
@@ -61,7 +61,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Alamat</label>
     <div class="col-sm-10">
-    <textarea required name="alamat" rows="4" cols="96" placeholder="Masukan Alamat Lengkap"><?php echo ($data_pelajar->alamat) ?></textarea>
+    <textarea required name="alamat" rows="4" cols="96" name="alamat"  placeholder="Masukan Alamat Lengkap"><?php echo ($data_pelajar->alamat) ?></textarea>
     </div>
   </div>
 
@@ -72,7 +72,7 @@
   <div class="custom-file">
   
     <input type="file" class="custom-file-input" id="">
-    <label class="custom-file-label" for="inputGroupFile04">Pilih File</label>
+    <label class="custom-file-label" for="inputGroupFile04" name="foto_profil" >Pilih File</label>
   </div>
   </div>
   </div>

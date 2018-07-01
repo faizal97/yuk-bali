@@ -105,7 +105,14 @@ $route['kursusku/kelola/edit/(:any)'] = "mycourse/manage_course/$1";
 $route['kursusku/hapus/(:any)'] ="mycourse/hapus_kursus/$1";
 $route['kursusku/hapus_semua'] = "mycourse/hapus_semua";
 
-$route['admin/masuk'] = "login_admin";
+// Login Admin
+$route['admin'] = 'login_admin';
+$route['admin/masuk']= 'login_admin';
+$route['admin/proses_masuk'] = 'login_admin/proses';
+$route['admin/keluar'] = 'login_admin/logout';
+
+// beranda Admin
+$route['admin/beranda']='beranda';
 
 // Data admin
 $route['admin/data_admin'] = "data_admin";
@@ -134,6 +141,26 @@ $route['admin/data_pelajar/ubah_pelajar/proses/(:any)'] = 'data_pelajar/proses_e
 $route['admin/data_pelajar/hapus_pelajar/(:any)'] = 'data_pelajar/hapus_pelajar/$1';
 $route['admin/data_pelajar/hapus/semua'] = "data_pelajar/hapus_semua";
 $route['admin/data_pelajar/cari_data'] = 'data_pelajar/cari_data';
+
+
+//data pengajar
+$route['admin/data_pengajar'] = "data_pengajar";
+$route['admin/data_pengajar/ubah_pengajar/(:any)'] = 'data_pengajar/edit_pengajar/$1';
+$route['admin/data_pengajar/ubah_pengajar/proses/(:any)'] = 'data_pengajar/proses_edit_pengajar/$1';
+$route['admin/data_pengajar/hapus_pengajar/(:any)'] = 'data_pengajar/hapus_pengajar/$1';
+$route['admin/data_pengajar/hapus/semua'] = "data_pengajar/hapus_semua";
+$route['admin/data_pengajar/cari_data'] = 'data_pengajar/cari_data';
+
+//data kursus
+//data pengajar
+$route['admin/data_kursus'] = "data_kursus";
+$route['admin/data_kursus/ubah_kursus/(:any)'] = 'data_kursus/edit_kursus/$1';
+$route['admin/data_kursus/ubah_kursus/proses/(:any)'] = 'data_kursus/proses_edit_kursus/$1';
+$route['admin/data_kursus/lihat_kursus/(:any)'] = 'data_kursus/lihat_kursus/$1';
+$route['admin/data_kursus/hapus_kursus/(:any)'] = 'data_kursus/hapus_kursus/$1';
+$route['admin/data_kursus/hapus/semua'] = "data_kursus/hapus_semua";
+$route['admin/data_kursus/cari_data'] = 'data_pengajar/cari_data';
+
 
 // Detail Kursus
 $route['(:any)/(:any)'] = "course/view_detail_kursus/$1/$2";
