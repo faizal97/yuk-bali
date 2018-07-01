@@ -112,7 +112,7 @@ $route['admin/proses_masuk'] = 'login_admin/proses';
 $route['admin/keluar'] = 'login_admin/logout';
 
 // beranda Admin
-$route['admin/beranda']='beranda';
+$route['admin/beranda']='admin';
 
 // Data admin
 $route['admin/data_admin'] = "data_admin";
