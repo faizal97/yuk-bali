@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 15px">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+    <li class="breadcrumb-item"><a  href="<?php echo base_url('admin/beranda.html') ?>" >Beranda</a></li>
     <li class="breadcrumb-item"><a href="<?php echo base_url('admin/data_admin.html') ?>"> Data Admin</a></li>
     <li class="breadcrumb-item active" aria-current="page">Tambah Data Admin</li>
   </ol>
@@ -38,7 +38,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Kata Sandi</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="password_admin" name="password_admin" title =" 8 Karakter Kata Sandi. Gunakan huruf kapital, huruf kecil dan angka" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" >
+      <input type="password" class="form-control" id="password_admin" name="password_admin" title =" 6 Karakter Kata Sandi. Gunakan huruf kapital, huruf kecil dan angka" pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" >
     </div>
   </div>
 <br>
