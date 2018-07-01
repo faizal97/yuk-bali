@@ -47,7 +47,7 @@
       <td><?php echo $pelajar->tgl_lahir ?> </td>
       <td><?php echo $pelajar->jenis_kelamin ?> </td>
       <td><?php echo $pelajar->alamat ?> </td>
-      <td><?php echo $pelajar->foto_profil ?> </td>
+      <td><img src="<?php echo base_url($pelajar->foto_profil) ?>" width="100`" height="100`"> </td>
       <td><a href="<?php echo base_url('admin/data_pelajar/ubah_pelajar/'.$pelajar->id_pelajar.".html") ?>"><button type="button" class="btn btn-outline-primary"><i class="far fa-edit"></i></button></a> 
         <a href="<?php echo base_url('admin/data_pelajar/hapus_pelajar/'.$pelajar->id_pelajar.".html") ?>"><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></a>
       </td>

@@ -197,6 +197,30 @@ class functions extends CI_Model {
 		return $page;
 	}
 
+	public function upload_gambar($name_dom,$target_dir,$id)
+	{
+		// Upload Cover Buku Ke files/covers/
+		$config_cover = array(
+			'upload_path' => $target_dir,
+			'allowed_types' => "png|jpeg|jpg",
+			'overwrite' => TRUE,
+			'max_size' => 2048*1000,
+			'max_height' => '768',
+			'max_width' => '1024',
+			'file_name' => $id
+		);
+		$this->load->library('upload',$config_cover);
+		$this->upload->initialize($config_cover);
+		if($this->upload->do_upload($name_dom,$config_cover)){
+			// echo "Cover Telah terupload";
+		}
+		else{
+			echo $this->upload->display_errors();
+			exit();
+		}
+		unset($config_cover);
+	}
+
 }
 
 /* End of file functions.php */
