@@ -30,16 +30,9 @@
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Jumlah Kursus</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" disabled name="jumlah_kursus"  value="<?php echo $data_pengajar->jumlah_kursus ?>" required onkeyup="this.value = this.value.replace(/[^0-9]/, '')" />
-    </div>
-  </div>
-
-  <div class="form-group row">
     <label class="col-sm-2 col-form-label">Upvote</label>
     <div class="col-sm-10">
-      <input type="date"  class="form-control"  name="upvote" disabled value="<?php echo $data_pengajar->tgl_lahir ?>">
+      <input class="form-control"  name="upvote" disabled value="<?php echo $data_pengajar->upvote ?>">
     </div>
   </div>
 
@@ -47,7 +40,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Downvote</label>
     <div class="col-sm-10">
-    <input type="text" name="downvote" disabled value="<?php echo ($data_pengajar->alamat) ?>">
+    <input type="text" class="form-control"  name="downvote" disabled value="<?php echo ($data_pengajar->downvote) ?>">
     </div>
   </div>
 
