@@ -29,9 +29,8 @@
         <th>Jumlah Materi</th>
         <th>Nama Pengajar</th>
         <th>Tanggal Dibuat </th>
-        <th>Deskripsi Kursus</th>
         <th>Gambar Kursus</th>
-        <th>Tindakan</th>
+        <th width="200">Tindakan</th>
     </tr>
     </thead>
     <tbody>
@@ -43,11 +42,10 @@
       <tr>
       <td><?php echo $no ?> </td>
       <td ><?php echo $kursus->nama_kursus ?> </td>
-      <td><?php echo $kursus->jumlah_Pengajar ?> </td>
+      <td><?php echo $kursus->jumlah_materi ?> </td>
       <td><?php echo ($kursus->nama_depan."   ".$kursus->nama_belakang) ?> </td>
       <td><?php echo $kursus->tgl_buat ?></td>
-      <td><?php echo $kursus->gambar_kursus ?></td>
-      <td><?php echo $kursus->desktipsi_kursus ?></td>
+      <td><img src="<?php echo base_url($kursus->gambar_kursus) ?>" width="100" height="100" alt=""></td>
 
       <td><a href="<?php echo base_url('admin/data_kursus/lihat_kursus/'.$kursus->id_kursus.".html") ?>"><button type="button" class="btn btn-outline-success"><i class="fas fa-search"></i></button></a>
 

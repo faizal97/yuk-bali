@@ -152,10 +152,10 @@ $route['admin/data_pengajar/hapus/semua'] = "data_pengajar/hapus_semua";
 $route['admin/data_pengajar/cari_data'] = 'data_pengajar/cari_data';
 
 //data kursus
-//data pengajar
 $route['admin/data_kursus'] = "data_kursus";
 $route['admin/data_kursus/ubah_kursus/(:any)'] = 'data_kursus/edit_kursus/$1';
 $route['admin/data_kursus/ubah_kursus/proses/(:any)'] = 'data_kursus/proses_edit_kursus/$1';
+$route['admin/data_kursus/lihat_kursus/(:any)/(:any)'] = 'data_kursus/lihat_materi/$1/$2';
 $route['admin/data_kursus/lihat_kursus/(:any)'] = 'data_kursus/lihat_kursus/$1';
 $route['admin/data_kursus/hapus_kursus/(:any)'] = 'data_kursus/hapus_kursus/$1';
 $route['admin/data_kursus/hapus/semua'] = "data_kursus/hapus_semua";

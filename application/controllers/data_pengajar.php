@@ -125,8 +125,8 @@ class data_pengajar extends CI_Controller {
 		}
 
         $search = $this->input->get('q');
-        $query_pengajar = "tb_pengajar WHERE nama_depan LIKE '%$search%' OR nama_belakang LIKE '%$search%'  OR jenis_kelamin LIKE '%$search%'  OR tgl_lahir LIKE '%$search%' OR email LIKE '%$search%' OR alamat LIKE '%$search%'";
-		$query = $this->db->query("SELECT * FROM ".$query_pengajar." LIMIT ".$page.",".$per_halaman);
+        $query_pengajar = "tb_pengajar INNER JOIN tb_kursus ON tb_kursus.id_pengajar=tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pelajar.id_pelajar = tb_pengajar.id_pelajar WHERE tb_pelajar.nama_depan LIKE '%$search%' OR tb_pelajar.nama_belakang LIKE '%$search%'  OR tb_pelajar.jenis_kelamin LIKE '%$search%'  OR tb_pelajar.tgl_lahir LIKE '%$search%' OR tb_pelajar.email LIKE '%$search%' OR tb_pelajar.alamat LIKE '%$search%' OR tb_pengajar.upvote LIKE '%$search%' OR tb_pengajar.downvote LIKE '%$search%' OR tb_kursus.jumlah_kursus LIKE '%$search%'";
+		$query = $this->db->query("SELECT *,COUNT(tb_kursus.id_kursus) AS jumlah_kursus FROM ".$query_pengajar." LIMIT ".$page.",".$per_halaman);
 		$data = array();
 		$tampil = array(
 			'tampil' => $query,
@@ -137,7 +137,7 @@ class data_pengajar extends CI_Controller {
 		);
 		$this->load->view('settings/bootstrap',$data);
 		$this->load->view('admin/menu');
-		$this->load->view('admin/data_pelajar', $tampil);
+		$this->load->view('admin/data_pengajar', $tampil);
     }
 
 }

@@ -42,7 +42,7 @@
       <tr>
       <td><?php echo $no ?></td>
       <td ><?php echo ($pengajar->nama_depan." ".$pengajar->nama_belakang) ?> </td>
-      <td><?php echo $pengajar->jumlah_kursus ?> </td>
+      <td><?php echo $pengajar->jumlah_kursus ?></td>
       <td><?php echo $pengajar->upvote ?> </td>
       <td><?php echo $pengajar->downvote ?> </td>
       <td><img src="<?php echo base_url($pengajar->foto_profil) ?>" width="100" height="100" alt=""> </td>
