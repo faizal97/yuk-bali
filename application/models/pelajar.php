@@ -39,7 +39,7 @@ class Pelajar extends CI_Model {
 		}
 		$this->setSession($euser,$password);
 
-		echo "<script>alert('GAGAL LOGIN');</script>";
+		echo "<script>alert('Email atau Kata sandi salah');</script>";
 		redirect(base_url($gagal),"refresh");
 	}
 	// End : Method Login Pelajar
@@ -69,13 +69,13 @@ class Pelajar extends CI_Model {
 
 		// Password Matching
 		if($password2 != $this->input->post('password')){
-			echo "<script>alert('Password tidak cocok');</script>";
+			echo "<script>alert('Kata Sandi tidak cocok');</script>";
 			redirect(base_url()."daftar.html",'refresh');			
 		}
 
 		// Cek Jika Ada Email Yang Sama
 		if ($this->functions->cekSamaData($tabel,'email',$email)) {
-			echo "<script>alert('Email telah ada');</script>";
+			echo "<script>alert('Email telah terdaftar');</script>";
 			redirect(base_url()."daftar.html",'refresh');
 		}
 
