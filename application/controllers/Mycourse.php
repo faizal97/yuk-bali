@@ -68,7 +68,7 @@ class Mycourse extends CI_Controller {
 			$this->load->library('upload',$config);
 
 			if(!$this->upload->do_upload('gambar')){
-				echo "<script>alert('".$this->upload->display_errors()."');</script>";
+				echo "<script>alert('Hanya menerima format gambar seperti png,jpeg,jpg pada data gambar kursus');</script>";
 				redirect(base_url().'tambah_kursus.html','refresh');
 			}
 			else{
