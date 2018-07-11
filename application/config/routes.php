@@ -61,6 +61,7 @@ $route['kursus/(:any)'] = "course/belajar/$1";
 $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
 $route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";
 $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
+$route['kursus/(:any)/(:any)/ulang_materi'] = "course/ulang_materi/$1/$2";
 
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';

@@ -109,13 +109,24 @@ class Course extends CI_Controller {
 		$query = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_kursus INNER JOIN tb_detail_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_detail_kursus.id_pelajar='$user'");
 		$query = $query->row();
 		$id_kursus = $query->id_kursus;
+		$materi_terakhir = $query->materi_terakhir;
 		$query_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' AND nama_materi='$nama_materi2'");
 		$data_materi = $query_materi->row();
+		$id_materi = $data_materi->id_materi;
+		$urut = $data_materi->urut;
+		$cek_nilai = $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_soal ON tb_nilai.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi WHERE tb_materi.id_materi='$id_materi' AND tb_nilai.id_pelajar='$user'");
+		if ($cek_nilai->num_rows() > 0 || $materi_terakhir > $urut ) {
+			$sudah_belajar = true;
+		}
+		else {
+			$sudah_belajar = false;
+		}
 		$data = [
 			'data_kursus' => $query,
 			'data_materi' => $data_materi,
 			'nama_kursus' => $nama_kursus2,
-			'nama_materi' => $nama_materi2
+			'nama_materi' => $nama_materi2,
+			'sudah_belajar' => $sudah_belajar
 		];
 		$this->template->header($nama_kursus2.' - '.$nama_materi2,2);
 		$this->load->view('belajar/detail_belajar', $data);
@@ -127,19 +138,20 @@ class Course extends CI_Controller {
 		$nama_kursus2 = $this->functions->ubahKata($nama_kursus);
 		$nama_materi2 = $this->functions->ubahKata($nama_materi);
 		$user = $this->session->id_pelajar;
-		$query = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_kursus INNER JOIN tb_detail_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_materi.nama_materi='$nama_materi2' AND tb_detail_kursus.id_pelajar='$user'");
-		$query = $query->row();
+		$query1 = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_kursus INNER JOIN tb_detail_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_materi.nama_materi='$nama_materi2' AND tb_detail_kursus.id_pelajar='$user'");
+		$query = $query1->row();
 		$id_kursus = $query->id_kursus;
 		$id_materi = $query->id_materi;
 		$query_soal = $this->db->query("SELECT * FROM tb_detail_soal INNER JOIN tb_soal ON tb_detail_soal.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi WHERE tb_soal.id_materi='$id_materi' ORDER BY RAND()");
 		$jumlah_soal = $query_soal->num_rows();
 		if($jumlah_soal <= 0){
-			$query =$this->db->query("SELECT * FROM tb_detail_kursus WHERE id_pelajar='$user' AND id_kursus='$'");
+			$query =$this->db->query("SELECT * FROM tb_detail_kursus WHERE id_pelajar='$user' AND id_kursus='$id_kursus'");
 			$query = $query->row();
 			$materi_terakhir = $query->materi_terakhir;
 			$materi_terakhir++;
-			$this->db->query("UPDATE tb_detail_kursus SET materi_terakhir='$materi_terakhir' WHERE id_kursus='$id_kursus' AND id_pelajar='$user'");
-			redirect('kursus/'.$nama_materi2.'.html','refresh');
+			$sql = "UPDATE tb_detail_kursus SET materi_terakhir='$materi_terakhir' WHERE id_kursus='$id_kursus' AND id_pelajar='$user'";
+			$this->db->query($sql);
+			redirect(base_url('kursus/'.$nama_kursus.'.html'),'refresh');
 		}
 		$data = [
 			'data_kursus' => $query,
@@ -188,8 +200,19 @@ class Course extends CI_Controller {
 			'nilai' => $nilai
 		];
 		$result = $this->db->insert('tb_nilai',$data);
+
+		$query = $this->db->query("SELECT * FROM tb_detail_kursus WHERE id_pelajar='$user' AND id_kursus='$id_kursus'");
+		$query = $query->row();
+		$materi_terakhir = $query->materi_terakhir;
+		$materi_terakhir++;
+		$id_detail_kursus = $query->id_detail_kursus;
+		$data_kursus = [
+			'materi_terakhir' => $materi_terakhir
+		];
+		$this->db->where('id_detail_kursus',$id_detail_kursus);
+		$result = $this->db->update('tb_detail_kursus',$data_kursus);
 		if ($result) {
-			$this->functions->pindah_halaman('kursus/nilai/'.$id_nilai.'.html');
+			$this->functions->pindah_halaman('kursus/nilai/'.$id_nilai.'.html?s=belajar');
 		}
 		else {
 			$this->functions->pindah_halaman('kursus.html');
@@ -199,13 +222,106 @@ class Course extends CI_Controller {
 	public function tampil_nilai($id_nilai)
 	{
 		$user = $this->session->id_pelajar;
-		$query = $this->db->query("SELECT * FROM tb_nilai WHERE id_nilai='$id_nilai'");
+		$query = $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_soal ON tb_nilai.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi INNER JOIN tb_kursus ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE id_nilai='$id_nilai'");
 		$query = $query->row();
 		$data = [
-			'data_nilai' => $query
+			'data_nilai' => $query,
 		];
 		$this->template->header('Hasil Nilai',2);
 		$this->load->view('belajar/nilai', $data);
 		$this->template->footer();
+	}
+	
+	public function ulang_materi($id_materi,$id_soal)
+	{
+		$user = $this->session->id_pelajar;
+		$sql = "SELECT * FROM tb_detail_kursus INNER JOIN tb_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_kursus.id_kursus = tb_materi.id_kursus INNER JOIN tb_soal ON tb_soal.id_materi = tb_materi.id_materi WHERE tb_detail_kursus.id_pelajar='$user' AND tb_soal.id_soal='$id_soal'";
+		$query = $this->db->query($sql);
+		$query = $query->row();
+		$id_detail_kursus = $query->id_detail_kursus;
+		$materi_terakhir = $query->materi_terakhir;
+		$materi_terakhir--;
+
+		$data = [
+			'materi_terakhir' => $materi_terakhir
+		];
+
+		$this->db->where('id_detail_kursus',$id_detail_kursus);
+		$this->db->update('tb_detail_kursus',$data);
+
+		$data_kursus = $this->db->query("SELECT * FROM tb_kursus INNER JOIN tb_materi ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.id_materi='$id_materi'");
+		$data_kursus = $data_kursus->row();
+		$nama_materi = $data_kursus->nama_materi;
+		$nama_kursus = $data_kursus->nama_kursus;
+		$query = $this->db->query("DELETE FROM tb_nilai WHERE id_pelajar='$user' AND id_soal='$id_soal'");
+
+		if($query)
+		{
+			redirect(base_url('kursus/'.$this->functions->ubahURL($nama_kursus).'/'.$this->functions->ubahURL($nama_materi)),'refresh');
+		}
+		else 
+		{
+			echo "Gagal Mengulang";
+			exit();
+		}
+	}
+
+	public function sertifikat($id_kursus)
+	{
+		$id_pelajar = $this->session->id_pelajar;
+		if(empty($id_pelajar)){
+			echo "Login terlebih dahulu";
+			exit();
+		}
+		$sql = "SELECT tb_pelajar.nama_depan,tb_pelajar.nama_belakang,tb_kursus.nama_kursus FROM tb_detail_kursus INNER JOIN tb_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_pelajar ON tb_detail_kursus.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.id_kursus='$id_kursus' AND tb_detail_kursus.id_pelajar='$id_pelajar'";
+		$query = $this->db->query($sql);
+		if($query->num_rows() <= 0){
+			show_404();
+			exit();
+		}
+		$query = $query->row();
+		$nama_pelajar = $query->nama_depan." ".$query->nama_belakang;
+		$nama_kursus = $query->nama_kursus;
+
+		// Nilai
+		$sql = "SELECT tb_nilai.nilai FROM tb_nilai INNER JOIN tb_soal ON tb_nilai.id_soal = tb_soal.id_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi INNER JOIN tb_kursus ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.id_kursus='$id_kursus' AND tb_nilai.id_pelajar = '$id_pelajar'";
+		$query = $this->db->query($sql);
+		$jumlah_nilai = 0;
+		$nilai = 0;
+		foreach ($query->result() as $row) {
+			$jumlah_nilai++;
+			$nilai += $row->nilai;
+		}
+		$nilai /= $jumlah_nilai;
+		if ($nilai >= 80 && $nilai <= 100) {
+			$grade = "A";
+		}
+		elseif($nilai >= 70){
+			$grade = "B";
+		}
+		elseif ($nilai >= 60) {
+			$grade = "C";
+		}
+		elseif ($nilai >= 40) {
+			$grade = "D";
+		}
+		elseif ($nilai >= 10) {
+			$grade = "E";
+		}
+		elseif ($nilai >= 0) {
+			$grade = "F";
+		}
+		else {
+			echo "Nilai Tidak Valid";
+			exit();
+		}
+		$data = [
+			'nama_pelajar' => $nama_pelajar,
+			'nama_kursus' => $nama_kursus,
+			'nilai' => $nilai,
+			'grade' => $grade
+		];
+		$this->load->view('settings/bootstrap', $data);
+		$this->load->view('belajar/sertifikat', $data);
 	}
 }

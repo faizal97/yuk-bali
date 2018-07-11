@@ -10,7 +10,7 @@
 		<?php
 			$kursus_progress = ($data_kursus->materi_terakhir / $jumlah_materi) * 100;
 		 ?>
-		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo $kursus_progress ?>%" aria-valuenow="<?php echo $kursus_progress ?>" aria-valuemin="0" aria-valuemax="100"><?php echo  $data_kursus->materi_terakhir ?>&nbsp;/&nbsp;<?php echo $jumlah_materi ?>&nbsp;Materi</div>
+		<div class="progress-bar progress-bar-striped progress-bar-animated <?php if($data_kursus->materi_terakhir > $jumlah_materi){echo "bg-success";} ?>" role="progressbar" style="width: <?php echo $kursus_progress ?>%" aria-valuenow="<?php echo $kursus_progress ?>" aria-valuemin="0" aria-valuemax="100"><?php if($data_kursus->materi_terakhir > $jumlah_materi){echo "Selesai";}else{echo  $data_kursus->materi_terakhir; ?>&nbsp;/&nbsp;<?php echo $jumlah_materi; ?>&nbsp;Materi<?php } ?></div>
 	</div>
 
 	<table class="table">
