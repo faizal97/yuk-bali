@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 		);
     	$this->load->view('settings/bootstrap',$data);
     	$this->load->view('admin/menu.php');
-        $this->load->view('admin/home.php');
+        $this->load->view('admin/beranda.php');
     }
 }
 

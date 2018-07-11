@@ -32,16 +32,16 @@
 					?>
 							<div class="row">
 								<div class="col-sm-12">
-									<p><input type="radio" name="soal<?php echo $no ?>" id="soalA<?php echo $no ?>" value="<?php echo $pilihan_array[0]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;A. <?php echo $pilihan_array[0]['pilihan'] ?></p>
+									<p><input type="radio" required name="soal<?php echo $no ?>" id="soalA<?php echo $no ?>" value="<?php echo $pilihan_array[0]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;A. <?php echo $pilihan_array[0]['pilihan'] ?></p>
 								</div>
 								<div class="col-sm-12">
-									<p><input type="radio" name="soal<?php echo $no ?>" id="soalB<?php echo $no ?>" value="<?php echo $pilihan_array[1]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;B. <?php echo $pilihan_array[1]['pilihan'] ?></p>
+									<p><input type="radio" required name="soal<?php echo $no ?>" id="soalB<?php echo $no ?>" value="<?php echo $pilihan_array[1]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;B. <?php echo $pilihan_array[1]['pilihan'] ?></p>
 								</div>
 								<div class="col-sm-12">
-									<p><input type="radio" name="soal<?php echo $no ?>" id="soalC<?php echo $no ?>" value="<?php echo $pilihan_array[2]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;C. <?php echo $pilihan_array[2]['pilihan'] ?></p>
+									<p><input type="radio" required name="soal<?php echo $no ?>" id="soalC<?php echo $no ?>" value="<?php echo $pilihan_array[2]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;C. <?php echo $pilihan_array[2]['pilihan'] ?></p>
 								</div>
 								<div class="col-sm-12">
-									<p><input type="radio" name="soal<?php echo $no ?>" id="soalD<?php echo $no ?>" value="<?php echo $pilihan_array[3]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;D. <?php echo $pilihan_array[3]['pilihan'] ?></p>
+									<p><input type="radio" required name="soal<?php echo $no ?>" id="soalD<?php echo $no ?>" value="<?php echo $pilihan_array[3]['value'] ?>|<?php echo $row->id_detail_soal ?>">&nbsp;D. <?php echo $pilihan_array[3]['pilihan'] ?></p>
 								</div>
 							</div>
 							<?php if($no<$jumlah_soal){ ?>
