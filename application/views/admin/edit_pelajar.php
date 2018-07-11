@@ -61,7 +61,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Alamat</label>
     <div class="col-sm-10">
-    <textarea required name="alamat" rows="4" cols="96" name="alamat"  placeholder="Masukan Alamat Lengkap"><?php echo ($data_pelajar->alamat) ?></textarea>
+    <textarea required class="form-control" name="alamat" rows="4" cols="96" name="alamat"  placeholder="Masukan Alamat Lengkap"><?php echo ($data_pelajar->alamat) ?></textarea>
     </div>
   </div>
 
@@ -71,8 +71,8 @@
   <div class="input-group">
   <div class="custom-file">
   
-    <input type="file" class="custom-file-input" id="">
-    <label class="custom-file-label" for="inputGroupFile04" name="foto_profil" >Pilih File</label>
+    <input name="foto_profil" type="file" class="custom-file-input" id="">
+    <label class="custom-file-label" for="inputGroupFile04"  >Pilih File</label>
   </div>
   </div>
   </div>
@@ -81,8 +81,8 @@
 <br>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10" style="margin-left: -15px">
-        <a href=""><button type="button" class="btn btn-primary">Simpan</button></a>
-        <a href=""><button type="button" class="btn btn-secondary">Batal</button></a>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="reset" class="btn btn-secondary">Batal</button>
        </div>
        </div> 
 </form>

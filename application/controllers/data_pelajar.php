@@ -56,13 +56,21 @@ class data_pelajar extends CI_Controller {
         $nama_belakang = $this->input->post('nama_belakang');
 		$email = $this->input->post('email');
         $alamat = $this->input->post('alamat');
-        $jenis_kelamin = $this ->post('jenis_kelamin');
+        $jenis_kelamin = $this->input->post('jenis_kelamin');
 		$tgl_lahir = $this->input->post('tgl_lahir');
-		$foto_profil = $this->input->post('foto_profil');
+		$upload = $this->input->post('foto_profil');
 
 		// Mengambil Data pelajar
 		$query = $this->db->query("SELECT * FROM tb_pelajar WHERE id_pelajar='$id_pelajar'");
 		$row = $query->row();
+		if (!empty($_FILES['foto_profil']['name'])) {
+			$this->functions->upload_gambar('foto_profil','img/user',$id_pelajar);
+			$foto_profil = 'img/user/'.$this->upload->data('file_name');
+		}
+		else {
+			$foto_profil = $row->foto_profil;
+		}
+		
 
 	
 		// Mempersiapkan Data Update

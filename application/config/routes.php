@@ -61,6 +61,7 @@ $route['kursus/(:any)'] = "course/belajar/$1";
 $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
 $route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";
 $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
+$route['kursus/(:any)/(:any)/ulang_materi'] = "course/ulang_materi/$1/$2";
 
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
@@ -112,7 +113,7 @@ $route['admin/proses_masuk'] = 'login_admin/proses';
 $route['admin/keluar'] = 'login_admin/logout';
 
 // beranda Admin
-$route['admin/beranda']='beranda';
+$route['admin/beranda']='admin';
 
 // Data admin
 $route['admin/data_admin'] = "data_admin";
@@ -152,10 +153,10 @@ $route['admin/data_pengajar/hapus/semua'] = "data_pengajar/hapus_semua";
 $route['admin/data_pengajar/cari_data'] = 'data_pengajar/cari_data';
 
 //data kursus
-//data pengajar
 $route['admin/data_kursus'] = "data_kursus";
 $route['admin/data_kursus/ubah_kursus/(:any)'] = 'data_kursus/edit_kursus/$1';
 $route['admin/data_kursus/ubah_kursus/proses/(:any)'] = 'data_kursus/proses_edit_kursus/$1';
+$route['admin/data_kursus/lihat_kursus/(:any)/(:any)'] = 'data_kursus/lihat_materi/$1/$2';
 $route['admin/data_kursus/lihat_kursus/(:any)'] = 'data_kursus/lihat_kursus/$1';
 $route['admin/data_kursus/hapus_kursus/(:any)'] = 'data_kursus/hapus_kursus/$1';
 $route['admin/data_kursus/hapus/semua'] = "data_kursus/hapus_semua";

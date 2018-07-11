@@ -4,6 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		if (empty($this->session->id_admin) || !isset($this->session->id_admin)) {
+			redirect(base_url('admin'),'refresh');
+		}
+	}
     public function index()
     {
 			$data_pelajar = $this->db->query("SELECT * FROM tb_pelajar");
@@ -21,7 +28,7 @@ class Admin extends CI_Controller {
 		);
     	$this->load->view('settings/bootstrap',$data);
     	$this->load->view('admin/menu.php');
-        $this->load->view('admin/home.php');
+        $this->load->view('admin/beranda.php');
     }
 }
 

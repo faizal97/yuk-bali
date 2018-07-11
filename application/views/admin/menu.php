@@ -11,7 +11,7 @@
     <a  href="<?php echo base_url('admin/data_kategori.html') ?>"  style="border-bottom: 1px solid ">Data Kategori</a>
     <a href="<?php echo base_url('admin/data_pelajar.html') ?>"  style="border-bottom: 1px solid ">Data Pelajar</a>
     <a href="<?php echo base_url('admin/data_pengajar.html') ?>" style="border-bottom: 1px solid ">Data Pengajar</a>
-    <a href="" style="border-bottom: 1px solid ">Data Kursus</a>
+    <a href="<?php echo base_url('admin/data_kursus.html') ?>" style="border-bottom: 1px solid ">Data Kursus</a>
   </div>
 
  <button class="dropdown-btn" style="border-bottom: 1px solid ">Laporan

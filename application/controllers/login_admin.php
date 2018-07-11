@@ -12,9 +12,7 @@ class login_admin extends CI_Controller {
 			$this->load->view('settings/bootstrap',$data);
 			$this->load->view('admin/login_admin');
 		}else{
-		$data = array();
-		$this->load->view('settings/bootstrap',$data);
-		$this->load->view('admin/menu');
+			redirect('admin/beranda','refresh');
 	}
 }
 	public function proses()

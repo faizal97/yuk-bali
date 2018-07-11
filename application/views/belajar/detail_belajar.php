@@ -46,7 +46,9 @@
 					<hr>
 				</div>
 				<div class="col-sm-2">
+				<?php if ($sudah_belajar == false) { ?>
 					<a style="letter-spacing:1px" href="<?php echo base_url('kursus/'.$this->functions->ubahURL($nama_kursus).'/'.$this->functions->ubahURL($nama_materi).'/soal.html') ?>" class="btn btn-outline-success btn-lg btn-block">SELESAI</a>
+				<?php } ?>
 				</div>
 				<div class="col-sm-5">
 					<hr>
