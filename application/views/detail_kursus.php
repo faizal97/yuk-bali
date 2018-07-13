@@ -22,13 +22,15 @@
 			</div>
 			
 			<div class="row mt-5">
-				<div class="col-sm-5">
+				<div class="col">
 					<hr>
 				</div>
+				<?php if($id_pengajar != $_SESSION['id_pengajar']){ ?>
 				<div class="col-sm-2">
 					<a href="<?php echo base_url($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus).'/daftar_kursus.html') ?>" class="btn btn-outline-primary btn-lg btn-block">DAFTAR</a>
 				</div>
-				<div class="col-sm-5">
+				<?php } ?>
+				<div class="col">
 					<hr>
 				</div>
 			</div>

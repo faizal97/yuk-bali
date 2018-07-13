@@ -25,7 +25,7 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10" style="margin-left: -15px">
        <button type="submit" class="btn btn-primary">Simpan</button>
-       <button type="submit" class="btn btn-success">Batal</button>
+       <a href="<?php echo base_url('admin/data_kategori.html') ?>"><button type="button" class="btn btn-success">Batal</button></a>
        </div>
        </div> 
 </form>

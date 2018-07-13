@@ -15,14 +15,14 @@ class data_kategori extends CI_Controller {
 			$page = ($p - 1) * $per_halaman;
 		}
 		$query_kategori = "tb_kategori";
-		$query = $this->db->query("SELECT * FROM ".$query_kategori." LIMIT ".$page.",".$per_halaman);
+		$query = $this->db->query("SELECT * FROM ".$query_kategori." ORDER BY nama_kategori ASC LIMIT ".$page.",".$per_halaman);
 		$data = array();
 		$tampil = array(
 			'tampil' => $query,
 			'aktif' => $p,
 			'nomor' => $page,
 			'query_kategori' => $query_kategori,
-			'link' => 'admin/data_Kategori.html'
+			'link' => 'admin/data_kategori.html'
 		);
 		$this->load->view('settings/bootstrap',$data);
 		$this->load->view('admin/menu');

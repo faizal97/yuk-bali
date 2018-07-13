@@ -38,5 +38,10 @@
 		</tr>
 		<?php } ?>
 		</tbody>
-	</table>	
+	</table>
+	<?php if($data_kursus->materi_terakhir > $jumlah_materi) { ?>
+		<div class="container text-center" style="margin-bottom:20px">
+			<a target="_BLANK" href="<?php echo base_url('course/sertifikat/'.$data_kursus->id_kursus.'.html') ?>" style="font-size:24pt" class="btn btn-outline-success">SERTIFIKAT</a>
+		</div>
+	<?php } ?>	
 </div>

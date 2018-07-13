@@ -34,14 +34,15 @@ class Course extends CI_Controller {
 		$jumlah_materi = $data_materi->num_rows();
 		$data_kursus_pengajar = $this->db->query("SELECT * FROM tb_kursus WHERE id_pengajar='$id_pengajar'");
 		$jumlah_kursus_pengajar = $data_kursus_pengajar->num_rows();
-		$data_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus'");
+		$data_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut ASC");
 		$data = [
 			'data_materi' => $data_materi,
 			'data_kursus' => $query,
 			'nama_pengajar' => $nama_pengajar2,
 			'nama_kursus' => $nama_kursus2,
 			'jumlah_materi' => $jumlah_materi,
-			'jumlah_kursus_pengajar' => $jumlah_kursus_pengajar
+			'jumlah_kursus_pengajar' => $jumlah_kursus_pengajar,
+			'id_pengajar' => $id_pengajar
 		];
 		$this->template->header($nama_kursus2,2);
 		$this->load->view('detail_kursus', $data);
@@ -88,7 +89,7 @@ class Course extends CI_Controller {
 		$query = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_kursus INNER JOIN tb_detail_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_detail_kursus.id_pelajar='$user'");
 		$query = $query->row();
 		$id_kursus = $query->id_kursus;
-		$query_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus'");
+		$query_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut ASC");
 		$jumlah_materi = $query->jumlah_materi;
 		$data = [
 			'data_kursus' => $query,
@@ -291,6 +292,10 @@ class Course extends CI_Controller {
 		foreach ($query->result() as $row) {
 			$jumlah_nilai++;
 			$nilai += $row->nilai;
+		}
+		if($jumlah_nilai==0){
+			$jumlah_nilai = 1;
+			$nilai = 100;
 		}
 		$nilai /= $jumlah_nilai;
 		if ($nilai >= 80 && $nilai <= 100) {
