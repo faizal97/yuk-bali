@@ -54,9 +54,15 @@ $route['default_controller'] = 'home';
 // Halaman Awal
 $route['welcome'] = 'home';
 
+// Kategori
+$route['kategori/(:any)'] = "kategori/kategori_visitor/$1";
+$route['search'] = "search/search_visitor";
+
 // Kursus Saya
 $route['kursus'] = "course";
+$route['kursus/search'] = "search/search_user";
 $route['kursus/nilai/(:any)'] = "course/tampil_nilai/$1";
+$route['kursus/kategori/(:any)'] = "kategori/kategori_user/$1";
 $route['kursus/(:any)'] = "course/belajar/$1";
 $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
 $route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";

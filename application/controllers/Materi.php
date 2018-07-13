@@ -77,6 +77,8 @@ class Materi extends CI_Controller {
 		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
 		$query = $query->row();
 		$id_materi = $query->id_materi;
+		$steril_url = explode("&",$url_video);
+		$url_video = $steril_url[0];
 		$data = [
 			'url_video' => $url_video
 		];
@@ -149,20 +151,21 @@ class Materi extends CI_Controller {
 		$query = $this->db->query("SELECT * FROM tb_materi INNER JOIN tb_kursus ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_materi.nama_materi = '$nama_materi2' AND tb_kursus.nama_kursus='$nama_kursus2' AND tb_kursus.id_pengajar = '$user'");
 		$query = $query->row();
 		$id_materi = $query->id_materi;
+		$id_kursus = $query->id_kursus;
 		$urut_lama = $query->urut;
-		$data = [
-			'urut' => $urut_lama
-		];
-		$this->db->where('urut',$urut);
-		$this->db->update('tb_materi',$data);
-
+		if($urut > $urut_lama){
+			$query = $this->db->query("UPDATE tb_materi SET urut = urut - 1 WHERE urut <='$urut'");	
+		}
+		elseif($urut < $urut_lama){
+			$query = $this->db->query("UPDATE tb_materi SET urut = urut + 1 WHERE urut >='$urut'");
+		}
 		$data = [
 			'urut' => $urut
 		];
 
 		$this->db->where('id_materi',$id_materi);
 		$result = $this->db->update('tb_materi',$data);
-
+		$this->aturUlang($id_kursus);
 		if ($result) {
 			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/materi/'.$this->functions->ubahURL($nama_materi).'.html','Urut Materi Berhasil Disimpan');
 		}
@@ -207,6 +210,36 @@ class Materi extends CI_Controller {
 		else
 		{
 			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'html?tab=materi','Materi Gagal Dihapus');
+		}
+	}
+
+	public function aturUlang($id_kursus)
+	{
+		$query = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut ASC");
+		$i = 0;
+		$query2 = $this->db->query("SELECT COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_materi WHERE id_kursus='$id_kursus'");
+		$query2 = $query2->row();
+		$jumlah_materi = $query2->jumlah_materi;
+		foreach ($query->result() as $row) {
+			$i++;
+			if($i==1){
+				if ($row->urut!=1) {
+					$data['urut'] = 1;
+					$this->db->where('id_materi',$row->id_materi);
+					$this->db->update('tb_materi',$data);
+				}
+			}
+			if($row->urut!=$i){
+				$data['urut'] = $i;
+				$this->db->where('id_materi',$row->id_materi);
+				$this->db->update('tb_materi',$data);
+			}
+
+			if($i>=$jumlah_materi){
+				$data['urut'] = $jumlah_materi;
+				$this->db->where('id_materi',$row->id_materi);
+				$this->db->update('tb_materi',$data);
+			}
 		}
 	}
 
