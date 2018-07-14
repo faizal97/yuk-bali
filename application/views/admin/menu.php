@@ -24,7 +24,7 @@
 </div>
 </div>
 
-<div class style="background-color:#292F33">
+<div class="animated slideInDown" style="background-color:#292F33">
 <span style="font-size:30px;margin-left:150px;color:white;cursor:pointer" onclick="openNav(); ">&#9776; </span>
 <span id=tgl-skrg style="color:white; float:right;margin-right:20px; margin-top: 10px" ></span>
 <span style="color:white; float:right;margin-right:20px; margin-top: 10px" >Halo, <?php echo $_SESSION['nm_depan'] ?></span>
