@@ -37,12 +37,16 @@
   	<?php
       $no = $nomor;
       foreach($tampil->result() as $kursus){
-        $no++;
+				$no++;
+				$id_kursus = $kursus->id_kursus;
+				$data_jumlah = $this->db->query("SELECT COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_materi WHERE id_kursus='$id_kursus'");
+				$data_jumlah = $data_jumlah->row();
+				$jumlah_materi = $data_jumlah->jumlah_materi
       ?>
       <tr>
       <td><?php echo $no ?> </td>
       <td ><?php echo $kursus->nama_kursus ?> </td>
-      <td><?php echo $kursus->jumlah_materi ?> </td>
+      <td><?php echo $jumlah_materi ?> </td>
       <td><?php echo ($kursus->nama_depan."   ".$kursus->nama_belakang) ?> </td>
       <td><?php echo $kursus->tgl_buat ?></td>
       <td><img src="<?php echo base_url($kursus->gambar_kursus) ?>" width="100" height="100" alt=""></td>

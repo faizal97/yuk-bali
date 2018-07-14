@@ -37,12 +37,16 @@
   	<?php
       $no = $nomor;
       foreach($tampil->result() as $pengajar){
-        $no++;
-      ?>
+				$no++;
+				$id_pengajar = $pengajar->id_pengajar;
+				$data_jumlah = $this->db->query("SELECT COUNT(tb_kursus.id_kursus) AS jumlah_kursus FROM tb_kursus WHERE id_pengajar='$id_pengajar'");
+				$data_jumlah = $data_jumlah->row();
+				$jumlah_kursus = $data_jumlah->jumlah_kursus;
+			?>
       <tr>
       <td><?php echo $no ?></td>
       <td ><?php echo ($pengajar->nama_depan." ".$pengajar->nama_belakang) ?> </td>
-      <td><?php echo $pengajar->jumlah_kursus ?></td>
+      <td><?php echo $jumlah_kursus ?></td>
       <td><?php echo $pengajar->upvote ?> </td>
       <td><?php echo $pengajar->downvote ?> </td>
       <td><img src="<?php echo base_url($pengajar->foto_profil) ?>" width="100" height="100" alt=""> </td>

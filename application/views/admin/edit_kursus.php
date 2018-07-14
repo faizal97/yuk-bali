@@ -19,28 +19,21 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Nama Kursus</label>
     <div class="col-sm-10">
-      <input type="text"  class="form-control" id="nama_depan" name="nama_kursus"  value="<?php echo $data_kursus->nama_depan ?>" required>
+      <input type="text"  class="form-control" id="nama_depan" name="nama_kursus"  value="<?php echo $data_kursus->nama_kursus ?>" required>
     </div>
   </div>
 
    <div class="form-group row">
     <label class="col-sm-2 col-form-label">Nama Pengajar</label>
     <div class="col-sm-10">
-      <input type="text"  class="form-control" id="nama_belakang" disabled name="" value="<?php echo ($data_kursus->nama_depan."   ".$kursus->nama_belakang) ?>" required>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Tanggal Dibuat</label>
-    <div class="col-sm-10">
-      <input type="date"  class="form-control"  name="tgl_buat" value="<?php echo $data_kursus->tgl_buat?>">
+      <input type="text"  class="form-control" id="nama_belakang" disabled name="" value="<?php echo ($data_kursus->nama_depan." ".$data_kursus->nama_belakang) ?>" required>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Deskripsi Kursus</label>
     <div class="col-sm-10">
-      <input type="text"  class="form-control"  name="deskripsi_kursus" value="<?php echo $data_kursus->deskripsi_kursus?>">
+      <textarea class="form-control"  name="deskripsi_kursus"><?php echo $data_kursus->deskripsi_kursus?></textarea>
     </div>
   </div>
 
@@ -50,7 +43,7 @@
   <div class="input-group">
   <div class="custom-file">
   
-    <input type="file" class="custom-file-input" id="">
+    <input type="file" class="custom-file-input" name="gambar_kursus" id="">
     <label class="custom-file-label" for="inputGroupFile04" name="gambar_kursus" >Pilih File</label>
   </div>
   </div>

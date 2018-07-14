@@ -1,15 +1,15 @@
 <link rel="stylesheet" href="<?php echo base_url('css/admin.css') ?>">
 <div class="sejajar"style="margin-bottom: 150px">
-<label id="haloadmin"> Selamat Datang,<br>  <?php echo $_SESSION['nm_depan']." ".$_SESSION['nm_belakang'] ?> </label>
+<label class="animated flipInY" id="haloadmin"> Selamat Datang,<br>  <?php echo $_SESSION['nm_depan']." ".$_SESSION['nm_belakang'] ?> </label>
     <div class="samping">
     
-        <div id="kotak1">
+        <div id="kotak1" class="animated zoomIn">
             <a style="color:white" href="<?php echo base_url('admin/data_pelajar.html') ?>" ><img id="logokotak1" src="<?php echo base_url('img/beranda/decul.png') ?>" >
             <h4> Data Pelajar</h4>
             <label id="ket"> Mempunyai Data Sebanyak : <?php echo $jumlah_pelajar ?> Data Pelajar</label></a>
         </div>
 
-        <div id="kotak2" style="margin-left:470px">
+        <div id="kotak2" class="animated zoomIn" style="margin-left:470px">
           <a style="color:white" href="<?php echo base_url('admin/data_pengajar.html') ?>" > <img id="logokotak2" src="<?php echo base_url('img/beranda/pengajaar.png') ?>" >
             <h4> Data Pengajar</h4>
             <label id="ket"> Mempunyai Data Sebanyak : <?php echo $jumlah_pengajar ?> Data Pengajar</label></a>
@@ -17,13 +17,13 @@
     </div>
 
     <div class="samping" style="margin-top:350px">
-        <div id="kotak3">
+        <div id="kotak3" class="animated zoomIn">
            <a style="color:white" href="<?php echo base_url('admin/data_kursus.html') ?>" > <img id="logokotak3" src="<?php echo base_url('img/beranda/course.png') ?>" >
             <h4> Data Kursus</h4>
             <label id="ket"> Mempunyai Data Sebanyak : <?php echo $jumlah_kursus ?> Data Kursus</label></a>
         </div>
 
-        <div id="kotak4" style="margin-left:470px">
+        <div id="kotak4" class="animated zoomIn" style="margin-left:470px">
            <a style="color:white" href=""><img id="logokotak4" src="<?php echo base_url('img/beranda/laporan.png') ?>" >
             <h4 style="margin-bottom:45px"> Data Laporan</h4></a>
             

@@ -10,6 +10,8 @@ class Home extends CI_Controller {
 		$this->load->model('template');
 		$this->load->model('pelajar');
 		
+		
+
 		$this->pelajar->getSession('login');
 	}
 

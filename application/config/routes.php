@@ -165,7 +165,7 @@ $route['admin/data_kursus/lihat_kursus/(:any)/(:any)'] = 'data_kursus/lihat_mate
 $route['admin/data_kursus/lihat_kursus/(:any)'] = 'data_kursus/lihat_kursus/$1';
 $route['admin/data_kursus/hapus_kursus/(:any)'] = 'data_kursus/hapus_kursus/$1';
 $route['admin/data_kursus/hapus/semua'] = "data_kursus/hapus_semua";
-$route['admin/data_kursus/cari_data'] = 'data_pengajar/cari_data';
+$route['admin/data_kursus/cari_data'] = 'data_kursus/cari_data';
 
 
 // Detail Kursus

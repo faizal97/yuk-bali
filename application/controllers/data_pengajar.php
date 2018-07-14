@@ -14,7 +14,7 @@ class data_pengajar extends CI_Controller {
 		}else{
 			$page = ($p - 1) * $per_halaman;
 		}
-		$sql = "SELECT * ,COUNT(tb_kursus.id_kursus) AS jumlah_kursus FROM tb_pengajar INNER JOIN tb_kursus ON tb_kursus.id_pengajar=tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pelajar.id_pelajar=tb_pengajar.id_pelajar LIMIT ".$page.",".$per_halaman;
+		$sql = "SELECT * FROM tb_pengajar INNER JOIN tb_pelajar ON tb_pelajar.id_pelajar=tb_pengajar.id_pelajar LIMIT ".$page.",".$per_halaman;
 		$query = $this->db->query($sql);
 		$data = array();
 		$tampil = array(

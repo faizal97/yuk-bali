@@ -4,6 +4,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class functions extends CI_Model {
 
+	public function __construct()
+	{
+		$query = $this->db->query("SELECT * FROM tb_kursus");
+		foreach ($query->result() as $row) {
+			$this->aturUlang($row->id_kursus);
+		}
+	}
+	public function aturUlang($id_kursus)
+	{
+		$query = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut ASC");
+		$i = 0;
+		$query2 = $this->db->query("SELECT COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_materi WHERE id_kursus='$id_kursus'");
+		$query2 = $query2->row();
+		$jumlah_materi = $query2->jumlah_materi;
+		foreach ($query->result() as $row) {
+			$i++;
+			if($i==1){
+				if ($row->urut!=1) {
+					$data['urut'] = 1;
+					$this->db->where('id_materi',$row->id_materi);
+					$this->db->update('tb_materi',$data);
+				}
+			}
+			if($row->urut!=$i){
+				$data['urut'] = $i;
+				$this->db->where('id_materi',$row->id_materi);
+				$this->db->update('tb_materi',$data);
+			}
+
+			if($i>=$jumlah_materi){
+				$data['urut'] = $jumlah_materi;
+				$this->db->where('id_materi',$row->id_materi);
+				$this->db->update('tb_materi',$data);
+			}
+		}
+	}
+
 	public function makeID($query,$depan,$banyak_nol=5)
 	{
 		$no = 1;
