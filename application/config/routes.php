@@ -54,20 +54,13 @@ $route['default_controller'] = 'home';
 // Halaman Awal
 $route['welcome'] = 'home';
 
-// Kategori
-$route['kategori/(:any)'] = "kategori/kategori_visitor/$1";
-$route['search'] = "search/search_visitor";
-
 // Kursus Saya
 $route['kursus'] = "course";
-$route['kursus/search'] = "search/search_user";
 $route['kursus/nilai/(:any)'] = "course/tampil_nilai/$1";
-$route['kursus/kategori/(:any)'] = "kategori/kategori_user/$1";
 $route['kursus/(:any)'] = "course/belajar/$1";
 $route['kursus/(:any)/(:any)'] = "course/belajar_detail/$1/$2";
 $route['kursus/(:any)/(:any)/soal'] = "course/soal/$1/$2";
 $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
-$route['kursus/(:any)/(:any)/ulang_materi'] = "course/ulang_materi/$1/$2";
 
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
@@ -174,7 +167,7 @@ $route['(:any)/(:any)'] = "course/view_detail_kursus/$1/$2";
 $route['(:any)/(:any)/daftar_kursus'] = "course/daftar_kursus/$1/$2";
 
 // Halaman 404
-$route['404_override'] = '';
+$route['404_override'] = 'errorbelajar';
 
 
 $route['translate_uri_dashes'] = FALSE;

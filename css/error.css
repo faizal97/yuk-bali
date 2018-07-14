@@ -1,0 +1,26 @@
+#gambar{
+    width: 30%;
+    margin: 50px;
+    margin-left:60px;
+}
+
+.animated.bounceInDown{
+    
+-webkit-animation-duration: 5s;
+-webkit-animation-delay: 2s;
+
+    
+}
+
+.animated.lightSpeedIn{
+    
+        -webkit-animation-duration: 1s;
+        -webkit-animation-delay: 1.5s;
+        
+        
+            
+ }
+
+    
+        
+}
