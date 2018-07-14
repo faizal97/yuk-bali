@@ -7,7 +7,7 @@
   </ol>
 </nav>
 </div>
-
+<a class="btn btn-primary" href="<?php echo base_url('admin/data_kursus.html') ?>">Kembali</a>
 <div class="container" style="margin-top: 35px">
 <div class="card border-dark mb-3" style="width: 100%;">
   <div class="card-header"><h2>Lihat Data Kursus</h2></div>
@@ -49,8 +49,8 @@
       <td ><?php echo $kursus->nama_materi ?> </td>
       <td><?php echo $kursus->url_video ?> </td>
 			<td><a href="<?php echo base_url('admin/data_kursus/lihat_kursus/'.$kursus->id_kursus.'/'.$kursus->id_materi.".html") ?>"><button type="button" class="btn btn-outline-success"><i class="fas fa-search"></i></button></a>
-			<a href="<?php echo base_url('admin/data_kursus/ubah_kursus/'.$kursus->id_kursus.'/'.$kursus->id_materi.".html") ?>"><button type="button" class="btn btn-outline-primary"><i class="far fa-edit"></i></button></a> 
-			<a href="<?php echo base_url('admin/data_kursus/hapus_kursus/'.$kursus->id_kursus.'/'.$kursus->id_materi.".html") ?>"><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></a>
+			<!-- <a href="<?php //echo base_url('admin/data_kursus/ubah_kursus/'.$kursus->id_kursus.'/'.$kursus->id_materi.".html") ?>"><button type="button" class="btn btn-outline-primary"><i class="far fa-edit"></i></button></a> 
+			<a href="<?php //echo base_url('admin/data_kursus/hapus_kursus/'.$kursus->id_kursus.'/'.$kursus->id_materi.".html") ?>"><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></a> -->
 			</td>
 			</tr>
 			<?php } ?>
