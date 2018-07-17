@@ -16,7 +16,12 @@
 		<div class="card-body">
 		<div class="row">
 		<?php foreach ($data_kursus->result() as $row) {
-			if($row->jumlah_materi!=0){?>
+				$id_kursus= $row->id_kursus;
+				$query = $this->db->query("SELECT COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_materi WHERE id_kursus='$id_kursus'");
+				$query = $query->row();
+				$jumlah = $query->jumlah_materi;			
+			if($jumlah != 0){
+				?>
 			<div class="col-sm-3 mb-3">
 		<a class="kursus" href="<?php echo base_url('kursus/'.$this->functions->ubahURL($row->nama_kursus).'.html') ?>" style="text-decoration:none;color:black">
 		<div class="card">
@@ -25,10 +30,10 @@
              <h5 class="card-title"><?php echo $row->nama_kursus ?></h5>
 			 <div class="progress" style="height:20px">
 			 <?php
-				$kursus_progress = ($row->materi_terakhir / $row->jumlah_materi) * 100;
+				$kursus_progress = ($row->materi_terakhir / $jumlah) * 100;
 				 
 			 ?>
-			 	<div class="progress-bar <?php if($row->materi_terakhir > $row->jumlah_materi){echo "bg-success";} ?>" role="progressbar" style="width: <?php echo $kursus_progress ?>%" aria-valuenow="<?php echo $kursus_progress ?>" aria-valuemin="0" aria-valuemax="100"><?php if($row->materi_terakhir > $row->jumlah_materi){echo "Selesai";}else{echo  $row->materi_terakhir; ?>&nbsp;/&nbsp;<?php echo $row->jumlah_materi; ?>&nbsp;Materi<?php } ?></div>
+			 	<div class="progress-bar <?php if($row->materi_terakhir > $jumlah){echo "bg-success";} ?>" role="progressbar" style="width: <?php echo $kursus_progress ?>%" aria-valuenow="<?php echo $kursus_progress ?>" aria-valuemin="0" aria-valuemax="100"><?php if($row->materi_terakhir > $jumlah){echo "Selesai";}else{echo  $row->materi_terakhir; ?>&nbsp;/&nbsp;<?php echo $jumlah; ?>&nbsp;Materi<?php } ?></div>
 				 <?php } ?>
 			 </div>	 
          </div>

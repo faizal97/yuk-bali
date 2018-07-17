@@ -6,7 +6,7 @@ class Course extends CI_Controller {
 	public function index()
 	{
 		$id_pelajar = $this->session->id_pelajar;
-		$query = $this->db->query("SELECT *,COUNT(tb_materi.id_materi) AS jumlah_materi FROM tb_pelajar INNER JOIN tb_detail_kursus ON tb_pelajar.id_pelajar = tb_detail_kursus.id_pelajar INNER JOIN tb_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus INNER JOIN tb_materi ON tb_kursus.id_kursus = tb_materi.id_kursus WHERE tb_detail_kursus.id_pelajar='$id_pelajar'");
+		$query = $this->db->query("SELECT * FROM tb_pelajar INNER JOIN tb_detail_kursus ON tb_pelajar.id_pelajar = tb_detail_kursus.id_pelajar INNER JOIN tb_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus WHERE tb_detail_kursus.id_pelajar='$id_pelajar'");
 		$data = [
 			'data_kursus' => $query
 		];
@@ -35,6 +35,16 @@ class Course extends CI_Controller {
 		$data_kursus_pengajar = $this->db->query("SELECT * FROM tb_kursus WHERE id_pengajar='$id_pengajar'");
 		$jumlah_kursus_pengajar = $data_kursus_pengajar->num_rows();
 		$data_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut ASC");
+		$tombol_daftar = true;
+		$user = $this->session->id_pelajar;
+			$sql = $this->db->query("SELECT * FROM tb_detail_kursus WHERE id_pelajar='$user' AND id_kursus='$id_kursus'");
+			$jml = $sql->num_rows();
+		if ($id_pengajar == $this->session->id_pelajar) {
+			$tombol_daftar = false;
+		}
+		elseif ($jml>0) {
+			$tombol_daftar = false;
+		}
 		$data = [
 			'data_materi' => $data_materi,
 			'data_kursus' => $query,
@@ -42,7 +52,8 @@ class Course extends CI_Controller {
 			'nama_kursus' => $nama_kursus2,
 			'jumlah_materi' => $jumlah_materi,
 			'jumlah_kursus_pengajar' => $jumlah_kursus_pengajar,
-			'id_pengajar' => $id_pengajar
+			'id_pengajar' => $id_pengajar,
+			'tombol' => $tombol_daftar
 		];
 		$this->template->header($nama_kursus2,2);
 		$this->load->view('detail_kursus', $data);

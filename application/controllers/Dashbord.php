@@ -39,27 +39,25 @@ class Dashbord extends CI_Controller {
 		}
 	}
 
-	public function profile($username='')
+	public function profile($id='')
 	{
-		$this->load->library('session');
-		if(empty($username)){
-			$query = $this->db->query("SELECT * FROM tb_user WHERE username='".$this->session->userdata['username']."'");
+		$id_pelajar = $this->session->id_pelajar;
+		if(empty($id)){			
+			$query = $this->db->query("SELECT * FROM tb_pelajar WHERE id_pelajar='$id_pelajar'");
 		}
 		else{
-			$query = $this->db->query("SELECT * FROM tb_user WHERE username='".$username."'");
+			$query = $this->db->query("SELECT * FROM tb_pelajar WHERE id_pelajar='$id'");
 		}
 		$row = $query->row();
 		if($query->num_rows()<=0){
-			show_error("User Tidak Ditemukan.<br>Hubungi Admin Untuk Meminta Bantuan.<br><a href=".base_url()."dashbord>Kembali</a>",404,"[ERROR] User $username Tidak Ditemukan");
+			show_error("User Tidak Ditemukan.<br>Hubungi Admin Untuk Meminta Bantuan.<br><a href=".base_url()."dashbord>Kembali</a>",404,"[ERROR] User Tidak Ditemukan");
 		}
-		$akses = $this->session->userdata['status'];
 		$data = array(
-			'title' => $row->nama_depan." ".$row->nama_belakang
+			'title' => $row->nama_depan." ".$row->nama_belakang,
+			'data_profil' => $row
 		);
-		$this->load->view('header');
-		$this->load->view('settings/bootstrap',$data);
-		$this->load->view('menu_dashbord');
-		$this->load->view('profile',$row);
+		$this->template->header('Profil',2);
+		$this->load->view('profile',$data);
 		$this->load->view('footer');
 	}
 

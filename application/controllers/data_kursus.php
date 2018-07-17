@@ -149,7 +149,7 @@ class data_kursus extends CI_Controller {
 		}
 
 		$search = $this->input->get('q');
-		if(empty($q)){
+		if(empty($search)){
 			redirect(base_url('admin/data_kursus.html'),'refresh');
 		}
         $query_kursus = "tb_kursus INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.nama_kursus LIKE '%$search%' OR tb_kursus.tgl_buat LIKE '%$search%'  OR tb_kursus.deskripsi_kursus LIKE '%$search%'";

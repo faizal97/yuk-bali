@@ -18,7 +18,7 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="#" style="border-bottom: 1px solid ">Laporan Kursus</a>
+    <a href="<?php echo base_url('admin/laporan/kursus.html')?>" target="_BLANK" style="border-bottom: 1px solid ">Laporan Kursus</a>
   </div>
 <a href="<?php echo base_url('admin/keluar.html')?>" style="border-bottom: 1px solid">Keluar</a>
 </div>
