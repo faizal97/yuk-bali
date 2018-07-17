@@ -65,4 +65,6 @@ class Dashbord extends CI_Controller {
 	{
 		$this->pengajar->become_instructor();
 	}
+
+
 }

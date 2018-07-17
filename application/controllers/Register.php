@@ -25,6 +25,12 @@
 		function action() {
 			$this->pelajar->register();
 		}
+
+		public function daftar_pengajar()
+		{
+			$this->load->model('pengajar');
+			$this->pengajar->langsung_ngajar($this->input->post('email'),$this->input->post('nama_lengkap'),$this->input->post('password'));
+		}
 	}
 /* End of file Home.php */
 /* Location: ./application/controllers/Home.php */
