@@ -24,7 +24,7 @@
 </style>
 
 <div class="container" style="margin-top:5px;">
-<div class="card border-dark mb-3" style="width: 50%;margin-left:25%; margin-top:10%; padding:22px">
+<div class="card animated flipInY border-dark mb-3" style="width: 50%;margin-left:25%; margin-top:10%; padding:22px">
   <div class="card-header" style="background-color:#3F729B; color:white"><h2 align="center">Masuk Administrator</h2></div>
   <div class="card-body text-primary">
     <div class="card-text">

@@ -54,6 +54,9 @@ $route['default_controller'] = 'home';
 // Halaman Awal
 $route['welcome'] = 'home';
 
+// Laporan
+$route['admin/laporan/kursus'] = "laporan/kursus";
+
 // Kategori
 $route['kategori/(:any)'] = "kategori/kategori_visitor/$1";
 $route['search'] = "search/search_visitor";

@@ -25,7 +25,7 @@
 				<div class="col">
 					<hr>
 				</div>
-				<?php if($id_pengajar != $_SESSION['id_pengajar']){ ?>
+				<?php if($tombol){ ?>
 				<div class="col-sm-2">
 					<a href="<?php echo base_url($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus).'/daftar_kursus.html') ?>" class="btn btn-outline-primary btn-lg btn-block">DAFTAR</a>
 				</div>
