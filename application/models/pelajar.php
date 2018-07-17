@@ -59,6 +59,7 @@ class Pelajar extends CI_Model {
 			$nama_belakang .= $nama_lengkap[$i]." ";
 		}
 		$nama_belakang = trim($nama_belakang);
+		
 		$email = $this->db->escape_str($this->input->post('email'));
 		$salt = bin2hex(openssl_random_pseudo_bytes(64,$cstrong));
 		$password = $this->db->escape_str($this->input->post('password'));

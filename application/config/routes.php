@@ -53,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 // Halaman Awal
 $route['welcome'] = 'home';
+$route['daftar_pengajar'] = "register/daftar_pengajar";
 
 // Laporan
 $route['admin/laporan/kursus'] = "laporan/kursus";
@@ -73,6 +74,7 @@ $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
 
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
+
 
 // Register Pelajar
 $route['daftar'] = 'register';
