@@ -61,6 +61,70 @@ class Dashbord extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	public function ubah_profil()
+	{
+		$id_pelajar = $this->session->id_pelajar;
+		$query = $this->db->query("SELECT * FROM tb_pelajar WHERE id_pelajar='$id_pelajar'");
+		$query = $query->row();
+		$data = [
+			'data_pelajar' => $query
+		];
+		$this->template->header('Ubah Profil',2);
+		$this->load->view('ubah_profil',$data);
+		$this->load->view('footer');
+	}
+
+	public function proses_ubah_profil()
+	{
+		$id_pelajar = $this->session->id_pelajar;
+		// Mengambil Data2 dari halaman edit pelajar 
+        $nama_depan = $this->input->post('nama_depan');
+        $nama_belakang = $this->input->post('nama_belakang');
+		$email = $this->input->post('email');
+        $alamat = $this->input->post('alamat');
+        $jenis_kelamin = $this->input->post('jenis_kelamin');
+		$tgl_lahir = $this->input->post('tgl_lahir');
+		$upload = $this->input->post('foto_profil');
+
+		// Mengambil Data pelajar
+		$query = $this->db->query("SELECT * FROM tb_pelajar WHERE id_pelajar='$id_pelajar'");
+		$row = $query->row();
+		if (!empty($_FILES['foto_profil']['name'])) {
+			$this->functions->upload_gambar('foto_profil','img/user',$id_pelajar);
+			$foto_profil = 'img/user/'.$this->upload->data('file_name');
+		}
+		else {
+			$foto_profil = $row->foto_profil;
+		}
+		
+
+	
+		// Mempersiapkan Data Update
+		$data = array(
+            'nama_depan' => $nama_depan,
+            'nama_belakang' => $nama_belakang,
+			'email' => $email,
+            'alamat' => $alamat,
+            'jenis_kelamin' => $jenis_kelamin,
+			'tgl_lahir' => $tgl_lahir,
+			'foto_profil' => $foto_profil
+		);
+		$this->session->gambar_profil = $foto_profil;
+
+		$this->db->where('id_pelajar',$id_pelajar);
+		$result = $this->db->update('tb_pelajar',$data);
+
+		if($result){
+			echo "<script>alert('Data Berhasil Diubah')</script>";
+			redirect(base_url('profil.html'),'refresh');
+		}
+		else {
+			echo "<script>alert('Data Gagal Diubah')</script>";
+			redirect(base_url('ubah_profil.html'),'refresh');
+		}
+
+	}
+
 	public function menjadi_pengajar()
 	{
 		$this->pengajar->become_instructor();

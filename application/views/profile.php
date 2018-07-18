@@ -9,7 +9,7 @@
 
     <div class="row">
 		<div class="col-sm-6">
-            <a href="<?php echo base_url('') ?>"><button type="button" class="btn btn-primary"><span class="far fa-edit"> Ubah Profil</span></button></a><br><br>
+            <a href="<?php echo base_url('ubah_profil.html') ?>"><button type="button" class="btn btn-primary"><span class="far fa-edit"> Ubah Profil</span></button></a><br><br>
                 <i class=""></i><?php echo strtoupper($data_profil->nama_depan." ".$data_profil->nama_belakang) ?><hr>
                 <i class="far fa-envelope"></i> <?php echo $data_profil->email ?><hr>
                 <i class="far fa-calendar-alt"></i><?php echo $data_profil->tgl_lahir ?>  <hr>

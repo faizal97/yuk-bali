@@ -90,6 +90,8 @@ $route['keluar'] = 'logout';
 // Profil Pelajar
 $route['profil'] = "dashbord/profile";
 $route['profil/(:any)'] = "dashbord/profile/$1";
+$route['ubah_profil'] = "dashbord/ubah_profil";
+$route['ubah_profil/proses'] = "dashbord/proses_ubah_profil";
 
 // Kursus ku(My Courses)
 $route['aktivasi_pengajar'] = "dashbord/menjadi_pengajar";
