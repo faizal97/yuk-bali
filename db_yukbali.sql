@@ -57,8 +57,8 @@ CREATE TABLE `tb_detail_kursus` (
 /*Data for the table `tb_detail_kursus` */
 
 insert  into `tb_detail_kursus`(`id_detail_kursus`,`id_kursus`,`id_pelajar`,`tgl_daftar`,`status`,`materi_terakhir`,`vote`,`ulasan`) values 
-('DKU001','KRS001','PLJ001','2018-07-13 21:52:40','aktif',1,0,NULL),
-('DKU002','KRS002','PLJ002','2018-07-13 23:46:49','aktif',11,0,NULL);
+('DKU001','KRS001','PLJ001','2018-07-18 13:50:06','aktif',1,0,NULL),
+('DKU002','KRS002','PLJ002','2018-07-18 22:06:00','aktif',1,0,NULL);
 
 /*Table structure for table `tb_detail_soal` */
 
@@ -121,7 +121,7 @@ CREATE TABLE `tb_kursus` (
 /*Data for the table `tb_kursus` */
 
 insert  into `tb_kursus`(`id_kursus`,`nama_kursus`,`id_pengajar`,`tgl_buat`,`gambar_kursus`,`id_kategori`,`deskripsi_kursus`) values 
-('KRS001','Vue JS 101','PGJ001','2018-07-13 20:11:28','img/course/KRS001.jpg','KTG001','abcd'),
+('KRS001','Vue JS 101','PGJ001','2018-07-13 20:11:28','img/course/KRS001.jpg','KTG001','<b>Vue JS</b> <b>101&nbsp; </b>adalah kursus bagi pemula yang ingin mempelajar framework <b>Vue JS</b><br>'),
 ('KRS002','PHP Untuk Pemula','PGJ003','2018-07-13 20:52:51','img/course/KRS002.jpg','KTG001',NULL);
 
 /*Table structure for table `tb_materi` */
@@ -207,7 +207,7 @@ CREATE TABLE `tb_pelajar` (
 
 insert  into `tb_pelajar`(`id_pelajar`,`nama_depan`,`nama_belakang`,`password`,`password_salt`,`foto_profil`,`email`,`jenis_kelamin`,`tgl_lahir`,`alamat`) values 
 ('PLJ001','Kepala','Sekolah','8bfd0302da67e8f791acdfe2f4b6ae6bacf95af7647768126a2b3fdca8aecac3a1c9cd719ac8e00436bb2c4401a1374f0079ff76cfaa363be318275949d39750','ce5fbcc7d504e8a6b734a12630e5dc12ab36ebd1f3c1ad5646bd83976dc044f7ec0e80a4b0c3eada50411db2bd0a2de19bf6eba15dac8eadffe16e1f270e8be7','img/user/PLJ001.jpg','kepsek@yahoo.co.id','Laki-Laki','1997-08-28','Bumi Mutiara'),
-('PLJ002','Faizal','Ardian Putra','73fe94f7ace26f8ed8236bef45206e0913797234b85ec12b25bc382561bba33be9fb1ea3ba909b6c4b477b55c18186bf10941c3e87d68b417d0f7063e9b31c3e','602241e89dc5f6a120d60481e0126ca0d7ee41ec9e7ef9d56e8cea7c79bdb4b17c12563a12c42bea6581210f169fa0300d5f85ea0602c6d751e9cdc3f9a572fe','img/user/PLJ002.jpeg','faizalardianputra@yahoo.co.id','Laki-Laki','1997-08-28','Bumi Mutiara'),
+('PLJ002','Faizal','Ardian Putra','73fe94f7ace26f8ed8236bef45206e0913797234b85ec12b25bc382561bba33be9fb1ea3ba909b6c4b477b55c18186bf10941c3e87d68b417d0f7063e9b31c3e','602241e89dc5f6a120d60481e0126ca0d7ee41ec9e7ef9d56e8cea7c79bdb4b17c12563a12c42bea6581210f169fa0300d5f85ea0602c6d751e9cdc3f9a572fe','img/user/PLJ002.jpg','faizalardianputra@yahoo.co.id','Laki-Laki','1997-08-28','Bumi Mutiara JG 2 / 12'),
 ('PLJ003','Anisa','Cahyani','0671098bf2f56b0d6ca4c8b93cb2605b2c72f0bff3cd7fcb8a126071c4e1b11c10552eb3688651ea3c39d57d745f50d6044a22cb1470100620ae90ca8d975d63','d44544642f74b5a08bd1d2a4ea51dd947532fa9df406d449a684c71278ffb6130ebfc6b60aefdf215ce254533da6dab0ccaf303c3a66ad30e14bd038999d7b05','img/user/nopic.jpg','aniscyn@gmail.com',NULL,NULL,NULL);
 
 /*Table structure for table `tb_pengajar` */
