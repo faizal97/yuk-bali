@@ -57,6 +57,8 @@ $route['daftar_pengajar'] = "register/daftar_pengajar";
 
 // Laporan
 $route['admin/laporan/kursus'] = "laporan/kursus";
+$route['laporan/pelajar/(:any)'] = "laporan/pelajar/$1";
+$route['laporan/nilai/(:any)'] = "laporan/nilai/$1";
 
 // Kategori
 $route['kategori/(:any)'] = "kategori/kategori_visitor/$1";
