@@ -95,6 +95,8 @@ $route['profil/(:any)'] = "dashbord/profile/$1";
 $route['aktivasi_pengajar'] = "dashbord/menjadi_pengajar";
 $route['kursusku'] = "mycourse";
 $route['kursusku/tambah_kursus'] = "mycourse/proses_tambah_kursus";
+$route['kursusku/kelola/(:any)/pengaturan'] = "mycourse/ubah_pengaturan/$1";
+
 // Kursuku Materi
 $route['kursusku/kelola/(:any)/tambah_materi'] = "materi/proses_tambah_materi/$1";
 $route['kursusku/kelola/(:any)/tambah_soal'] = "soal/proses_tambah_soal/$1";

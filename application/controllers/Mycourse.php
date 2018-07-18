@@ -106,7 +106,7 @@ class Mycourse extends CI_Controller {
 			$query = $this->db->query("SELECT COUNT(tb_detail_kursus.id_detail_kursus) AS jumlah_siswa FROM tb_detail_kursus WHERE id_kursus='$id_kursus'");
 			$query = $query->row();
 			$jumlah_siswa = $query->jumlah_siswa;
-			$kategori = $this->db->query('SELECT * FROM tb_kategori');
+			$kategori = $this->db->query('SELECT * FROM tb_kategori ORDER BY nama_kategori');
 			$laporan_pelajar = $this->db->query("SELECT * FROM tb_detail_kursus INNER JOIN tb_pelajar ON tb_detail_kursus.id_pelajar = tb_pelajar.id_pelajar WHERE tb_detail_kursus.id_kursus='$id_kursus' ORDER BY tb_pelajar.nama_depan LIMIT 0,5");
 			$laporan_nilai = $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_soal ON tb_soal.id_soal = tb_nilai.id_soal INNER JOIN tb_pelajar ON tb_nilai.id_pelajar = tb_pelajar.id_pelajar INNER JOIN tb_materi ON tb_materi.id_materi = tb_soal.id_materi WHERE tb_materi.id_kursus='$id_kursus' ORDER BY tb_pelajar.nama_depan LIMIT 0,5");
 			$data = array(
@@ -165,6 +165,42 @@ class Mycourse extends CI_Controller {
 			else 
 			{
 				$this->functions->pindah_halaman('kursusku.html','Semua Kursus Gagal Dihapus.');
+			}
+		}
+
+		public function ubah_pengaturan($id_kursus)
+		{
+			$nama_kursus = $this->input->post('nama_kursus');
+			$id_kategori = $this->input->post('id_kategori');
+			$deskripsi_kursus = $this->input->post('deskripsi_kursus');
+	
+			$query = $this->db->query("SELECT * FROM tb_kursus WHERE id_kursus='$id_kursus'");
+			$row = $query->row();
+			if (!empty($_FILES['gambar_kursus']['name'])) {
+				$this->functions->upload_gambar('gambar_kursus','img/course',$id_kursus);
+				$gambar_kursus = 'img/course/'.$this->upload->data('file_name');
+			}
+			else {
+				$gambar_kursus = $row->gambar_kursus;
+			}
+	
+			$data = [
+				'nama_kursus' => $nama_kursus,
+				'deskripsi_kursus' => $deskripsi_kursus,
+				'id_kategori' => $id_kategori,
+				'gambar_kursus' => $gambar_kursus	
+			];
+	
+			$this->db->where('id_kursus',$id_kursus);
+			$result = $this->db->update('tb_kursus',$data);
+	
+			if($result){
+				echo "<script>alert('Data Berhasil Diubah')</script>";
+				redirect(base_url('kursusku/kelola/'.$this->functions->ubahURL($nama_kursus).'.html?tab=pengaturan'),'refresh');
+			}
+			else {
+				echo "<script>alert('Data Gagal Diubah')</script>";
+				redirect(base_url('kursusku/kelola/'.$this->functions->ubahURL($nama_kursus).'.html?tab=pengaturan'),'refresh');
 			}
 		}
     }

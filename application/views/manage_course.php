@@ -21,7 +21,7 @@
 	<!-- END BREADCRUMB -->
 	<!-- START CONTENT -->
 	<div class="container">
-		<div class="card">
+		<div class="card animated fadeIn">
 			<div class="card-body" style="background-color:rgb(255,255,255,1);">
 				<!-- START BAGIAN JUDUL -->
 				<div class="row" style="border-bottom:1px solid rgb(0,0,0,0.1);">
@@ -37,7 +37,7 @@
 						<h3 style="line-height:20px"><?php echo $data->nama_kategori ?></h3>
 					</div>
 					<div class="col-sm-1">
-						<a class="btn btn-secondary" href="#"><span class="oi oi-pencil">&nbsp;Edit</span></a>
+						<a class="btn btn-secondary" href="#" onclick="bukamenu('pengaturan')"><span class="oi oi-pencil">&nbsp;Edit</span></a>
 					</div>
 				</div>
 				<!-- END BAGIAN JUDUL -->
