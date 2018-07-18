@@ -76,7 +76,7 @@ $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
 
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
-
+$route['eksplor'] = 'dashbord/eksplor';
 
 // Register Pelajar
 $route['daftar'] = 'register';
@@ -90,11 +90,15 @@ $route['keluar'] = 'logout';
 // Profil Pelajar
 $route['profil'] = "dashbord/profile";
 $route['profil/(:any)'] = "dashbord/profile/$1";
+$route['ubah_profil'] = "dashbord/ubah_profil";
+$route['ubah_profil/proses'] = "dashbord/proses_ubah_profil";
 
 // Kursus ku(My Courses)
 $route['aktivasi_pengajar'] = "dashbord/menjadi_pengajar";
 $route['kursusku'] = "mycourse";
 $route['kursusku/tambah_kursus'] = "mycourse/proses_tambah_kursus";
+$route['kursusku/kelola/(:any)/pengaturan'] = "mycourse/ubah_pengaturan/$1";
+
 // Kursuku Materi
 $route['kursusku/kelola/(:any)/tambah_materi'] = "materi/proses_tambah_materi/$1";
 $route['kursusku/kelola/(:any)/tambah_soal'] = "soal/proses_tambah_soal/$1";

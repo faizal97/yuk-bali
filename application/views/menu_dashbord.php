@@ -19,7 +19,7 @@
 				<a class="dropdown-item" href="#">Others</a>
         	</div>
 		</li>
-		<li class="nav-item"><a href="" class="nav-link">Eksplor</a></li>
+		<li class="nav-item"><a href="<?php echo base_url('eksplor.html') ?>" class="nav-link">Eksplor</a></li>
 		<li class="nav-item">
 				<form action="<?php echo base_url('kursus/search.html') ?>" class="form-horizontal input-group" method="get">
 					<input style="width:500px;margin-left:50px" type="search" placeholder="Cari Kursus" class="form-control form-control-sm" name="q" id="tmenucari">
@@ -40,7 +40,7 @@
                 <div href="#" class="dropdown-header">Masuk sebagai <strong><?php echo $_SESSION['nama_depan']." ".$_SESSION['nama_belakang'] ?></strong></div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url() ?>profil.html"><span class="oi oi-person"></span>&nbsp;&nbsp;Profil</a>
-                <a class="dropdown-item" href="#"><span class="oi oi-wrench"></span>&nbsp;&nbsp;Ubah Profil</a>
+                <a class="dropdown-item" href="<?php echo base_url('ubah_profil.html') ?>"><span class="oi oi-wrench"></span>&nbsp;&nbsp;Ubah Profil</a>
                 <?php if($_SESSION['instructor']==true){ ?>
                     <a class="dropdown-item bg-success" href="<?php echo base_url('kursusku.html') ?>"><span class="oi oi-book"></span>&nbsp;&nbsp;Kelola Kursus</a>
                 <?php }else{ ?>
