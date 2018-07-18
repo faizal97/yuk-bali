@@ -101,13 +101,22 @@ class Mycourse extends CI_Controller {
             $judul = str_replace("-"," ",$judul);
             $user = $this->session->id_pengajar;
             $query = $this->db->query("SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori WHERE tb_kursus.nama_kursus='$judul' AND tb_kursus.id_pengajar='$user'");
-            $row = $query->row();
-            $kategori = $this->db->query('SELECT * FROM tb_kategori');
-            $data = array(
+			$row = $query->row();
+			$id_kursus = $row->id_kursus;
+			$query = $this->db->query("SELECT COUNT(tb_detail_kursus.id_detail_kursus) AS jumlah_siswa FROM tb_detail_kursus WHERE id_kursus='$id_kursus'");
+			$query = $query->row();
+			$jumlah_siswa = $query->jumlah_siswa;
+			$kategori = $this->db->query('SELECT * FROM tb_kategori');
+			$laporan_pelajar = $this->db->query("SELECT * FROM tb_detail_kursus INNER JOIN tb_pelajar ON tb_detail_kursus.id_pelajar = tb_pelajar.id_pelajar WHERE tb_detail_kursus.id_kursus='$id_kursus' ORDER BY tb_pelajar.nama_depan LIMIT 0,5");
+			$laporan_nilai = $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_soal ON tb_soal.id_soal = tb_nilai.id_soal INNER JOIN tb_pelajar ON tb_nilai.id_pelajar = tb_pelajar.id_pelajar INNER JOIN tb_materi ON tb_materi.id_materi = tb_soal.id_materi WHERE tb_materi.id_kursus='$id_kursus' ORDER BY tb_pelajar.nama_depan LIMIT 0,5");
+			$data = array(
                 'title' => $judul,
                 'data' => $row,
 				'kategori' => $kategori,
-				'id_kursus' => $row->id_kursus
+				'id_kursus' => $id_kursus,
+				'jumlah_siswa' => $jumlah_siswa,
+				'laporan_pelajar' => $laporan_pelajar,
+				'laporan_nilai' => $laporan_nilai
             );
             $this->load->view('settings/bootstrap', $data);
             $this->load->view('header');
