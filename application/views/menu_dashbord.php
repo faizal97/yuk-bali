@@ -19,7 +19,7 @@
 				<a class="dropdown-item" href="#">Others</a>
         	</div>
 		</li>
-		<li class="nav-item"><a href="" class="nav-link">Eksplor</a></li>
+		<li class="nav-item"><a href="<?php echo base_url('eksplor.html') ?>" class="nav-link">Eksplor</a></li>
 		<li class="nav-item">
 				<form action="<?php echo base_url('kursus/search.html') ?>" class="form-horizontal input-group" method="get">
 					<input style="width:500px;margin-left:50px" type="search" placeholder="Cari Kursus" class="form-control form-control-sm" name="q" id="tmenucari">

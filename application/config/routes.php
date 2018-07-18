@@ -76,7 +76,7 @@ $route['kursus/(:any)/(:any)/cek_soal'] = "course/cek_soal/$1/$2";
 
 // Halaman Pelajar Setelah Login
 $route['home'] = 'dashbord';
-
+$route['eksplor'] = 'dashbord/eksplor';
 
 // Register Pelajar
 $route['daftar'] = 'register';

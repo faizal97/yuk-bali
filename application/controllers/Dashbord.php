@@ -130,5 +130,45 @@ class Dashbord extends CI_Controller {
 		$this->pengajar->become_instructor();
 	}
 
+	public function eksplor()
+	{
+		$id_pelajar = $this->session->id_pelajar;
+		$list_kursus = $this->db->query("SELECT * FROM tb_detail_kursus INNER JOIN tb_kursus ON tb_detail_kursus.id_kursus = tb_kursus.id_kursus WHERE tb_detail_kursus.id_pelajar='$id_pelajar' ORDER BY RAND()");
+		foreach ($list_kursus->result() as $row) {
+			$list_kategori[$row->id_kategori] = $row->id_kategori;
+		}
+		if (empty($list_kategori)) {
+			$sql = "SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar ORDER BY RAND() LIMIT 0,4";
+		}
+		else {
+			$id_rek1 = key($list_kategori);
+			$sql = "SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.id_kategori='$id_rek1' ORDER BY RAND() LIMIT 0,4";
+		}
+		$rekomendasi1 = $this->db->query($sql);
+
+		$query = $this->db->query("SELECT id_kursus,COUNT(id_pelajar) AS jumlah_pelajar FROM tb_detail_kursus GROUP BY id_kursus ORDER BY jumlah_pelajar DESC LIMIT 0,4");
+		foreach ($query->result() as $row) {
+			$list_populer[$row->id_kursus] = $row->id_kursus;
+		}
+		$sql2 = "SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.id_kursus IN (";
+		$sentence = "";
+		foreach ($list_populer as $data) {
+			$sentence .= "'".$data."',";
+		}
+		$sql_in = substr($sentence,0,strlen($sentence)-1);
+		$sql2.=$sql_in.")";
+		$rekomendasi2 = $this->db->query($sql2);
+
+		$data = [
+			'data_kursus' => $rekomendasi1,
+			'judul_rek1' => 'Rekomendasi Untuk Anda',
+			'data_kursus_baru' =>$rekomendasi2,
+			'judul_rek2' => 'Kursus Terpopuler'
+		];
+
+		$this->template->header("Eksplor",2);
+		$this->load->view('eksplor', $data);
+		$this->template->footer();
+	}
 
 }
