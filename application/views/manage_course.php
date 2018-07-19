@@ -21,7 +21,7 @@
 	<!-- END BREADCRUMB -->
 	<!-- START CONTENT -->
 	<div class="container">
-		<div class="card animated fadeIn">
+		<div class="card">
 			<div class="card-body" style="background-color:rgb(255,255,255,1);">
 				<!-- START BAGIAN JUDUL -->
 				<div class="row" style="border-bottom:1px solid rgb(0,0,0,0.1);">
