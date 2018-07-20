@@ -1,0 +1,20 @@
+#isi {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+#isilgi {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.animated.zoomInUp{
+    
+    -webkit-animation-duration: 1.7s;
+    
+    
