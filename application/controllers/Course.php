@@ -29,6 +29,7 @@ class Course extends CI_Controller {
 		$query = $this->db->query("SELECT * FROM tb_kursus INNER JOIN tb_kategori ON tb_kursus.id_kategori = tb_kategori.id_kategori INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pelajar.id_pelajar = tb_pengajar.id_pelajar WHERE tb_kursus.nama_kursus='$nama_kursus2' AND tb_pelajar.nama_depan='$nama_depan' AND tb_pelajar.nama_belakang='$nama_belakang'");
 		$query = $query->row();
 		$id_kursus = $query->id_kursus;
+		$id_pelajar = $query->id_pelajar;
 		$id_pengajar = $query->id_pengajar;
 		$data_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus'");
 		$jumlah_materi = $data_materi->num_rows();
@@ -39,7 +40,7 @@ class Course extends CI_Controller {
 		$user = $this->session->id_pelajar;
 			$sql = $this->db->query("SELECT * FROM tb_detail_kursus WHERE id_pelajar='$user' AND id_kursus='$id_kursus'");
 			$jml = $sql->num_rows();
-		if ($id_pengajar == $this->session->id_pelajar) {
+		if ($id_pelajar == $this->session->id_pelajar) {
 			$tombol_daftar = false;
 		}
 		elseif ($jml>0) {
