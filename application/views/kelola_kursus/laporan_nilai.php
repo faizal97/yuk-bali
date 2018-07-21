@@ -1,6 +1,6 @@
 <?php
             $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
-            $pdf->SetTitle('Laporan Pelajar');
+            $pdf->SetTitle('Laporan Nilai');
             $pdf->SetHeaderMargin(30);
             $pdf->SetTopMargin(20);
             $pdf->setFooterMargin(20);
@@ -12,11 +12,11 @@
             $pdf->AddPage();
             $i=0;
                 $html=' 
-                <h3 style="font-size:20pt;text-align:center;">Laporan Pelajar</h3>
+                <h3 style="font-size:20pt;text-align:center;">Laporan Nilai</h3>
                     <table cellspacing="2" bgcolor="black" cellpadding="4">
                         <tr bgcolor="#ffffff">
-						<th>No</th>
-						<th>Nama Lengkap</th>
+						<th width="10%">No</th>
+						<th width="40%">Nama Lengkap</th>
 						<th>Materi</th>
 						<th>Nilai</th>
                         </tr>';
@@ -27,7 +27,7 @@
 					$nama_materi = $query->nama_materi;
 					  $i++;
                     $html.='<tr bgcolor="#ffffff">
-                            <td align="center">'.$i.'</td>
+                            <td>'.$i.'</td>
 							<td>'.$row->nama_depan." ".$row->nama_belakang.'</td>
 							<td>'.$nama_materi.'</td>
 							<td>'.$row->nilai.'</td>
@@ -35,5 +35,5 @@
                 }
             $html.='</table>';
             $pdf->writeHTML($html, true, false, true, false, '');
-            $pdf->Output('laporan_pelajar.pdf', 'I');
+            $pdf->Output('laporan_nilai.pdf', 'I');
 ?>
