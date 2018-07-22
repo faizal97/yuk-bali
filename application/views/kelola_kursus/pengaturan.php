@@ -19,7 +19,7 @@
 			<div class="custom-file">
 		
 			<input type="file" class="custom-file-input form-control" name="gambar_kursus" id="">
-			<label class="custom-file-label form-control" for="inputGroupFile04" name="gambar_kursus" >Pilih File</label>
+			<label class="custom-file-label form-control" for="inputGroupFile04" name="gambar_kursus" >Pilih Berkas</label>
   			</div>
   			</div>
   </div>

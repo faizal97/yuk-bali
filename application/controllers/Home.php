@@ -23,7 +23,7 @@ class Home extends CI_Controller {
 		);
 		$this->template->header('Yuk Bali - Home',1);
 		$this->load->view('home',$data);
-		$this->template->footer();
+		
 	}
 
 }

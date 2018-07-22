@@ -72,7 +72,7 @@
   <div class="custom-file">
   
     <input name="foto_profil" type="file" class="custom-file-input" id="">
-    <label class="custom-file-label" for="inputGroupFile04"  >Pilih File</label>
+    <label class="custom-file-label" for="inputGroupFile04"  >Pilih Berkas</label>
   </div>
   </div>
   </div>
