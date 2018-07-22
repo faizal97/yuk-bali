@@ -1,7 +1,7 @@
 <div class="container">
   <ol class="breadcrumb" style="margin-top: 70px">
-  <li><a href="<?php echo base_url('') ?>">Beranda</a></li>
-  <li class="active">Profil</li>
+  <li class="breadcrumb-item"><a href="<?php echo base_url('') ?>">Beranda</a></li>
+  <li class="breadcrumb-item active">Profil</li>
 </ol></div>
 <div class="card border-info mb-3" style="margin-top:10px;width:75%;margin-left: 160px">
 <div class="container" style="width: 100%; margin-right: : 50px; margin-top: 30px; font-size: 14pt; font-weight: bold">
