@@ -197,7 +197,7 @@ class functions extends CI_Model {
 					$a = "";
 					$href = base_url($link.$simbol.'p='.$prev);
 				}
-				echo "<li class='".$a."'><a href='".$href."'><<</a></li>";
+				echo "<li class='page-item ".$a."'><a class='page-link' href='".$href."'><<</a></li>";
 			}
 			if ($aktif==$i) {
 				$b = "active";
@@ -205,7 +205,7 @@ class functions extends CI_Model {
 			else {
 				$b = "";
 			}
-			echo "<li class='".$b."'><a href='".base_url($link.$simbol.'p='.$i)."'>$i</a></li>";
+			echo "<li class='page-item ".$b."'><a class='page-link' href='".base_url($link.$simbol.'p='.$i)."'>$i</a></li>";
 			$next = $aktif + 1;
 			if ($i==$banyak_halaman) {
 				if ($aktif == $banyak_halaman) {
@@ -216,7 +216,7 @@ class functions extends CI_Model {
 					$a = "";
 					$href=base_url($link.$simbol.'p='.$next);
 				} 
-				echo "<li class='".$a."'><a href='".$href."'>>></a></li>";
+				echo "<li class='page-item ".$a."'><a class='page-link' href='".$href."'>>></a></li>";
 			}	
 		}
 		echo "</ul>";	
