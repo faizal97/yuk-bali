@@ -35,7 +35,7 @@
 				<div class="col-sm-1">
 						<span onclick="buka_tab('video')" style="top:50%;font-size:36pt" class="oi oi-chevron-left"></span>
 					</div>
-					<div class="col-sm-11">
+					<div class="col-sm-11" style="text-align:justify;line-height:2.1">
 						<?php echo $data_materi->isi_materi ?>
 					</div>
 				</div>
