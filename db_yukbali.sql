@@ -51,14 +51,12 @@ CREATE TABLE `tb_detail_kursus` (
   `ulasan` text,
   PRIMARY KEY (`id_detail_kursus`),
   KEY `id_kursus` (`id_kursus`),
-  KEY `tb_detail_kursus_ibfk_2` (`id_pelajar`)
+  KEY `tb_detail_kursus_ibfk_2` (`id_pelajar`),
+  CONSTRAINT `tb_detail_kursus_kursus` FOREIGN KEY (`id_kursus`) REFERENCES `tb_kursus` (`id_kursus`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_detail_kursus_pelajar` FOREIGN KEY (`id_pelajar`) REFERENCES `tb_pelajar` (`id_pelajar`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_detail_kursus` */
-
-insert  into `tb_detail_kursus`(`id_detail_kursus`,`id_kursus`,`id_pelajar`,`tgl_daftar`,`status`,`materi_terakhir`,`vote`,`ulasan`) values 
-('DKU001','KRS001','PLJ001','2018-07-18 13:50:06','aktif',1,0,NULL),
-('DKU002','KRS002','PLJ002','2018-07-18 22:06:00','aktif',1,0,NULL);
 
 /*Table structure for table `tb_detail_soal` */
 
@@ -73,7 +71,9 @@ CREATE TABLE `tb_detail_soal` (
   `pilihan3` text,
   `pilihan4` text,
   `jawaban` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_detail_soal`)
+  PRIMARY KEY (`id_detail_soal`),
+  KEY `tb_detail_soal_soal` (`id_soal`),
+  CONSTRAINT `tb_detail_soal_soal` FOREIGN KEY (`id_soal`) REFERENCES `tb_soal` (`id_soal`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_detail_soal` */
@@ -115,13 +115,14 @@ CREATE TABLE `tb_kursus` (
   `deskripsi_kursus` text COMMENT 'deskripsi kursus',
   PRIMARY KEY (`id_kursus`),
   KEY `id_user` (`id_pengajar`),
-  KEY `id_kategori` (`id_kategori`)
+  KEY `id_kategori` (`id_kategori`),
+  CONSTRAINT `tb_kursus_kategori` FOREIGN KEY (`id_kategori`) REFERENCES `tb_kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_kursus_pengajar` FOREIGN KEY (`id_pengajar`) REFERENCES `tb_pengajar` (`id_pengajar`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_kursus` */
 
 insert  into `tb_kursus`(`id_kursus`,`nama_kursus`,`id_pengajar`,`tgl_buat`,`gambar_kursus`,`id_kategori`,`deskripsi_kursus`) values 
-('KRS001','Vue JS 101','PGJ001','2018-07-13 20:11:28','img/course/KRS001.jpg','KTG001','<b>Vue JS</b> <b>101&nbsp; </b>adalah kursus bagi pemula yang ingin mempelajar framework <b>Vue JS</b><br>'),
 ('KRS002','PHP Untuk Pemula','PGJ003','2018-07-13 20:52:51','img/course/KRS002.jpg','KTG001',NULL);
 
 /*Table structure for table `tb_materi` */
@@ -137,27 +138,13 @@ CREATE TABLE `tb_materi` (
   `tgl_dibuat` datetime DEFAULT CURRENT_TIMESTAMP,
   `urut` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_materi`),
-  KEY `id_kursus` (`id_kursus`)
+  KEY `id_kursus` (`id_kursus`),
+  CONSTRAINT `tb_materi_kursus` FOREIGN KEY (`id_kursus`) REFERENCES `tb_kursus` (`id_kursus`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_materi` */
 
 insert  into `tb_materi`(`id_materi`,`nama_materi`,`id_kursus`,`isi_materi`,`url_video`,`tgl_dibuat`,`urut`) values 
-('MTR001','Vue 101 Intro','KRS001',NULL,'https://www.youtube.com/watch?v=EmCBOtkXxdg','2018-07-13 20:12:42',1),
-('MTR002','Vue Instance And Property','KRS001',NULL,'https://www.youtube.com/watch?v=hPKYHIQQBMk','2018-07-13 20:14:25',2),
-('MTR003','Data Binding','KRS001',NULL,'https://www.youtube.com/watch?v=u0R2qtCyvyc','2018-07-13 20:15:14',4),
-('MTR004','Computed Properties','KRS001',NULL,'https://www.youtube.com/watch?v=gfo45kZa_5Y','2018-07-13 20:15:52',3),
-('MTR005','Loop Lists','KRS001',NULL,'https://www.youtube.com/watch?v=E8d87l1gOOE','2018-07-13 20:16:33',5),
-('MTR006','List Methods','KRS001',NULL,'https://www.youtube.com/watch?v=JDNFhLuounA','2018-07-13 20:17:15',6),
-('MTR007','Menggunakan Filter','KRS001',NULL,'https://www.youtube.com/watch?v=FUwMlDhIaos','2018-07-13 20:18:18',7),
-('MTR008','Metode Dan V On','KRS001',NULL,'https://www.youtube.com/watch?v=rhOitPVApAQ','2018-07-13 20:19:02',8),
-('MTR009','V On Dan V Bind','KRS001',NULL,'https://www.youtube.com/watch?v=iPSTb-pwpkQ','2018-07-13 20:19:48',9),
-('MTR010','Input Binding','KRS001',NULL,'https://www.youtube.com/watch?v=4PQEogmzR4k','2018-07-13 20:20:19',11),
-('MTR011','Components','KRS001',NULL,'https://www.youtube.com/watch?v=d3-RYc5-YgE','2018-07-13 20:20:57',12),
-('MTR012','Components 2 And Closing','KRS001',NULL,'https://www.youtube.com/watch?v=YV_C4JT3gYA','2018-07-13 20:21:29',13),
-('MTR013','Dynamic Components','KRS001',NULL,'https://www.youtube.com/watch?v=M92Fi8zZ1Ck','2018-07-13 20:22:41',14),
-('MTR014','Transition VueJS','KRS001',NULL,'https://www.youtube.com/watch?v=dHZcZSndX-M','2018-07-13 20:23:29',15),
-('MTR015','More On V on And V Bind','KRS001',NULL,'https://www.youtube.com/watch?v=iPSTb-pwpkQ','2018-07-13 20:24:45',10),
 ('MTR016','INTRO','KRS002',NULL,'https://www.youtube.com/watch?v=l1W2OwV5rgY','2018-07-13 20:53:06',1),
 ('MTR017','Sejarah','KRS002',NULL,'https://www.youtube.com/watch?v=q3NVC5JxgVI','2018-07-13 20:56:52',2),
 ('MTR018','Persiapan Lingkungan Pengembangan','KRS002',NULL,'https://www.youtube.com/watch?v=o8oLQVYlpqw','2018-07-13 20:58:32',3),
@@ -180,7 +167,11 @@ CREATE TABLE `tb_nilai` (
   `benar` int(11) DEFAULT NULL,
   `salah` int(11) DEFAULT NULL,
   `nilai` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_nilai`)
+  PRIMARY KEY (`id_nilai`),
+  KEY `tb_nilai_pelajar` (`id_pelajar`),
+  KEY `tb_nilai_soal` (`id_soal`),
+  CONSTRAINT `tb_nilai_pelajar` FOREIGN KEY (`id_pelajar`) REFERENCES `tb_pelajar` (`id_pelajar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_nilai_soal` FOREIGN KEY (`id_soal`) REFERENCES `tb_soal` (`id_soal`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_nilai` */
@@ -221,7 +212,8 @@ CREATE TABLE `tb_pengajar` (
   `id_pelajar` varchar(6) DEFAULT NULL,
   `deskripsi_pengajar` text,
   PRIMARY KEY (`id_pengajar`),
-  KEY `id_pelajar` (`id_pelajar`)
+  KEY `id_pelajar` (`id_pelajar`),
+  CONSTRAINT `tb_pengajar_pelajar` FOREIGN KEY (`id_pelajar`) REFERENCES `tb_pelajar` (`id_pelajar`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_pengajar` */
@@ -238,7 +230,9 @@ DROP TABLE IF EXISTS `tb_soal`;
 CREATE TABLE `tb_soal` (
   `id_soal` varchar(6) NOT NULL,
   `id_materi` varchar(6) DEFAULT NULL,
-  PRIMARY KEY (`id_soal`)
+  PRIMARY KEY (`id_soal`),
+  KEY `tb_soal_materi` (`id_materi`),
+  CONSTRAINT `tb_soal_materi` FOREIGN KEY (`id_materi`) REFERENCES `tb_materi` (`id_materi`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_soal` */

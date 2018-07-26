@@ -7,7 +7,7 @@
   </ol>
 </nav>
 </div>
-<a class="btn btn-primary" href="<?php echo base_url('admin/data_kursus.html') ?>">Kembali</a>
+<a class="btn btn-primary" style="margin-left:125px" href="<?php echo base_url('admin/data_kursus.html') ?>">Kembali</a>
 <div class="container" style="margin-top: 35px">
 <div class="card border-dark mb-3" style="width: 100%;">
   <div class="card-header"><h2>Lihat Data Kursus</h2></div>

@@ -84,4 +84,11 @@ function hilang_tombol(angka) {
 	},1);
 	kolom_animasi = false;
 }
+
+var url_string = window.location.href;
+var url = new URL(url_string);
+var act_modal = url.searchParams.get("modal");
+	if(act_modal != null){
+		$('#'+act_modal).modal();
+	}
 </script>

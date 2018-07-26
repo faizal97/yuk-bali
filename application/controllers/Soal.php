@@ -141,6 +141,36 @@ class Soal extends CI_Controller {
 			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'/soal/'.$nama_materi.'/'.$id_detail_soal.'.html',"Soal Gagal Diubah !");
 		}
 	}
+
+	public function proses_hapus_soal($nama_kursus,$id_soal)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$user = $this->session->id_pengajar;
+		$query = $this->db->query("DELETE FROM tb_soal WHERE id_soal='$id_soal'");
+		if($query){
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'.html?tab=soal','Soal Berhasil Dihapus');
+		}
+		else
+		{
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'html?tab=soal','Soal Gagal Dihapus');
+		}
+		
+	}
+
+	public function proses_hapus_semua_soal($nama_kursus)
+	{
+		$nama_kursus2 = str_replace("-"," ",$nama_kursus);
+		$user = $this->session->id_pengajar;
+		$query = $this->db->query("DELETE tb_soal FROM tb_soal INNER JOIN tb_materi ON tb_soal.id_materi = tb_materi.id_materi INNER JOIN tb_kursus ON tb_materi.id_kursus = tb_kursus.id_kursus WHERE tb_kursus.nama_kursus='$nama_kursus2'");
+	
+		if($query){
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'.html?tab=soal','Data Soal Berhasil Dihapus');
+		}
+		else
+		{
+			$this->functions->pindah_halaman('kursusku/kelola/'.$nama_kursus.'html?tab=soal','Data Soal Gagal Dihapus');
+		}
+	}
 }
 
 /* End of file Soal.php */
