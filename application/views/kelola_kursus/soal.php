@@ -8,7 +8,7 @@
 			Tambah Soal
 		</button>
 	</a>	
-	<a href="">
+	<a href="<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($title).'/hapus_semua_soal') ?>">
 		<button class="btn btn-danger">
 			Hapus Semua
 		</button>
@@ -28,7 +28,7 @@
 					<td><?php echo $row->urut ?></td>
 					<td><?php echo $row->nama_materi ?></td>
 					<td><a href="<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($title).'/soal/'.$this->functions->ubahURL($row->nama_materi).'.html') ?>" class="btn btn-success">Kelola</a></td>
-					<td><a href="#" class="btn btn-danger">Hapus</a></td>
+					<td><a href="<?php echo base_url('kursusku/kelola/'.$this->functions->ubahURL($title).'/soal/'.$row->id_soal.'/hapus_soal.html') ?>" class="btn btn-danger">Hapus</a></td>
 				</tr>
 			<?php } ?>
 		</tbody>

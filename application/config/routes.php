@@ -102,6 +102,8 @@ $route['kursusku/kelola/(:any)/pengaturan'] = "mycourse/ubah_pengaturan/$1";
 // Kursuku Materi
 $route['kursusku/kelola/(:any)/tambah_materi'] = "materi/proses_tambah_materi/$1";
 $route['kursusku/kelola/(:any)/tambah_soal'] = "soal/proses_tambah_soal/$1";
+$route['kursusku/kelola/(:any)/soal/(:any)/hapus_soal'] = "soal/proses_hapus_soal/$1/$2";
+$route['kursusku/kelola/(:any)/hapus_semua_soal'] = "soal/proses_hapus_semua_soal/$1";
 $route['kursusku/kelola/(:any)/hapus_materi'] = "materi/proses_hapus_semua/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_artikel'] = "materi/proses_edit_artikel/$1/$2";
 $route['kursusku/kelola/(:any)/materi/(:any)/update_nama_materi'] = "materi/proses_edit_nama_materi/$1/$2";

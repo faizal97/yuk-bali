@@ -69,7 +69,7 @@ class Mycourse extends CI_Controller {
 
 			if(!$this->upload->do_upload('gambar')){
 				echo "<script>alert('Hanya menerima format gambar seperti png,jpeg,jpg pada data gambar kursus');</script>";
-				redirect(base_url().'tambah_kursus.html','refresh');
+				redirect(base_url().'kursusku.html?modal=tambah-kursus','refresh');
 			}
 			else{
 				$gambar = "img/course/".$this->upload->data('file_name');
@@ -132,7 +132,7 @@ class Mycourse extends CI_Controller {
 
         public function hapus_kursus($judul)
         {
-            $user = $this->session->id_pelajar;
+            $user = $this->session->id_pengajar;
             $judul = str_replace("-"," ",$judul);
             $query = $this->db->query("SELECT * FROM tb_kursus WHERE nama_kursus='$judul' AND id_pengajar='$user'");
             $row = $query->row();
@@ -149,7 +149,7 @@ class Mycourse extends CI_Controller {
 		
 		public function hapus_semua()
 		{
-			$user = $this->session->id_pelajar;
+			$user = $this->session->id_pengajar;
 			$query = $this->db->query("SELECT * FROM tb_kursus WHERE id_pengajar='$user'");
 			$pics = [];
 			foreach ($query->result() as $row) {
