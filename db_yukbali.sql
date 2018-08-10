@@ -58,6 +58,9 @@ CREATE TABLE `tb_detail_kursus` (
 
 /*Data for the table `tb_detail_kursus` */
 
+insert  into `tb_detail_kursus`(`id_detail_kursus`,`id_kursus`,`id_pelajar`,`tgl_daftar`,`status`,`materi_terakhir`,`vote`,`ulasan`) values 
+('DKU001','KRS002','PLJ002','2018-08-10 02:47:01','aktif',1,1,'<p>Kursusnya Bagus, Detail, Dan Bermanfaat.<br></p>');
+
 /*Table structure for table `tb_detail_soal` */
 
 DROP TABLE IF EXISTS `tb_detail_soal`;
@@ -77,6 +80,9 @@ CREATE TABLE `tb_detail_soal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_detail_soal` */
+
+insert  into `tb_detail_soal`(`id_detail_soal`,`id_soal`,`nama_soal`,`pilihan1`,`pilihan2`,`pilihan3`,`pilihan4`,`jawaban`) values 
+('DSO001','SOL001','asd','a','s','d','e',1);
 
 /*Table structure for table `tb_kategori` */
 
@@ -123,6 +129,7 @@ CREATE TABLE `tb_kursus` (
 /*Data for the table `tb_kursus` */
 
 insert  into `tb_kursus`(`id_kursus`,`nama_kursus`,`id_pengajar`,`tgl_buat`,`gambar_kursus`,`id_kategori`,`deskripsi_kursus`) values 
+('KRS001','abc','PGJ001','2018-07-27 00:28:37','img/course/KRS001.jpg','KTG005',NULL),
 ('KRS002','PHP Untuk Pemula','PGJ003','2018-07-13 20:52:51','img/course/KRS002.jpg','KTG001',NULL);
 
 /*Table structure for table `tb_materi` */
@@ -145,6 +152,7 @@ CREATE TABLE `tb_materi` (
 /*Data for the table `tb_materi` */
 
 insert  into `tb_materi`(`id_materi`,`nama_materi`,`id_kursus`,`isi_materi`,`url_video`,`tgl_dibuat`,`urut`) values 
+('MTR001','abc','KRS001',NULL,NULL,'2018-07-27 00:54:50',1),
 ('MTR016','INTRO','KRS002',NULL,'https://www.youtube.com/watch?v=l1W2OwV5rgY','2018-07-13 20:53:06',1),
 ('MTR017','Sejarah','KRS002',NULL,'https://www.youtube.com/watch?v=q3NVC5JxgVI','2018-07-13 20:56:52',2),
 ('MTR018','Persiapan Lingkungan Pengembangan','KRS002',NULL,'https://www.youtube.com/watch?v=o8oLQVYlpqw','2018-07-13 20:58:32',3),
@@ -221,7 +229,7 @@ CREATE TABLE `tb_pengajar` (
 insert  into `tb_pengajar`(`id_pengajar`,`upvote`,`downvote`,`id_pelajar`,`deskripsi_pengajar`) values 
 ('PGJ001',0,0,'PLJ002',NULL),
 ('PGJ002',0,0,'PLJ003',NULL),
-('PGJ003',0,0,'PLJ001',NULL);
+('PGJ003',1,0,'PLJ001',NULL);
 
 /*Table structure for table `tb_soal` */
 
@@ -236,6 +244,9 @@ CREATE TABLE `tb_soal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_soal` */
+
+insert  into `tb_soal`(`id_soal`,`id_materi`) values 
+('SOL001','MTR001');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
