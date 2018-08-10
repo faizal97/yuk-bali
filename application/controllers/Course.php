@@ -37,6 +37,7 @@ class Course extends CI_Controller {
 		$jumlah_kursus_pengajar = $data_kursus_pengajar->num_rows();
 		$data_materi = $this->db->query("SELECT * FROM tb_materi WHERE id_kursus='$id_kursus' ORDER BY urut ASC");
 		$tombol_daftar = true;
+		$tombol_vote = false;
 		$user = $this->session->id_pelajar;
 			$sql = $this->db->query("SELECT * FROM tb_detail_kursus WHERE id_pelajar='$user' AND id_kursus='$id_kursus'");
 			$jml = $sql->num_rows();
@@ -45,7 +46,10 @@ class Course extends CI_Controller {
 		}
 		elseif ($jml>0) {
 			$tombol_daftar = false;
+			$tombol_vote = true;
 		}
+		$sql_ulasan = "SELECT * FROM tb_detail_kursus INNER JOIN tb_pelajar ON tb_detail_kursus.id_pelajar = tb_pelajar.id_pelajar WHERE tb_detail_kursus.id_kursus='$id_kursus' AND tb_detail_kursus.ulasan IS NOT NULL ORDER BY RAND() LIMIT 5";
+		$query_ulasan = $this->db->query($sql_ulasan);
 		$data = [
 			'data_materi' => $data_materi,
 			'data_kursus' => $query,
@@ -54,7 +58,9 @@ class Course extends CI_Controller {
 			'jumlah_materi' => $jumlah_materi,
 			'jumlah_kursus_pengajar' => $jumlah_kursus_pengajar,
 			'id_pengajar' => $id_pengajar,
-			'tombol' => $tombol_daftar
+			'tombol' => $tombol_daftar,
+			'hak_vote' => $tombol_vote,
+			'data_ulasan' => $query_ulasan
 		];
 		$this->template->header($nama_kursus2,2);
 		$this->load->view('detail_kursus', $data);
@@ -340,5 +346,90 @@ class Course extends CI_Controller {
 		];
 		$this->load->view('settings/bootstrap', $data);
 		$this->load->view('belajar/sertifikat', $data);
+	}
+
+	public function vote_pengajar($tipe_vote,$id_kursus)
+	{
+		$id_pelajar = $this->session->id_pelajar;
+		if($tipe_vote == 'upvote')
+		{
+			$sql = "SELECT * FROM tb_detail_kursus WHERE id_kursus='$id_kursus' AND id_pelajar='$id_pelajar'";
+			$query = $this->db->query($sql);
+			$query = $query->row();
+			$id_detail_kursus = $query->id_detail_kursus;
+			$sql_pengajar = "SELECT * FROM tb_kursus INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.id_kursus='$id_kursus'";
+			$query_pengajar = $this->db->query($sql_pengajar);
+			$query_pengajar = $query_pengajar->row();
+			$id_pengajar = $query_pengajar->id_pengajar;
+			$nama_pengajar = $query_pengajar->nama_depan." ".$query_pengajar->nama_belakang;
+			$nama_kursus = $query_pengajar->nama_kursus;
+			if ($query->vote == +1) {
+				redirect($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus),'refresh');
+			}
+			if ($query->vote != 0) {
+				$sql_devote = "UPDATE tb_pengajar SET downvote = downvote - 1 WHERE id_pengajar='$id_pengajar'";
+				$query_devote = $this->db->query($sql_devote);
+			}
+			$sql_devote = "UPDATE tb_pengajar SET upvote = upvote + 1 WHERE id_pengajar='$id_pengajar'";
+			$query_devote = $this->db->query($sql_devote);
+			$data['vote'] = '1';
+			$this->db->where('id_detail_kursus',$id_detail_kursus);
+			$this->db->update('tb_detail_kursus',$data);
+			redirect($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus),'refresh');
+		}
+		elseif($tipe_vote == 'downvote')
+		{
+			$sql = "SELECT * FROM tb_detail_kursus WHERE id_kursus='$id_kursus' AND id_pelajar='$id_pelajar'";
+			$query = $this->db->query($sql);
+			$query = $query->row();
+			$id_detail_kursus = $query->id_detail_kursus;
+			$sql_pengajar = "SELECT * FROM tb_kursus INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.id_kursus='$id_kursus'";
+			$query_pengajar = $this->db->query($sql_pengajar);
+			$query_pengajar = $query_pengajar->row();
+			$id_pengajar = $query_pengajar->id_pengajar;
+			$nama_pengajar = $query_pengajar->nama_depan." ".$query_pengajar->nama_belakang;
+			$nama_kursus = $query_pengajar->nama_kursus;
+			if ($query->vote == -1) {
+				redirect($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus),'refresh');
+			}
+			if ($query->vote != 0) {
+				$sql_devote = "UPDATE tb_pengajar SET upvote = upvote - 1 WHERE id_pengajar='$id_pengajar'";
+				$query_devote = $this->db->query($sql_devote);
+			}
+			$sql_devote = "UPDATE tb_pengajar SET downvote = downvote + 1 WHERE id_pengajar='$id_pengajar'";
+			$query_devote = $this->db->query($sql_devote);
+			$data['vote'] = '-1';
+
+			$this->db->where('id_detail_kursus',$id_detail_kursus);
+			$this->db->update('tb_detail_kursus',$data);
+			redirect($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus),'refresh');
+		}
+		else {
+            $data['title'] = "Halaman Tidak Ditemukan";
+        
+            $this->load->view('settings/bootstrap',$data);
+            $this->load->view('error');
+		}
+	}
+
+	public function beri_ulasan($id_kursus)
+	{
+		$id_pelajar = $this->session->id_pelajar;
+		$sql = "SELECT * FROM tb_detail_kursus WHERE id_kursus='$id_kursus' AND id_pelajar='$id_pelajar'";
+		$query = $this->db->query($sql);
+		$query = $query->row();
+		$id_detail_kursus = $query->id_detail_kursus;
+		$sql_pengajar = "SELECT * FROM tb_kursus INNER JOIN tb_pengajar ON tb_kursus.id_pengajar = tb_pengajar.id_pengajar INNER JOIN tb_pelajar ON tb_pengajar.id_pelajar = tb_pelajar.id_pelajar WHERE tb_kursus.id_kursus='$id_kursus'";
+		$query_pengajar = $this->db->query($sql_pengajar);
+		$query_pengajar = $query_pengajar->row();
+		$id_pengajar = $query_pengajar->id_pengajar;
+		$nama_pengajar = $query_pengajar->nama_depan." ".$query_pengajar->nama_belakang;
+		$nama_kursus = $query_pengajar->nama_kursus;
+		$post_ulasan = $this->input->post('ulasan');
+		$data['ulasan'] = $post_ulasan;
+		$this->db->where('id_detail_kursus',$id_detail_kursus);
+		$this->db->update('tb_detail_kursus',$data);
+		redirect($this->functions->ubahURL($nama_pengajar).'/'.$this->functions->ubahURL($nama_kursus),'refresh');
+		
 	}
 }

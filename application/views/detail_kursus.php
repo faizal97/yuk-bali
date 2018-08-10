@@ -1,4 +1,16 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('') ?>">
+<style>
+
+	a {
+		text-decoration:none;
+	}
+	#upvote:hover {
+		cursor:pointer;
+	}
+
+	#downvote:hover {
+		cursor:pointer;
+	}
+</style>
   <div class="container">
 	<nav class="breadcrumb bg-white">
      <a class="breadcrumb-item" href="<?php echo base_url('home.html') ?>">Beranda</a>
@@ -40,7 +52,24 @@
 					<img src="<?php echo base_url($data_kursus->foto_profil)  ?>" width="300" height="300" alt="">
 				</div>
 				<div class="col-sm-8 mt-5">
-				<h1><?php echo $nama_pengajar ?></h1>
+				<h1><?php echo $nama_pengajar ?></h1>&nbsp;
+				<!-- BEGIN UPVOTE - DOWNVOTE -->
+				<?php if($hak_vote){
+					echo '<a href="'.base_url('vote/upvote/'.$data_kursus->id_kursus.'.html').'">';
+				} ?>
+					<span id="upvote" class="oi oi-chevron-top" style="color:green">&nbsp;+<?php echo $data_kursus->upvote?></span>
+					<?php if($hak_vote){
+					echo '</a>';
+				} ?>
+				<span id="separator" style="color:gray">&nbsp;/&nbsp;</span>
+				<?php if($hak_vote){
+					echo '<a href="'.base_url('vote/downvote/'.$data_kursus->id_kursus.'.html').'">';
+				} ?>
+					<span id="downvote" class="oi oi-chevron-bottom" style="color:red">&nbsp;-<?php echo $data_kursus->downvote ?></span>
+					<?php if($hak_vote){
+					echo '</a>';
+				} ?>
+				<!-- END UPVOTE - DOWNVOTE -->
 				<h4><?php echo $jumlah_kursus_pengajar ?> Kursus</h4>
 					<?php echo $data_kursus->deskripsi_pengajar ?>
 				</div>
@@ -70,7 +99,40 @@
 						</tbody>
 					</table>
 				</div>
+				<?php
+					if($hak_vote){
+						echo "
+						<form action='".base_url('Course/beri_ulasan/'.$data_kursus->id_kursus)."' method='post'>
+							<textarea name='ulasan' id='summernote'></textarea>
+							<input class='btn btn-primary' value='Beri Ulasan' type='submit'>
+						</form>
+						";
+						foreach ($data_ulasan->result() as $row) {
+							echo "
+							<div style='padding:10px;margin:5px;height:200px' class='container-fluid'>
+								<div style='border:1px solid black;border-radius:5px' class='row'>
+									<div style='border-right:1px solid black;background-color:#999999;height:200px;text-align:center;padding-top:100px' class='col-sm-3'>
+									".$row->nama_depan." ".substr($row->nama_belakang,0,1)."
+									</div>
+									<div style='border-right:1px solid black;background-color:#FFF' class='col-sm-9'>
+									".$row->ulasan."
+									</div>
+								</div>
+							</div>
+							";
+						}
+					}
+				?>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+	height: 200,
+	width: 1100
+  });
+});
+</script>
+
