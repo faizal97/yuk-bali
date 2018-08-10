@@ -100,28 +100,28 @@
 					</table>
 				</div>
 				<?php
-					if($hak_vote){
-						echo "
-						<form action='".base_url('Course/beri_ulasan/'.$data_kursus->id_kursus)."' method='post'>
-							<textarea name='ulasan' id='summernote'></textarea>
-							<input class='btn btn-primary' value='Beri Ulasan' type='submit'>
-						</form>
-						";
-						foreach ($data_ulasan->result() as $row) {
-							echo "
-							<div style='padding:10px;margin:5px;height:200px' class='container-fluid'>
-								<div style='border:1px solid black;border-radius:5px' class='row'>
-									<div style='border-right:1px solid black;background-color:#999999;height:200px;text-align:center;padding-top:100px' class='col-sm-3'>
-									".$row->nama_depan." ".substr($row->nama_belakang,0,1)."
-									</div>
-									<div style='border-right:1px solid black;background-color:#FFF' class='col-sm-9'>
-									".$row->ulasan."
-									</div>
-								</div>
-							</div>
-							";
-						}
-					}
+					// if($hak_vote){
+					// 	echo "
+					// 	<form action='".base_url('Course/beri_ulasan/'.$data_kursus->id_kursus)."' method='post'>
+					// 		<textarea name='ulasan' id='summernote'></textarea>
+					// 		<input class='btn btn-primary' value='Beri Ulasan' type='submit'>
+					// 	</form>
+					// 	";
+					// 	foreach ($data_ulasan->result() as $row) {
+					// 		echo "
+					// 		<div style='padding:10px;margin:5px;height:200px' class='container-fluid'>
+					// 			<div style='border:1px solid black;border-radius:5px' class='row'>
+					// 				<div style='border-right:1px solid black;background-color:#999999;height:200px;text-align:center;padding-top:100px' class='col-sm-3'>
+					// 				".$row->nama_depan." ".substr($row->nama_belakang,0,1)."
+					// 				</div>
+					// 				<div style='border-right:1px solid black;background-color:#FFF' class='col-sm-9'>
+					// 				".$row->ulasan."
+					// 				</div>
+					// 			</div>
+					// 		</div>
+					// 		";
+					// 	}
+					// }
 				?>
 			</div>
 		</div>
