@@ -242,8 +242,6 @@ class functions extends CI_Model {
 			'allowed_types' => "png|jpeg|jpg",
 			'overwrite' => TRUE,
 			'max_size' => 2048*1000,
-			'max_height' => '768',
-			'max_width' => '1024',
 			'file_name' => $id
 		);
 		$this->load->library('upload',$config_cover);

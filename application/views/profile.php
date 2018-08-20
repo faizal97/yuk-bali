@@ -17,7 +17,7 @@
                 <i class="fas fa-home"> <?php echo $data_profil->alamat ?> </i><hr></p> <br><br>
 			</div>
         <div class="col-sm-6">
-        	<img src="<?php echo base_url($this->session->gambar_profil) ?>" width="400" alt="" class="img-rounded">
+        	<img src="<?php echo base_url($this->session->gambar_profil) ?>?<?php echo time() ?>" style="width:400px;max-height:500px" alt="" class="img-rounded">
         </div>
 
                 </div>

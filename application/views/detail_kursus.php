@@ -27,7 +27,7 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col">
-					<img class="rounded float-left mr-3" src="<?php echo base_url($data_kursus->gambar_kursus)  ?>" width="300" height="300" alt="">
+					<img class="rounded float-left mr-3" src="<?php echo base_url($data_kursus->gambar_kursus)  ?>?<?php echo time() ?>" width="300" height="300" alt="">
 					<h1 class="display-4">Tentang Kursus</h1>
 					<?php echo $data_kursus->deskripsi_kursus ?>
 				</div>
@@ -49,7 +49,7 @@
 			<h1 class="display-4 mt-3">Profil Pengajar</h1>
 			<div class="row">
 				<div class="col-sm-4 mt-1">
-					<img src="<?php echo base_url($data_kursus->foto_profil)  ?>" width="300" height="300" alt="">
+					<img src="<?php echo base_url($data_kursus->foto_profil)  ?>?<?php echo time() ?>" width="300" height="300" alt="">
 				</div>
 				<div class="col-sm-8 mt-5">
 				<h1><?php echo $nama_pengajar ?></h1>&nbsp;
@@ -100,28 +100,28 @@
 					</table>
 				</div>
 				<?php
-					// if($hak_vote){
-					// 	echo "
-					// 	<form action='".base_url('Course/beri_ulasan/'.$data_kursus->id_kursus)."' method='post'>
-					// 		<textarea name='ulasan' id='summernote'></textarea>
-					// 		<input class='btn btn-primary' value='Beri Ulasan' type='submit'>
-					// 	</form>
-					// 	";
-					// 	foreach ($data_ulasan->result() as $row) {
-					// 		echo "
-					// 		<div style='padding:10px;margin:5px;height:200px' class='container-fluid'>
-					// 			<div style='border:1px solid black;border-radius:5px' class='row'>
-					// 				<div style='border-right:1px solid black;background-color:#999999;height:200px;text-align:center;padding-top:100px' class='col-sm-3'>
-					// 				".$row->nama_depan." ".substr($row->nama_belakang,0,1)."
-					// 				</div>
-					// 				<div style='border-right:1px solid black;background-color:#FFF' class='col-sm-9'>
-					// 				".$row->ulasan."
-					// 				</div>
-					// 			</div>
-					// 		</div>
-					// 		";
-					// 	}
-					// }
+					if($hak_vote){
+						echo "
+						<form action='".base_url('Course/beri_ulasan/'.$data_kursus->id_kursus)."' method='post'>
+							<textarea name='ulasan' id='summernote'></textarea>
+							<input class='btn btn-primary' value='Beri Ulasan' type='submit'>
+						</form>
+						";
+						foreach ($data_ulasan->result() as $row) {
+							echo "
+							<div style='padding:10px;margin:5px;height:200px' class='container-fluid'>
+								<div style='border:1px solid black;border-radius:5px' class='row'>
+									<div style='border-right:1px solid black;background-color:#999999;height:200px;text-align:center;padding-top:100px' class='col-sm-3'>
+									".$row->nama_depan." ".substr($row->nama_belakang,0,1)."
+									</div>
+									<div style='border-right:1px solid black;background-color:#FFF' class='col-sm-9'>
+									".$row->ulasan."
+									</div>
+								</div>
+							</div>
+							";
+						}
+					}
 				?>
 			</div>
 		</div>

@@ -49,7 +49,7 @@
       <td><?php echo $jumlah_materi ?> </td>
       <td><?php echo ($kursus->nama_depan."   ".$kursus->nama_belakang) ?> </td>
       <td><?php echo $kursus->tgl_buat ?></td>
-      <td><img src="<?php echo base_url($kursus->gambar_kursus) ?>" width="100" height="100" alt=""></td>
+      <td><img src="<?php echo base_url($kursus->gambar_kursus) ?>?<?php echo time() ?>" width="100" height="100" alt=""></td>
 
       <td><a href="<?php echo base_url('admin/data_kursus/lihat_kursus/'.$kursus->id_kursus.".html") ?>"><button type="button" class="btn btn-outline-success"><i class="fas fa-search"></i></button></a>
 
