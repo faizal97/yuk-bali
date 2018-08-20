@@ -2,7 +2,7 @@
 	$dat_kat = $this->db->query("SELECT * FROM tb_kategori ORDER BY nama_kategori ASC");
 ?>
 <nav id="menu_dashbord" class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-    <a href="" class="navbar-brand">
+    <a href="<?php echo base_url() ?>" class="navbar-brand">
         <img id="logo" src="<?php echo base_url() ?>img/logo.png" width="100px" alt="brand" />
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -33,7 +33,7 @@
 			<li class="nav-item"><a href="<?php echo base_url('kursus.html') ?>" class="nav-link">Kursus Saya</a></li>
 			<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                    <img id="thumbnail_profil" class="rounded-circle" width="40px" src="<?php echo base_url().$_SESSION['gambar_profil'] ?>" alt="profil">&nbsp;&nbsp;
+                    <img id="thumbnail_profil" class="rounded-circle" width="40px" src="<?php echo base_url().$_SESSION['gambar_profil'] ?>?<?php echo time() ?>" alt="profil">&nbsp;&nbsp;
                     <?php echo $_SESSION['nama_depan'] ?>
                 </a>
             <div class="dropdown-menu dropdown-menu-right">

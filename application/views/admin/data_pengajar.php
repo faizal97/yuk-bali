@@ -49,7 +49,7 @@
       <td><?php echo $jumlah_kursus ?></td>
       <td><?php echo $pengajar->upvote ?> </td>
       <td><?php echo $pengajar->downvote ?> </td>
-      <td><img src="<?php echo base_url($pengajar->foto_profil) ?>" width="100" height="100" alt=""> </td>
+      <td><img src="<?php echo base_url($pengajar->foto_profil) ?>?<?php echo time() ?>" width="100" height="100" alt=""> </td>
 			<td class="text-center"><a href="<?php echo base_url('admin/data_pengajar/hapus_pengajar/'.$pengajar->id_pengajar.".html") ?>"><button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button></a></td>
       </tr>
     <?php } ?>
